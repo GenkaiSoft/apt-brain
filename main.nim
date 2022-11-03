@@ -17,6 +17,9 @@ elif paramCount() == 2 and commandLineParams()[0] == "install":
   echo("Connecting to \"" & url & "\" ...")
   let req = Request(url: parseUrl(url) , verb: "get")
   let res = fetch(req)
+  echo("  code : " & res.code.intToStr)
+  if res.code == 200:
+    echo("->done")
   let lines = split(res.body , "\n\r")
   for line in lines:
     let tmp = split(line , ",")
