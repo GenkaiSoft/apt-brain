@@ -1,7 +1,7 @@
 import puppy
 import strutils
 
-const url = "https://777shuang.web.fc2.com/apt-brain/list.csv"
+const url = "https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/list.csv"
 echo("Connecting to \"" & url & "\" ...")
 let req = Request(url: parseUrl(url) , verb: "get")
 let res = fetch(req)
