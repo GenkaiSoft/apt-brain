@@ -21,17 +21,33 @@ Copyright (c) 2022 777shuang, GenkaiSoft. All Rights Reserved.
 `apt-brain help' to get help
     """
   )
-elif paramCount() == 2 and commandLineParams()[0] == "install":
-  const url = "https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/list.csv"
-  echo("Connecting to \"" & url & "\" ...")
-  let req = Request(url: parseUrl(url) , verb: "get")
-  let res = fetch(req)
-  echo("  code : " & res.code.intToStr)
-  if res.code == 200:
-    echo("->done")
-  let lines = split(res.body , "\n\r")
-  for line in lines:
-    let tmp = split(line , ",")
-    if tmp[0] == commandLineParams()[1]:
-      echo(tmp[0])
-      break
+elif commandLineParams()[0] == "help":
+  if paramCount() != 1:
+    echo("Warning : Too many arguments")
+  echo("apt-brain [command]")
+  echo("  help : show help")
+  echo("  help [command] : show help about [command]")
+  echo("  install [package] : install [package]")
+  echo("  ping")
+  echo("  show : show packeages")
+  echo("  show [packeage] : show [package]")
+elif  commandLineParams()[0] == "install":
+  if paramCount() == 2:
+    const url = "https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/list.csv"
+    echo("Connecting to \"" & url & "\" ...")
+    let req = Request(url: parseUrl(url) , verb: "get")
+    let res = fetch(req)
+    echo("  code : " & res.code.intToStr)
+    if res.code == 200:
+      echo("-> done")
+      let lines = split(res.body , "\n\r")
+      for line in lines:
+        let tmp = split(line , ",")
+        if tmp[0] == commandLineParams()[1]:
+          echo(tmp[0])
+          break
+    else :
+      echo("-> faild")
+      echo("Error : cannot send request to \"" & url & "\"")
+  else:
+    echo("Error : Too many arguments")
