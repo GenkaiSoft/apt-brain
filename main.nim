@@ -1,6 +1,24 @@
 import puppy
 import strutils
 import os
+import system
+import ctime
+
+proc show(title:string , str:string) =
+  echo(
+    "[" &
+    getYear().intToStr & "/" &
+    getMonth().intToStr & "/" &
+    getDay().intToStr & "/" &
+    getHour().intToStr & "/" &
+    getMinute().intToStr & "/" &
+    getSecond().intToStr & "] " &
+    title & " : " & str
+  )
+proc showError(str:string) = show("Err" , str)
+proc showLog(str:string) = show("Log" , str)
+proc showInfo(str:string) = show("Info" , str)
+proc showWrning(str:string) = show("Warn" , str)
 
 if paramCount() == 0:
   echo(
@@ -17,20 +35,17 @@ if paramCount() == 0:
  \____|\___|_| |_|_|\_\__,_|_|____/ \___/|_|  \__| ＼______／
 
 Copyright (c) 2022 777shuang, GenkaiSoft. All Rights Reserved.
-
-`apt-brain help' to get help
     """
   )
+  showInfo("`apt-brain help' to get help")
 elif commandLineParams()[0] == "help":
-  if paramCount() != 1:
-    echo("Warning : Too many arguments")
-  echo("apt-brain [command]")
-  echo("  help : show help")
-  echo("  help [command] : show help about [command]")
-  echo("  install [package] : install [package]")
-  echo("  ping")
-  echo("  show : show packeages")
-  echo("  show [packeage] : show [package]")
+  showInfo("apt-brain [command]")
+  showInfo("  help : show help")
+  showInfo("  help [command] : show help about [command]")
+  showInfo("  install [package] : install [package]")
+  showInfo("  ping")
+  showInfo("  show : show packeages")
+  showInfo("  show [packeage] : show [package]")
 elif  commandLineParams()[0] == "install":
   if paramCount() == 2:
     const url = "https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/list.csv"
@@ -48,6 +63,6 @@ elif  commandLineParams()[0] == "install":
           break
     else :
       echo("-> faild")
-      echo("Error : cannot send request to \"" & url & "\"")
+      showError("cannot send request to \"" & url & "\"")
   else:
-    echo("Error : Too many arguments")
+    showError("Too many arguments")
