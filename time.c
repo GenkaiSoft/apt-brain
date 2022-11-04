@@ -7,7 +7,7 @@ struct tm GetLocalTime()
 }
 
 // Interface for Nim
-int getYear() { return GetLocalTime().tm_year; }
+int getYear() { return GetLocalTime().tm_year + 1900; }
 int getMonth() { return GetLocalTime().tm_mon + 1; }
 int getDay() { return GetLocalTime().tm_mday; }
 int getHour() { return GetLocalTime().tm_hour; }
