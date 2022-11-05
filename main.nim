@@ -69,6 +69,7 @@ elif commandLineParams()[0] == "install":
             when defined(windows):
               let process = startProcess(fileName)
             else:
+              showInfo("Your OS isn't Windows.")
               discard execShellCmd("wine " & fileName)
         break
   else:
