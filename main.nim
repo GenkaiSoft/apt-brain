@@ -50,27 +50,37 @@ elif commandLineParams()[0] == "ping":
   showInfo("Ping : " & int((cpuTime() - start) * 1000).intToStr & " ms")
 elif commandLineParams()[0] == "install":
   if paramCount() == 2:
-    let lines = split(connect(url) , "\n\r")
+    let lines = split(connect(url) , "\n")
     for line in lines:
       let tmp = split(line , ",")
       if tmp[0] == commandLineParams()[1]:
-        echo(tmp[0])
+        showInfo("package \"" & tmp[0] & "\" exist.")
+        let fileName = tmp[2].substr(tmp[2].rfind("/") + 1)
+        showLog("opening file : \"" & fileName)
+        let strm = newFileStream(fileName , fmWrite)
+        if isNil(strm):
+          showFailed()
+          showErr("unable to open " & fileName)
+        else:
+          showDone()
+          strm.write(connect(tmp[2]))
+          strm.close()
         if tmp[1] == "exe":
-          let fileName = tmp[0] & ".exe"
-          showLog("opening " & fileName & " ...")
-          let strm = newFileStream(fileName , fmWrite)
-          if isNil(strm):
-            showFailed()
-            showErr("unable to open " & fileName)
+          showInfo("type : .exe installer")
+          when defined(windows):
+            var p:Process
+            try: p = startProcess(fileName)
+            except OSError:
+              showErr("unable to start process : " & filename)
+            showInfo("Process ID : " & p.processID.intToStr)
+            var line:string
+            while p.outputStream.readLine(line): showLog("installer : " & line)
+            discard p.waitForExit()
+            showLog("close process")
+            p.close()
           else:
-            showDone()
-            strm.write(connect(tmp[2]))
-            strm.close()
-            when defined(windows):
-              let process = startProcess(fileName)
-            else:
-              showInfo("Your OS isn't Windows.")
-              discard execShellCmd("wine " & fileName)
+            showInfo("Your OS isn't Windows.")
+            discard execShellCmd("wine " & fileName)
         break
   else:
     showErr("Too many arguments")
