@@ -14,11 +14,11 @@ proc connect(url:string):string =
   showLog("Connecting to \"" & url & "\" ...")
   let req = Request(url: parseUrl(url) , verb: "get")
   let res = fetch(req)
-  showLog("  code = " & res.code.intToStr)
+  showLog("  Code = " & res.code.intToStr)
   if res.code == 200: showDone()
   else:
     showFailed()
-    showErr("unable to connect to " & url)
+    showErr("Unable to connect to " & url)
     quit(1)
   return res.body
 
@@ -38,12 +38,12 @@ if paramCount() == 0:
   showInfo("`apt-brain help' to get help")
 elif commandLineParams()[0] == "help":
   showInfo("apt-brain [command]")
-  showInfo("  help : show help")
-  showInfo("  help [command] : show help about [command]")
-  showInfo("  install [package] : install [package]")
+  showInfo("  help : Show help")
+  showInfo("  help [command] : Show help about [command]")
+  showInfo("  install [package] : Install [package]")
   showInfo("  ping")
-  showInfo("  show : show all packeages")
-  showInfo("  show [packeage] : show about [package]")
+  showInfo("  show : Show all packeages")
+  showInfo("  show [packeage] : Show about [package]")
 elif commandLineParams()[0] == "ping":
   let start = cpuTime()
   discard connect(url)
@@ -54,33 +54,40 @@ elif commandLineParams()[0] == "install":
     for line in lines:
       let tmp = split(line , ",")
       if tmp[0] == commandLineParams()[1]:
-        showInfo("package \"" & tmp[0] & "\" exist.")
-        let fileName = tmp[2].substr(tmp[2].rfind("/") + 1)
-        showLog("opening file : \"" & fileName)
+        showInfo("Package \"" & tmp[0] & "\" exist.")
+        let fileName = tmp[1].substr(tmp[1].rfind("/") + 1)
+        showLog("Opening file : \"" & fileName)
         let strm = newFileStream(fileName , fmWrite)
         if isNil(strm):
           showFailed()
-          showErr("unable to open " & fileName)
+          showErr("Unable to open " & fileName)
         else:
           showDone()
-          strm.write(connect(tmp[2]))
+          strm.write(connect(tmp[1]))
           strm.close()
-        if tmp[1] == "exe":
-          showInfo("type : .exe installer")
+        if tmp[1].substr(tmp[1].rfind(".") + 1) == "exe":
+          showInfo("Type : .exe installer")
           when defined(windows):
             var p:Process
             try: p = startProcess(fileName)
             except OSError:
-              showErr("unable to start process : " & filename)
+              showErr("Unable to start process : " & filename)
             showInfo("Process ID : " & p.processID.intToStr)
             var line:string
             while p.outputStream.readLine(line): showLog("installer : " & line)
             discard p.waitForExit()
-            showLog("close process")
+            showLog("Close process")
             p.close()
           else:
             showInfo("Your OS isn't Windows.")
-            discard execShellCmd("wine " & fileName)
+            let command = "wine " & fileName
+            showLog("Call command : \"" & command & "\"")
+            let code = execShellCmd(command)
+            showLog("Code : " & code)
+            if code != 0:
+              showErr("Unable to call command : \"" & command & "\"")
+              showInfo("Did you install wine ?")
         break
-  else:
-    showErr("Too many arguments")
+  elif paramCount() == 1: showErr("Too few arguments")
+  else: showErr("Too many arguments")
+else: showErr("Unknown option")
