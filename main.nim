@@ -40,7 +40,7 @@ elif commandLineParams()[0] == "help":
   showInfo("apt-brain [command]")
   showInfo("  help : Show help")
   showInfo("  help [command] : Show help about [command]")
-  showInfo("  install [package] : Install [package]")
+  showInfo("  install [package] [drive] : Install [package] to [drive]")
   showInfo("  ping")
   showInfo("  show : Show all packeages")
   showInfo("  show [packeage] : Show about [package]")
@@ -49,7 +49,7 @@ elif commandLineParams()[0] == "ping":
   discard connect(url)
   showInfo("Ping : " & int((cpuTime() - start) * 1000).intToStr & " ms")
 elif commandLineParams()[0] == "install":
-  if paramCount() == 2:
+  if paramCount() == 3:
     let lines = split(connect(url) , "\n")
     for line in lines:
       let tmp = split(line , ",")
@@ -65,28 +65,29 @@ elif commandLineParams()[0] == "install":
           showDone()
           strm.write(connect(tmp[1]))
           strm.close()
-        if tmp[1].substr(tmp[1].rfind(".") + 1) == "exe":
-          showInfo("Type : .exe installer")
-          when defined(windows):
-            var p:Process
-            try: p = startProcess(fileName)
-            except OSError:
-              showErr("Unable to start process : " & filename)
-            showInfo("Process ID : " & p.processID.intToStr)
-            var line:string
-            while p.outputStream.readLine(line): showLog("installer : " & line)
-            discard p.waitForExit()
-            showLog("Close process")
-            p.close()
-          else:
-            showInfo("Your OS isn't Windows.")
-            let command = "wine " & fileName
-            showLog("Call command : \"" & command & "\"")
-            let code = execShellCmd(command)
-            showLog("Code : " & code)
-            if code != 0:
-              showErr("Unable to call command : \"" & command & "\"")
-              showInfo("Did you install wine ?")
+          let option = commandLineParams()[2] / "アプリ"
+          if tmp[1].substr(tmp[1].rfind(".") + 1) == "exe":
+            showInfo("Type : .exe installer")
+            when defined(windows):
+              var p:Process
+              try: p = startProcess(fileName , option)
+              except OSError: showErr("Unable to start process : " & filename)
+              showInfo("Process ID : " & p.processID.intToStr)
+              var line:string
+              while p.outputStream.readLine(line): showLog("installer : " & line)
+              discard p.waitForExit()
+              showLog("Closing process")
+              p.close()
+            else:
+              showInfo("Your OS isn't Windows.")
+              let command = "wine " & fileName & " " & option
+              showLog("Calling command : \"" & command & "\" ...")
+              let code = execShellCmd(command)
+              showDone()
+              showLog("Code : " & code)
+              if code != 0:
+                showErr("Unable to call command : \"" & command & "\"")
+                showInfo("Did you install wine ?")
         break
   elif paramCount() == 1: showErr("Too few arguments")
   else: showErr("Too many arguments")

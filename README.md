@@ -1,2 +1,2 @@
-`nimble install puppy`
+`nimble install puppy zip`
 `nim c main`
