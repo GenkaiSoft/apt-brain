@@ -2,13 +2,14 @@ import strutils
 import puppy
 import os
 import osproc
-import system
 import times
 import streams
 import console
 
 proc showFailed() = showLog("-> failed")
 proc showDone() = showLog("-> done")
+proc showFew() = showErr("Too few arguments")
+proc showMany() = showErr("Too many argumetns")
 
 proc connect(url:string):string =
   showLog("Connecting to \"" & url & "\" ...")
@@ -89,6 +90,6 @@ elif commandLineParams()[0] == "install":
                 showErr("Unable to call command : \"" & command & "\"")
                 showInfo("Did you install wine ?")
         break
-  elif paramCount() == 1: showErr("Too few arguments")
-  else: showErr("Too many arguments")
+  elif paramCount() == 1: showFew()
+  else: showMany()
 else: showErr("Unknown option")
