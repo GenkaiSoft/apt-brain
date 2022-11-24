@@ -1,4 +1,5 @@
 import os , strutils , streams , osproc
+import zippy/ziparchives
 import common
 
 proc install*() =
@@ -19,7 +20,10 @@ proc install*() =
           strm.write(connect(tmp[1]))
           strm.close()
           let option = commandLineParams()[2] / "アプリ"
-          if tmp[1].substr(tmp[1].rfind(".") + 1) == "exe":
+          case tmp[1].substr(tmp[1].rfind(".") + 1)
+          of "zip":
+            extractAll(fileName , "unzipped")
+          of "exe":
             showInfo("Type : .exe installer")
             when defined(windows):
               var p:Process
@@ -37,7 +41,7 @@ proc install*() =
               showLog("Calling command : \"" & command & "\" ...")
               let code = execShellCmd(command)
               showDone()
-              showLog("ExitCode : " & code.intToStr)
+              showLog("Code : " & code)
               if code != 0:
                 showErr("Unable to call command : \"" & command & "\"")
                 showInfo("Did you install wine ?")
