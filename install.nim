@@ -3,12 +3,14 @@ import zippy/ziparchives
 import common
 
 proc install*() =
-  if paramCount() == 3:
+  if paramCount() == 2:
     let lines = split(connect(url) , "\n")
+    var exist = false
     for line in lines:
       let tmp = split(line , ",")
       if tmp[0] == commandLineParams()[1]:
-        showInfo("Package \"" & tmp[0] & "\" exist.")
+        showInfo("Package \"" & tmp[0] & "\" is exist.")
+        exist = true
         let fileName = tmp[1].substr(tmp[1].rfind("/") + 1)
         showLog("Opening file : \"" & fileName)
         let strm = newFileStream(fileName , fmWrite)
@@ -46,5 +48,7 @@ proc install*() =
                 showErr("Unable to call command : \"" & command & "\"")
                 showInfo("Did you install wine ?")
         break
+    if not exist: showErr("Package \"" & commandLineParams()[1] & "\" isn't exist.")
   elif paramCount() == 1: showFew()
-  else: showMany()
+  else:
+    showMany()
