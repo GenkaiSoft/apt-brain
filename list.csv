@@ -1,2 +1,2 @@
-BrainLilo,https://github.com/brain-hackers/brainlilo/releases/download/4.0.0/brainlilo-4.0.0.zip,U-Boot
+BrainLILO,https://github.com/brain-hackers/brainlilo/releases/download/4.0.0/brainlilo-4.0.0.zip,U-Boot
 USBStorage,https://bitbucket.org/knatech/brain-tools/downloads/usbstorage-0.12-arm.zip,Brain と PC を USB 接続した状態で、PC から Brain の本体メモリや SD カードにアクセスすることを可能にします。
