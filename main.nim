@@ -14,17 +14,20 @@ if paramCount() == 0:
   showLog(""" \____|\___|_| |_|_|\_\__,_|_|____/ \___/|_|  \__| \______/""")
   showInfo("Copyright (c) 2022 GenkaiSoft. All Rights Reserved.")
   showInfo("`apt-brain help' to get help")
-elif commandLineParams()[0] == "help":
-  showInfo("apt-brain [command]")
-  showInfo("  help : Show help")
-  showInfo("  help [command] : Show help about [command]")
-  showInfo("  install [package] [drive] : Install [package] to [drive]")
-  showInfo("  ping")
-  showInfo("  show : Show all packeages")
-  showInfo("  show [packeage] : Show about [package]")
-elif commandLineParams()[0] == "ping":
-  let start = cpuTime()
-  discard connect(url)
-  showInfo("Ping : " & int((cpuTime() - start) * 1000).intToStr & " ms")
-elif commandLineParams()[0] == "install": install()
-else: showErr("Unknown option")
+else:
+  case commandLineParams()[0]
+  of "help":
+    showInfo("apt-brain [command]")
+    showInfo("  help : Show help")
+    showInfo("  help [command] : Show help about [command]")
+    showInfo("  install [package] [drive] : Install [package] to [drive]")
+    showInfo("  ping")
+    showInfo("  show : Show all packeages")
+    showInfo("  show [packeage] : Show about [package]")
+  of "ping":
+    let start = cpuTime()
+    discard connect(url)
+    showInfo("Ping : " & int((cpuTime() - start) * 1000).intToStr & " ms")
+  of "install": install()
+  of "show": echo(connect(url))
+  else: showErr("Unknown option")

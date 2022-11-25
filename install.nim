@@ -9,10 +9,10 @@ proc install*() =
     for line in lines:
       let tmp = split(line , ",")
       if tmp[0] == commandLineParams()[1]:
-        showInfo("Package \"" & tmp[0] & "\" is exist.")
+        showInfo("Package : \"" & tmp[0] & "\" is exist.")
         exist = true
         let fileName = tmp[1].substr(tmp[1].rfind("/") + 1)
-        showLog("Opening file : \"" & fileName)
+        showLog("Opening file : \"" & fileName & "\" ...")
         let strm = newFileStream(fileName , fmWrite)
         if isNil(strm):
           showFailed()
@@ -21,15 +21,19 @@ proc install*() =
           showDone()
           strm.write(connect(tmp[1]))
           strm.close()
-          let option = commandLineParams()[2] / "アプリ"
-          case tmp[1].substr(tmp[1].rfind(".") + 1)
+          showLog("File : \"" & fileName & "\" Closed.")
+          showLog("File : \"" & fileName & "\" Downloaded.")
+          let extension = tmp[1].substr(tmp[1].rfind(".") + 1)
+          case extension
           of "zip":
-            extractAll(fileName , "unzipped")
+            showLog("Extracting zip file : \"" & fileName & "\" ...")
+            extractAll(fileName , tmp[0])
+            showDone()
           of "exe":
             showInfo("Type : .exe installer")
             when defined(windows):
               var p:Process
-              try: p = startProcess(fileName , option)
+              try: p = startProcess(fileName)
               except OSError: showErr("Unable to start process : " & filename)
               showInfo("Process ID : " & p.processID.intToStr)
               var line:string
@@ -47,6 +51,7 @@ proc install*() =
               if code != 0:
                 showErr("Unable to call command : \"" & command & "\"")
                 showInfo("Did you install wine ?")
+          else: showErr("Unknown extension : " & extension)
         break
     if not exist: showErr("Package \"" & commandLineParams()[1] & "\" isn't exist.")
   elif paramCount() == 1: showFew()
