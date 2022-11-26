@@ -1,2 +1,2 @@
-`nimble install puppy zip`
-`nim c main`
+`nimble install puppy`<br>
+`nim c -o:apt-brain main`
