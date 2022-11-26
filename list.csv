@@ -1,2 +1,5 @@
-USBStorage,https://bitbucket.org/knatech/brain-tools/downloads/usbstorage-0.12-arm.zip,Brain と PC を USB 接続した状態で、PC から Brain の本体メモリや SD カードにアクセスすることを可能にします。
-BrainLILO,https://github.com/brain-hackers/brainlilo/releases/download/4.0.0/brainlilo-4.0.0.zip,U-Boot
+CERestor,https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/pkgs/CERestor_2.0.zip
+SaikoroCE,https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/pkgs/SaikoroCE_1.1.zip
+TmTimer,https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/pkgs/TmTimer_0.6.zip
+batmtr,https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/pkgs/batmtr_4.0.zip
+MEMZ,https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/pkgs/memz_1.3.zip
