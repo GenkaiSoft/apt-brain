@@ -22,11 +22,14 @@ proc show(title , str:string) =
     " > " &
     str
   )
-proc showErr*(str:string) = show("Err " , str)
-proc showLog*(str:string) = show("Log " , str)
-proc showInfo*(str:string) = show("Info" , str)
-proc showWarn*(str:string) = show("Warn" , str)
-proc showDbg*(str:string) = show("Dbg " , str)
+proc showErr*(str:string) = show("Error      " , str)
+proc showLog*(str:string) = show("Log        " , str)
+proc showInfo*(str:string) = show("Information" , str)
+proc showWarn*(str:string) = show("Warning    " , str)
+proc showDbg*(str:string) = show("Debug      " , str)
+proc showExc*(str:string) =
+  showErr(str)
+  showErr("Error message : \"" & getCurrentExceptionMsg() & "\"")
 
 proc showFailed*() = showLog("-> failed")
 proc showDone*() = showLog("-> done")
@@ -37,10 +40,9 @@ proc connect*(url:string):string =
   showLog("Connecting to \"" & url & "\" ...")
   let req = Request(url: parseUrl(url) , verb: "get")
   let res = fetch(req)
-  showLog("  Code = " & res.code.intToStr)
   if res.code == 200: showDone()
   else:
     showFailed()
     showErr("Unable to connect to " & url)
-    quit(1)
+  showLog("Response code = " & res.code.intToStr)
   return res.body

@@ -5,13 +5,15 @@ import common
 proc install*() =
   if paramCount() == 2:
     let lines = split(connect(url) , "\n")
-    var exist = false
+    var
+      exist = false
+      fileName:string
     for line in lines:
       let tmp = split(line , ",")
       if tmp[0].toLower == commandLineParams()[1].toLower:
         showInfo("Package : \"" & tmp[0] & "\" is exist.")
         exist = true
-        let fileName = tmp[1].substr(tmp[1].rfind("/") + 1)
+        fileName = tmp[1].substr(tmp[1].rfind("/") + 1)
         showLog("Opening file : \"" & fileName & "\" ...")
         let strm = newFileStream(fileName , fmWrite)
         if isNil(strm):
@@ -22,35 +24,35 @@ proc install*() =
           let res = connect(tmp[1])
           strm.write(res)
           strm.close()
-          if res == "":
-            removeFile(fileName)
-            break
+          if res == "": break
           else:
             showLog("File : \"" & fileName & "\" Closed.")
             showLog("File : \"" & fileName & "\" Downloaded.")
+            const appDir = "アプリ"
+            try:
+              if existsOrCreateDir(appDir): showInfo("Directory : \"" & appDir & "\" isn't exist.")
+            except OSError: showExc("Unable to create directory : " & appDir & "\"")
             let extension = tmp[1].substr(tmp[1].rfind(".") + 1)
             case extension
             of "zip":
               showLog("Extracting zip file : \"" & fileName & "\" ...")
-              try : extractAll(fileName , "アプリ" / tmp[0])
+              try: extractAll(fileName , appDir / tmp[0])
               except ZippyError:
-                showErr("Unable to extract zip file : \"" & fileName & "\"")
-                showExc()
+                showFailed()
+                showExc("Unable to extract zip file : \"" & fileName & "\"")
               showDone()
             of "exe":
               showInfo("Type : .exe installer")
               when defined(windows):
-                var p:Process
-                try: p = startProcess(fileName)
-                except OSError:
-                  showErr("Unable to start process : " & filename)
-                  showExc()
-                showInfo("Process ID : " & p.processID.intToStr)
-                var line:string
-                while p.outputStream.readLine(line): showLog("installer : " & line)
-                discard p.waitForExit()
-                showLog("Closing process")
-                p.close()
+                try:
+                  let p = startProcess(fileName)
+                  showInfo("Process ID : " & p.processID.intToStr)
+                  var line:string
+                  while p.outputStream.readLine(line): showLog("Installer log : \"" & line & "\"")
+                  discard p.waitForExit()
+                  showLog("Closing process")
+                  p.close()
+                except OSError: showExc("Unable to start process : \"" & filename & "\"")
               else:
                 showInfo("Your OS isn't Windows.")
                 let command = "wine " & fileName & " " & option
@@ -64,6 +66,12 @@ proc install*() =
             else: showErr("Unknown extension : " & extension)
         break
     if not exist: showErr("Package \"" & commandLineParams()[1] & "\" isn't exist.")
+    showLog("Removing file : \"" & fileName & "\" ...")
+    try: removeFile(fileName)
+    except OSError:
+      showFailed()
+      showExc("Unable to remove file : \"" & fileName & "\"")
+    showDone()
   elif paramCount() == 1: showFew()
   else:
     showMany()
