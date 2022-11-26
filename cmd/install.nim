@@ -1,8 +1,8 @@
 import os , strutils , streams , osproc
 import zippy/ziparchives
-import common
+import ../common
 
-proc install*() {.inline.} =
+proc cmdInstall*() {.inline.} =
   if paramCount() == 2:
     let lines = split(connect(url) , "\n")
     var

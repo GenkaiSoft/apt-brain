@@ -1,5 +1,6 @@
-import std/[os , times , strutils , tables]
-import common , install
+import std/[os , times , strutils]
+import common
+import cmd/[install , help , show]
 
 if paramCount() == 0:
   showLog(""" ___              _                  _   _""")
@@ -17,46 +18,14 @@ if paramCount() == 0:
 else:
   case commandLineParams()[0]
   of "help":
-    const null = ["" , ""]
-    const helps = {
-      "help":[["help" , "Show help"] , ["help {command(s)}" , "Show help about {command(s)}"]] ,
-      "install":[
-        ["install {package(s)}" , "Install {package(s)} to \"{current directory}" / "アプリ" / "{{package} name}\""] ,
-        ["install [--dir|-d] {directory} {package(s)}" , "Install {packages(s)} to {directory}"]
-      ] ,
-      "ping":[["ping" , "Measure ping."] , null] ,
-      "version":[["version" , "Show version."] , null] ,
-      "show":[["show" , "Show all packages"] , ["show [package]" , "Show about [package]."]]
-    }.toTable
-    if paramCount() == 1:
-      for key , help in helps:
-        for value in help:
-          if value != null:
-            echo("\"" & value[0] & "\" : " & value[1])
-    else:
-      for key , help in helps:
-        if key == commandLineParams()[1]:
-          for value in help:
-            echo("\"" & value[0] & "\" : " & value[1])
+    cmdHelp()
   of "ping":
     let start = cpuTime()
     discard connect(url)
     showInfo("Ping : " & int((cpuTime() - start) * 1000).intToStr & " ms")
-  of "install": install()
+  of "install":
+    cmdInstall()
   of "show":
-    var
-      procShow: proc(package:seq[string])
-      exist = false
-    if paramCount() == 1:
-      procShow = proc(package:seq[string]) = showInfo(package[0])
-    else:
-      procShow = proc(package:seq[string]) =
-        if package[0].toLower == commandLineParams()[1].toLower:
-          exist = true
-          showInfo(package[0])
-    let res = connect(url)
-    if res != "":
-      showLog("Show package(s)")
-      for line in split(res , "\n"): procShow(split(line , ","))
-      if not exist and paramCount() != 1: showErr("Package : \"" & commandLineParams()[1] & "\" isn't exist.")
-  else: showErr("Unknown option")
+    cmdShow()
+  else:
+    showErr("Unknown option")
