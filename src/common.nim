@@ -1,4 +1,4 @@
-import str/[strutils , os]
+import std/[strutils , os]
 import puppy
 import time/ctime
 
