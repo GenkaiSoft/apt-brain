@@ -22,3 +22,4 @@ proc cmdHelp*() {.inline.} =
       if key == commandLineParams()[1]:
         for value in help:
           echo("\"" & value[0] & "\" : " & value[1])
+      break

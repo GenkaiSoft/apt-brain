@@ -5,6 +5,7 @@ import cmd/[install , help , show]
 proc showVer() =
   showInfo("apt-brain BETA v2.1")
   showInfo("Copylight (c) 2022 777shuang. All Rights Reserved.")
+
 if paramCount() == 0:
   showLog(""" ___              _                  _   _""")
   showLog("""|   \ _____ _____| |___ _ __  ___ __| | | |__ _  _""")

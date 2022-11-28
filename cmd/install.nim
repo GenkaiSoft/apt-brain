@@ -52,7 +52,8 @@ proc cmdInstall*() {.inline.} =
                   discard p.waitForExit()
                   showLog("Closing process")
                   p.close()
-                except OSError: showExc("Unable to start process : \"" & filename & "\"")
+                except OSError:
+                  showExc("Unable to start process : \"" & filename & "\"")
               else:
                 showInfo("Your OS isn't Windows.")
                 let command = "wine " & fileName & " " & option
@@ -63,15 +64,19 @@ proc cmdInstall*() {.inline.} =
                 if code != 0:
                   showErr("Unable to call command : \"" & command & "\"")
                   showInfo("Did you install wine ?")
-            else: showErr("Unknown extension : " & extension)
+            else:
+              showErr("Unknown extension : " & extension)
         break
-    if not exist: showErr("Package \"" & commandLineParams()[1] & "\" isn't exist.")
+    if not exist:
+      showErr("Package \"" & commandLineParams()[1] & "\" isn't exist.")
     showLog("Removing file : \"" & fileName & "\" ...")
-    try: removeFile(fileName)
+    try:
+      removeFile(fileName)
     except OSError:
       showFailed()
       showExc("Unable to remove file : \"" & fileName & "\"")
     showDone()
-  elif paramCount() == 1: showFew()
+  elif paramCount() == 1:
+    showFew()
   else:
     showMany()
