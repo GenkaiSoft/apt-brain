@@ -12,3 +12,7 @@ namedBin["main"] = "apt-brain"
 requires "nim >= 1.6.8"
 requires "puppy >= 1.6.0"
 requires "zippy >= 0.10.4"
+
+# Skipes
+skipDirs  = "packages"
+skipFile = "list.csv"
