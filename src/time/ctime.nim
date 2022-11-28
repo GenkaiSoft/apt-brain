@@ -1,4 +1,4 @@
-{.push header:"time.c".}
+{.push header:"time.h".}
 proc getYear*():cint
 proc getMonth*():cint
 proc getDay*():cint
