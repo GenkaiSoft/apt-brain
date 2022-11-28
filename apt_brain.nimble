@@ -1,12 +1,12 @@
 # Package
 
-version       = "0.2.1"
-author        = "777shuang"
-description   = "apt for SHARP Brain"
-license       = "GPL-3.0-or-later"
-srcDir        = "src"
+version          = "0.2.1"
+author           = "777shuang"
+description      = "apt for SHARP Brain"
+license          = "GPL-3.0-or-later"
+srcDir           = "src"
+binDir           = "bin"
 namedBin["main"] = "apt-brain"
-
 
 # Dependencies
 

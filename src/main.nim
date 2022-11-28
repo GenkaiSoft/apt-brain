@@ -18,6 +18,8 @@ if paramCount() == 0:
   showLog("""| |_| |  __/ | | |   < (_| | |___) | (_) |  _| |_  |= __ =|  \__________|""")
   showLog(""" \____|\___|_| |_|_|\_\__,_|_|____/ \___/|_|  \__| \______/""")
   showVer()
+  when not defined(release):
+    showWarn("DEBUG BUILD")
   showInfo("\"apt-brain help\" to get help")
 else:
   case cmdLineParams[0]
