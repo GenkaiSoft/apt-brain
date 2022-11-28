@@ -20,7 +20,7 @@ if paramCount() == 0:
   showVer()
   showInfo("\"apt-brain help\" to get help")
 else:
-  case commandLineParams()[0]
+  case cmdLineParams[0]
   of "help":
     cmdHelp()
   of "ping":

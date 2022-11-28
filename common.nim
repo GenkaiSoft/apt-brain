@@ -1,8 +1,12 @@
-import strutils
+import strutils , os
 import puppy
 import ctime
 
 const url* = "https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/list.csv"
+
+let
+  cmdLineParamCount* = paramCount()
+  cmdLineParams* = commandLineParams()
 
 proc show(title , str:string) =
   echo(

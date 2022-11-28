@@ -1,16 +1,16 @@
-import os , strutils , streams , osproc
+import std/[os , strutils , streams , osproc]
 import zippy/ziparchives
 import ../common
 
 proc cmdInstall*() {.inline.} =
-  if paramCount() == 2:
+  if cmdLineParamCount == 2:
     let lines = split(connect(url) , "\n")
     var
       exist = false
       fileName:string
     for line in lines:
       let tmp = split(line , ",")
-      if tmp[0].toLower == commandLineParams()[1].toLower:
+      if tmp[0].toLower == cmdLineParams[1].toLower:
         showInfo("Package : \"" & tmp[0] & "\" is exist.")
         exist = true
         fileName = tmp[1].substr(tmp[1].rfind("/") + 1)

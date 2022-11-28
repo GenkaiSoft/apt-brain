@@ -1,4 +1,5 @@
-import os , tables
+import std/[os , tables]
+import ../common
 
 proc cmdHelp*() {.inline.} =
   const null = ["" , ""]
@@ -12,14 +13,14 @@ proc cmdHelp*() {.inline.} =
     "version":[["version" , "Show version."] , null] ,
     "show":[["show" , "Show all packages"] , ["show [package]" , "Show about [package]."]]
   }.toTable
-  if paramCount() == 1:
+  if cmdLineParamCount == 1:
     for key , help in helps:
       for value in help:
         if value != null:
           echo("\"" & value[0] & "\" : " & value[1])
   else:
     for key , help in helps:
-      if key == commandLineParams()[1]:
+      if key == cmdLineParams[1]:
         for value in help:
           echo("\"" & value[0] & "\" : " & value[1])
       break
