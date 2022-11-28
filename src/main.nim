@@ -2,7 +2,11 @@ import std/[os , times , strutils]
 import common
 import cmd/[install , help , show]
 
+proc showHelp() =
+  showInfo("\"apt-brain help\" to get help")
 proc showVer() =
+  when not defined(release):
+    showWarn("DEBUG BUILD")
   showInfo("apt-brain BETA v2.1")
   showInfo("Copylight (c) 2022 777shuang. All Rights Reserved.")
 
@@ -18,9 +22,7 @@ if paramCount() == 0:
   showLog("""| |_| |  __/ | | |   < (_| | |___) | (_) |  _| |_  |= __ =|  \__________|""")
   showLog(""" \____|\___|_| |_|_|\_\__,_|_|____/ \___/|_|  \__| \______/""")
   showVer()
-  when not defined(release):
-    showWarn("DEBUG BUILD")
-  showInfo("\"apt-brain help\" to get help")
+  showHelp()
 else:
   case cmdLineParams[0]
   of "help":
@@ -37,3 +39,4 @@ else:
     showVer()
   else:
     showErr("Unknown option")
+    showHelp()
