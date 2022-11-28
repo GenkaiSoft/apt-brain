@@ -1,6 +1,6 @@
-import strutils , os
+import str/[strutils , os]
 import puppy
-import ctime
+import time/ctime
 
 const url* = "https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/list.csv"
 
