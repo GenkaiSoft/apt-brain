@@ -36,11 +36,14 @@ proc cmdInstall*() {.inline.} =
             case extension
             of "zip":
               showLog("Extracting zip file : \"" & fileName & "\" ...")
+              var error = false
               try: extractAll(fileName , appDir / tmp[0])
               except ZippyError:
                 showFailed()
                 showExc("Unable to extract zip file : \"" & fileName & "\"")
-              showDone()
+                error = true
+              if not error:
+                showDone()
             of "exe":
               showInfo("Type : .exe installer")
               when defined(windows):
