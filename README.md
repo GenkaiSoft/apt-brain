@@ -4,7 +4,8 @@
 右のReleasesから入手
 ### それ以外、Windows (ソースからビルド)
 Nimをインストールする必要があります。<br>
-#### nimbleパッケージとしてインストールする : `nimble install https://github.com/GenkaiSoft/apt-brain.git`を実行する
+#### nimbleパッケージとしてインストールする
+- `nimble install https://github.com/GenkaiSoft/apt-brain.git`を実行する
 #### 任意の場所にインストールする :
 - `git clone https://github.com/GenkaiSoft/apt-brain.git`
 - `cd apt-brain`
