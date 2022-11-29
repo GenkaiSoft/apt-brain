@@ -63,7 +63,7 @@ proc cmdInstall*() {.inline.} =
                 showLog("Calling command : \"" & command & "\" ...")
                 let code = execShellCmd(command)
                 showDone()
-                showLog("Code : " & code)
+                showLog("Code : " & code.intToStr)
                 if code != 0:
                   showErr("Unable to call command : \"" & command & "\"")
                   showInfo("Did you install wine ?")
