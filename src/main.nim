@@ -9,7 +9,7 @@ proc showVer() =
   when not defined(release) or not defined(NimblePkgVersion):
     showWarn("It's not release build!")
   else:
-    showInfo("apt-brain version : \"" & NimblePkgVersion & "\"")
+    showInfo("apt-brain v" & NimblePkgVersion)
   showInfo("Copylight (c) 2022 777shuang. All Rights Reserved.")
 
 if cmdLineParamCount == 0:
