@@ -5,9 +5,9 @@
 Nimをインストールする必要があります。<br>
 - nimbleパッケージとしてインストールする : `nimble install https://github.com/GenkaiSoft/apt-brain.git`を実行する
 - 任意の場所にインストールする :
--- `git clone https://github.com/GenkaiSoft/apt-brain.git`
--- `cd apt-brain`
--- `nimble build -d:release`
+- - `git clone https://github.com/GenkaiSoft/apt-brain.git`
+- - `cd apt-brain`
+- - `nimble build -d:release`
 # 使用方法
 `apt-brain install [パッケージ]`で、`[カレントディレクトリ]/アプリ/[パッケージ]`にインストールされます。<br>
 例)`apt-brain install CERestor`※パッケージ名は大文字、小文字関係ありません。<br>
