@@ -11,11 +11,11 @@ proc cmdInstall*() {.inline.} =
         exist = false
         fileName:string
       for line in lines:
-        let tmp = split(line , ",")
-        if tmp[0].toLower == cmdLineParams[1].toLower:
-          showInfo("Package : \"" & tmp[0] & "\" is exist.")
+        let package = split(line , ",")
+        if package[0].toLower == cmdLineParams[1].toLower:
+          showInfo("Package : \"" & package[0] & "\" is exist.")
           exist = true
-          fileName = tmp[1].substr(tmp[1].rfind("/") + 1)
+          fileName = package[1].substr(package[1].rfind("/") + 1)
           showLog("Opening file : \"" & fileName & "\" ...")
           let strm = newFileStream(fileName , fmWrite)
           if isNil(strm):
@@ -23,7 +23,7 @@ proc cmdInstall*() {.inline.} =
             showErr("Unable to open " & fileName)
           else:
             showDone()
-            let res = connect(tmp[1])
+            let res = connect(package[1])
             strm.write(res)
             strm.close()
             if res == "":
@@ -37,12 +37,12 @@ proc cmdInstall*() {.inline.} =
                   showInfo("Directory : \"" & appDir & "\" isn't exist.")
               except OSError:
                 showExc("Unable to create directory : " & appDir & "\"")
-              let extension = tmp[1].substr(tmp[1].rfind(".") + 1)
+              let extension = package[1].substr(package[1].rfind(".") + 1)
               case extension
               of "zip":
                 showLog("Extracting zip file : \"" & fileName & "\" ...")
                 var error = false
-                try: extractAll(fileName , appDir / tmp[0])
+                try: extractAll(fileName , appDir / package[0])
                 except ZippyError:
                   showFailed()
                   showExc("Unable to extract zip file : \"" & fileName & "\"")

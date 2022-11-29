@@ -1,16 +1,18 @@
-import std/[os , times , strutils]
+import std/[times , strutils]
 import common
 import cmd/[install , help , show]
 
 proc showHelp() =
-  showInfo("\"apt-brain help\" to get help")
+  showInfo("Get help with \"apt-brain help\"")
 proc showVer() =
-  when not defined(release):
-    showWarn("DEBUG BUILD")
-  showInfo("apt-brain BETA v2.1")
+  const NimblePkgVersion {.strdefine.}:string = "DEBUG_BUILD"
+  when not defined(release) or not defined(NimblePkgVersion):
+    showWarn("It's not release build!")
+  else:
+    showInfo("apt-brain version : \"" & NimblePkgVersion & "\"")
   showInfo("Copylight (c) 2022 777shuang. All Rights Reserved.")
 
-if paramCount() == 0:
+if cmdLineParamCount == 0:
   showLog(""" ___              _                  _   _""")
   showLog("""|   \ _____ _____| |___ _ __  ___ __| | | |__ _  _""")
   showLog("""| |) / -_) V / -_) / _ \ '_ \/ -_) _` | | '_ \ || |""")

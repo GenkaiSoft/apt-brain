@@ -3,7 +3,6 @@ import puppy
 import time/ctime
 
 const url* = "https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/list.csv"
-
 let
   cmdLineParamCount* = paramCount()
   cmdLineParams* = commandLineParams()
