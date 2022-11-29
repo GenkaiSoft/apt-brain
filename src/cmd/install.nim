@@ -59,7 +59,7 @@ proc cmdInstall*() {.inline.} =
                   showExc("Unable to start process : \"" & filename & "\"")
               else:
                 showInfo("Your OS isn't Windows.")
-                let command = "wine " & fileName & " " & option
+                let command = "wine " & fileName
                 showLog("Calling command : \"" & command & "\" ...")
                 let code = execShellCmd(command)
                 showDone()
