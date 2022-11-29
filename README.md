@@ -1,5 +1,7 @@
 # インストール
-右のReleasesから入手するか、<br>
+## Windows
+右のReleasesから入手
+## それ以外、Windows
 `nimble install https://github.com/GenkaiSoft/apt-brain.git`を実行する
 # 使用方法
 `apt-brain install [パッケージ]`で、`[カレントディレクトリ]/アプリ/[パッケージ]`にインストールされます。<br>
