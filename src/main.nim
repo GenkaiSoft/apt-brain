@@ -5,11 +5,10 @@ import cmd/[install , help , show]
 proc showHelp() =
   showInfo("Get help with \"apt-brain help\"")
 proc showVer() =
-  const NimblePkgVersion {.strdefine.}:string = "DEBUG_BUILD"
+  const NimblePkgVersion {.strdefine.}:string = "0.0(DEBUG_BUILD)"
   when not defined(release) or not defined(NimblePkgVersion):
     showWarn("It's not release build!")
-  else:
-    showInfo("apt-brain v" & NimblePkgVersion)
+  showInfo("apt-brain v" & NimblePkgVersion)
   showInfo("Copylight (c) 2022 777shuang. All Rights Reserved.")
 
 if cmdLineParamCount == 0:
