@@ -1,4 +1,4 @@
-import std/[os , tables]
+import std/tables
 import ../common
 
 proc cmdHelp*() {.inline.} =

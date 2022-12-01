@@ -41,9 +41,9 @@ proc showMany*() = showErr("Too many argumetns")
 
 proc connect*(url:string):string =
   showLog("Connecting to \"" & url & "\" ...")
-  let req = Request(url: parseUrl(url) , verb: "get")
-  let res = fetch(req)
-  if res.code == 200: showDone()
+  let res = fetch(Request(url: parseUrl(url) , verb: "get"))
+  if res.code == 200:
+    showDone()
   else:
     showFailed()
     showErr("Unable to connect to \"" & url & "\"")
