@@ -32,7 +32,7 @@ proc showWarn*(str:string) = show("Warning    " , str)
 proc showDbg*(str:string) = show("Debug      " , str)
 proc showExc*(str:string) =
   showErr(str)
-  showErr("Error message : \"" & getCurrentExceptionMsg() & "\"")
+  showErr("Error message is \"" & getCurrentExceptionMsg() & "\"")
 
 proc showFailed*() = showLog("-> failed")
 proc showDone*() = showLog("-> done")
@@ -46,6 +46,6 @@ proc connect*(url:string):string =
   if res.code == 200: showDone()
   else:
     showFailed()
-    showErr("Unable to connect to " & url)
-  showLog("Response code = " & res.code.intToStr)
+    showErr("Unable to connect to \"" & url & "\"")
+  showLog("Response code is \'" & res.code.intToStr & "\'")
   return res.body
