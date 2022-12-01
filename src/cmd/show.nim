@@ -14,8 +14,8 @@ proc cmdShow*() {.inline.} =
       for line in lines:
         let value = split(line , ",")[0]
         if value.toLower == cmdLineParams[1].toLower:
-          showInfo("Package : \"" & value & "\" is exist.")
+          showInfo("Package \"" & value & "\" exists.")
           exist = true
           break
     if not exist and cmdLineParamCount != 1:
-      showErr("Package : \"" & cmdLineParams[1] & "\" isn't exist.")
+      showErr("Package \"" & cmdLineParams[1] & "\" does not exist.")

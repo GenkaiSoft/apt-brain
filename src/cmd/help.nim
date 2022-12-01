@@ -4,10 +4,10 @@ import ../common
 proc cmdHelp*() {.inline.} =
   const null = ["" , ""]
   const helps = {
-    "help":[["help" , "Show help"] , ["help {command(s)}" , "Show help about {command(s)}"]] ,
+    "help":[["help" , "Show help"] , ["help {command(s)}" , "Show help about {command(s)}."]] ,
     "install":[
-      ["install {package(s)}" , "Install {package(s)} to \"{current directory}" / "アプリ" / "{{package} name}\""] ,
-      ["install [--dir|-d] {directory} {package(s)}" , "Install {packages(s)} to {directory}"]
+      ["install {package(s)}" , "Install {package(s)} to \"{current directory}" / "アプリ" / "{{package} name}\"."] ,
+      ["install [--dir|-d] {directory} {package(s)}" , "Install {packages(s)} to {directory}."]
     ] ,
     "ping":[["ping" , "Measure ping."] , null] ,
     "version":[["version" , "Show version."] , null] ,
