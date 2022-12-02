@@ -5,7 +5,7 @@
 ### それ以外、Windows (ソースからビルド)
 [Nimをインストール](https://nim-lang.org/install.html)する必要があります。<br>
 #### nimbleパッケージとしてインストールする
-- `nimble install https://github.com/GenkaiSoft/apt-brain.git`を実行する
+- `nimble install apt_brain`
 #### 任意の場所にインストールする :
 - `git clone https://github.com/GenkaiSoft/apt-brain.git`
 - `cd apt-brain`
