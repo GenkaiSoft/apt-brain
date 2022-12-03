@@ -1,2 +1,4 @@
-apt-brain.exe
-src/main.exe
+*.exe
+*.app
+src/main.*
+アプリ/

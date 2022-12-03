@@ -1,4 +1,4 @@
-import std/[os , strutils , streams , osproc]
+import std/[os , strutils , streams]
 import zippy/ziparchives
 import ../common
 
