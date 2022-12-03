@@ -18,4 +18,4 @@ proc cmdShow*() {.inline.} =
           exist = true
           break
     if not exist and cmdLineParamCount != 1:
-      showErr("Package \"" & cmdLineParams[1] & "\" does not exist.")
+      showErr("Package \"" & cmdLineParams[1] & "\" does not exist")

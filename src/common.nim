@@ -25,19 +25,23 @@ proc show(title , str:string) =
     " > " &
     str
   )
-proc showErr*(str:string) = show("Error      " , str)
+proc showErr*(str:string) = show("Error      " , str & " !")
 proc showLog*(str:string) = show("Log        " , str)
 proc showInfo*(str:string) = show("Information" , str)
-proc showWarn*(str:string) = show("Warning    " , str)
+proc showWarn*(str:string) = show("Warning    " , str & " !")
 proc showDbg*(str:string) = show("Debug      " , str)
 proc showExc*(str:string) =
   showErr(str)
   showErr("Error message is \"" & getCurrentExceptionMsg() & "\"")
+proc showProcess*(str:string) = showLog(str & " ...")
 
-proc showFailed*() = showLog("-> failed")
-proc showDone*() = showLog("-> done")
-proc showFew*() = showErr("Too few arguments")
-proc showMany*() = showErr("Too many argumetns")
+proc showResult(str:string) = showLog("-> " & str)
+proc showFailed*() = showResult("failed")
+proc showDone*() = showResult("done")
+
+proc showArgs(str:string) = showErr("Too" & str & "arguments")
+proc showFew*() = showArgs("few")
+proc showMany*() = showArgs("many")
 
 proc connect*(url:string):string =
   showLog("Connecting to \"" & url & "\" ...")

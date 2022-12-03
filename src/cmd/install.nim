@@ -1,4 +1,4 @@
-import std/[os , strutils , streams]
+import std/[os , strutils , streams , osproc]
 import zippy/ziparchives
 import ../common
 
@@ -16,7 +16,7 @@ proc cmdInstall*() {.inline.} =
           showInfo("Package \"" & package[0] & "\" exists.")
           exist = true
           fileName = package[1].substr(package[1].rfind("/") + 1)
-          showLog("Opening file \"" & fileName & "\" ...")
+          showProcess("Opening file \"" & fileName & "\"")
           let strm = newFileStream(fileName , fmWrite)
           if isNil(strm):
             showFailed()
@@ -34,13 +34,13 @@ proc cmdInstall*() {.inline.} =
               const appDir = "アプリ"
               try:
                 if existsOrCreateDir(appDir):
-                  showInfo("Directory \"" & appDir & "\" does not exist.")
+                  showInfo("Directory \"" & appDir & "\" does not exist")
               except OSError:
                 showExc("Unable to create directory \"" & appDir & "\"")
               let extension = package[1].substr(package[1].rfind(".") + 1)
               case extension
               of "zip":
-                showLog("Extracting zip file \"" & fileName & "\" ...")
+                showProcess("Extracting zip file \"" & fileName & "\"")
                 var error = false
                 try: extractAll(fileName , appDir / package[0])
                 except ZippyError:
@@ -52,16 +52,17 @@ proc cmdInstall*() {.inline.} =
               of "exe":
                 showInfo("Type : .exe installer")
                 when defined(windows):
+                  var p:Process
                   try:
-                    let p = startProcess(fileName)
-                    showInfo("Process ID : " & p.processID.intToStr)
-                    var line:string
-                    while p.outputStream.readLine(line): showLog("Installer log : \"" & line & "\"")
-                    discard p.waitForExit()
-                    showLog("Closing process")
-                    p.close()
+                    p = startProcess(fileName)
                   except OSError:
                     showExc("Unable to start process \"" & filename & "\"")
+                  showInfo("Process ID : " & p.processID.intToStr)
+                  var line:string
+                  while p.outputStream.readLine(line): showLog("Installer log : \"" & line & "\"")
+                  discard p.waitForExit()
+                  showLog("Closing process")
+                  p.close()
                 else:
                   showInfo("Your OS isn't Windows.")
                   let command = "wine " & fileName
@@ -76,8 +77,8 @@ proc cmdInstall*() {.inline.} =
                 showErr("Unknown extension \"." & extension & "\"")
           break
       if not exist:
-        showErr("Package \"" & cmdLineParams[1] & "\" doesn't exist.")
-      showLog("Removing file \"" & fileName & "\" ...")
+        showErr("Package \"" & cmdLineParams[1] & "\" does not exist")
+      showProcess("Removing file \"" & fileName & "\"")
       try:
         removeFile(fileName)
       except OSError:
