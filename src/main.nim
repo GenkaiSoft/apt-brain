@@ -1,16 +1,21 @@
-import std/[times , strutils , exitprocs , terminal]
+import std/times
 import common
 import cmd/[install , help , show]
+from std/strutils import intToStr
+from std/exitprocs import addExitProc
+from std/terminal import resetAttributes
 
 exitprocs.addExitProc(resetAttributes)
 
 proc showHelp() =
   showInfo("Get help with \"apt-brain help\"")
 proc showVer() =
-  const NimblePkgVersion {.strdefine.}:string = "0.0(DEBUG_BUILD)"
+  const NimblePkgVersion {.strdefine.}:string = "DEBUG_BUILD"
   when not defined(release) or not defined(NimblePkgVersion):
     showWarn("It's not release build!")
-  showInfo("apt-brain v" & NimblePkgVersion)
+    showDbg("apt-brain " & NimblePkgVersion)
+  else:
+    showInfo("apt-brain v" & NimblePkgVersion)
   showInfo("https://github.com/GenkaiSoft/apt-brain")
   showInfo("Copylight (c) 2022 777shuang. All Rights Reserved.")
 

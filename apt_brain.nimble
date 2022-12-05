@@ -1,6 +1,6 @@
 # Package
 
-version          = "0.2.4"
+version          = "0.2.5"
 author           = "777shuang"
 description      = "apt for SHARP Brain"
 license          = "GPL-3.0-or-later"

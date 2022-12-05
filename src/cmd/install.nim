@@ -1,6 +1,8 @@
-import std/[os , strutils , streams , osproc]
+import std/[strutils , streams , os]
 import zippy/ziparchives
 import ../common
+when defined(windows):
+  import osproc
 
 proc cmdInstall*() {.inline.} =
   if cmdLineParamCount == 2:

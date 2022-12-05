@@ -1,5 +1,6 @@
-import std/[tables , os]
 import ../common
+import std/tables
+from std/os import `/`
 
 proc cmdHelp*() {.inline.} =
   const null = ["" , ""]
@@ -17,10 +18,11 @@ proc cmdHelp*() {.inline.} =
     for key , help in helps:
       for value in help:
         if value != null:
-          echo("\"" & value[0] & "\" : " & value[1])
+          showInfo("\"" & value[0] & "\" : " & value[1])
   else:
     for key , help in helps:
       if key == cmdLineParams[1]:
         for value in help:
-          echo("\"" & value[0] & "\" : " & value[1])
-      break
+          if value != null:
+            showInfo("\"" & value[0] & "\" : " & value[1])
+        break
