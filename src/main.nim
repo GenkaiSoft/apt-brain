@@ -1,6 +1,8 @@
-import std/[times , strutils]
+import std/[times , strutils , exitprocs , terminal]
 import common
 import cmd/[install , help , show]
+
+exitprocs.addExitProc(resetAttributes)
 
 proc showHelp() =
   showInfo("Get help with \"apt-brain help\"")
