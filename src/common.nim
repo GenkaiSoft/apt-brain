@@ -7,8 +7,8 @@ let
   cmdLineParamCount* = paramCount()
   cmdLineParams* = commandLineParams()
 
-proc show(title , str:string , color:ForegroundColor) =
-  stdout.styledWriteLine(
+proc show(f:File , title , str:string , color:ForegroundColor) =
+  f.styledWrite(
     color ,
     "[" &
     getYear().intToStr &
@@ -23,14 +23,14 @@ proc show(title , str:string , color:ForegroundColor) =
     ":" & getSecond().intToStr &
     "] " &
     title &
-    " > " &
-    str
+    " > "
   )
-proc showErr*(str:string) = show("Error      " , str & " !" , fgRed)
-proc showLog*(str:string) = show("Log        " , str , fgGreen)
-proc showInfo*(str:string) = show("Information" , str , fgBlue)
-proc showWarn*(str:string) = show("Warning    " , str & " !" , fgYellow)
-proc showDbg*(str:string) = show("Debug      " , str , fgWhite)
+  f.styledWrite(fgWhite , str)
+proc showErr*(str:string) = stderr.show("Error      " , str & " !" , fgRed)
+proc showLog*(str:string) = stdout.show("Log        " , str , fgGreen)
+proc showInfo*(str:string) = stdout.show("Information" , str , fgBlue)
+proc showWarn*(str:string) = stdout.show("Warning    " , str & " !" , fgYellow)
+proc showDbg*(str:string) = stdout.show("Debug      " , str , fgWhite)
 proc showExc*(str:string) =
   showErr(str)
   showErr("Error message is \"" & getCurrentExceptionMsg() & "\"")
