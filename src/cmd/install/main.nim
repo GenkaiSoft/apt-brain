@@ -1,6 +1,6 @@
 import std/[strutils , streams , os]
-import zippy/ziparchives
-import ../common
+import ../../common
+import zip
 when defined(windows):
   import osproc
 
@@ -19,8 +19,9 @@ proc cmdInstall*() {.inline.} =
           exist = true
           download = package[1].substr(package[1].rfind("/") + 1)
           showProcess("Opening file \"" & download & "\"")
+          var strm:Stream
           try:
-            var strm = openFileStream(download , fmWrite)
+            strm = openFileStream(download , fmWrite)
           except IOError:
             showFailed()
             showErr("Unable to open file \"" & download &  "\"")
@@ -33,7 +34,6 @@ proc cmdInstall*() {.inline.} =
           else:
             showLog("File \"" & download & "\" closed.")
             showLog("File \"" & download & "\" downloaded.")
-            const appDir = "アプリ"
             try:
               if existsOrCreateDir(appDir):
                 showInfo("Directory \"" & appDir & "\" does not exist")
@@ -42,31 +42,7 @@ proc cmdInstall*() {.inline.} =
             let extension = package[1].substr(package[1].rfind(".") + 1)
             case extension
             of "zip":
-              showProcess("Extracting zip file \"" & download & "\"")
-              let list = connect(package[2])
-              if list != "":
-                let reader = openZipArchive(download)
-                try:
-                  for files in split(list , "\n"):
-                    for path in split(files , ","):
-                      var dir:string = appDir
-                      for subDir in split(path , "/"):
-                        dir = dir / subDir
-                      createDir(dir)
-                      let fileName = dir / path[0].substr(path[0].rfind("/") + 1)
-                      showProcess("Opening file \"" & fileName & "\"")
-                      try:
-                        strm = openFileStream(fileName)
-                      except IOError:
-                        showFailed()
-                        showExc("Unable to open file \"" & fileName & "\"")
-                      showDone()
-                      showProcess("Writing file \"" & fileName & "\"")
-                      strm.write(reader.extractFile(path[0]))
-                except ZippyError:
-                  showFailed()
-                  showExc("Unable to extract zip file \"" & download & "\"")
-                showDone()
+              installZip(package[2] , download)
             of "exe":
               showInfo("Type : .exe installer")
               when defined(windows):

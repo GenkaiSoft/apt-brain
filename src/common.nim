@@ -2,14 +2,16 @@ import std/[strutils , os , terminal]
 import puppy
 import time/ctime
 
-const url* = "https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/list.csv"
+const
+  url* = "https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/list.csv"
+  appDir* = "アプリ"
 let
   cmdLineParamCount* = paramCount()
   cmdLineParams* = commandLineParams()
 
-proc show(f:File , title , str:string , color:ForegroundColor) =
+proc show(f:File , msgType , str:string , color:ForegroundColor) =
   f.styledWrite(
-    color ,
+    fgMagenta ,
     "[" &
     getYear().intToStr &
     "/" &
@@ -21,11 +23,12 @@ proc show(f:File , title , str:string , color:ForegroundColor) =
     ":" &
     getMinute().intToStr &
     ":" & getSecond().intToStr &
-    "] " &
-    title &
-    " > "
+    "] "
   )
-  f.styledWrite(fgWhite , str)
+  f.styledWrite(color , msgType)
+  f.styledWrite(fgWhite , " > ")
+  f.styledWrite(color , str)
+  f.write("\n")
 proc showErr*(str:string) = stderr.show("Error      " , str & " !" , fgRed)
 proc showLog*(str:string) = stdout.show("Log        " , str , fgGreen)
 proc showInfo*(str:string) = stdout.show("Information" , str , fgBlue)

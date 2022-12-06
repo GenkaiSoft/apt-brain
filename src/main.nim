@@ -1,6 +1,6 @@
 import std/times
 import common
-import cmd/[install , help , show]
+import cmd/[help , show , install/main]
 from std/strutils import intToStr
 from std/exitprocs import addExitProc
 from std/terminal import resetAttributes
