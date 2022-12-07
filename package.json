@@ -1,0 +1,10 @@
+{
+    "CERestor":{
+        "url":"http://tmksoft.starfree.jp/applications/dl/cerestorer_20.zip",
+        "dependencies":null
+    },
+    "batmtr":{
+        "url":"http://tmksoft.starfree.jp/applications/dl/batmtr_4_0.zip",
+        "dependencies":null
+    }
+}
