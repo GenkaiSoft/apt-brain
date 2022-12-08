@@ -6,5 +6,25 @@
     "batmtr":{
         "url":"http://tmksoft.starfree.jp/applications/dl/batmtr_4_0.zip",
         "dependencies":null
+    },
+    "KnMemoPadRev7Plus":{
+        "url":"http://tmksoft.starfree.jp/applications/dl/knmemopad.zip",
+        "dependencies":null
+    },
+    "ManualLowRes":{
+        "url":"http://tmksoft.starfree.jp/applications/dl/lowres_1_2.zip",
+        "dependencies":null
+    },
+    "TmTimer":{
+        "url":"http://tmksoft.starfree.jp/applications/dl/tmtimer_0_6.zip",
+        "dependencies":null
+    },
+    "MEMZ":{
+        "url":"http://tmksoft.starfree.jp/applications/dl/memz_1_3.zip",
+        "dependencies":null
+    },
+    "SaikoroCE":{
+        "url":"http://tmksoft.starfree.jp/applications/dl/saikoroce_1_1.zip",
+        "dependencies":null
     }
 }
