@@ -2,6 +2,13 @@ import std/[strutils , os , terminal]
 import puppy
 import time/ctime
 
+const
+  url* = "https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/list.csv"
+  appDir* = "アプリ"
+let
+  cmdLineParamCount* = paramCount()
+  cmdLineParams* = commandLineParams()
+
 proc quote(str:string):string = return " \"" & str & "\""
 proc show(f:File , msgType , str:string , color:ForegroundColor) =
   f.styledWrite(
@@ -54,9 +61,5 @@ proc connect*(url:string):string =
   showLog("Response code is \'" & res.code.intToStr & "\'")
   return res.body
 
-const
-  url* = "https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/list.csv"
-  appDir* = "アプリ"
-let
-  cmdLineParamCount* = paramCount()
-  cmdLineParams* = commandLineParams()
+proc getJson():JsonObj =
+  return pauseJson(connect(url))
