@@ -1,15 +1,12 @@
-import std/[strutils , os , terminal]
+import std/[strutils , terminal , json]
 import puppy
 import time/ctime
 
 const
   jsonUrl* = "https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/package.json"
   appDir* = "アプリ"
-let
-  cmdLineParamCount* = paramCount()
-  cmdLineParams* = commandLineParams()
 
-proc quote(str:string):string = return " \"" & str & "\" "
+proc quote*(str:string):string = return " \"" & str & "\" "
 proc show(f:File , msgType , str:string , color:ForegroundColor) =
   f.styledWrite(
     fgMagenta ,
@@ -70,5 +67,5 @@ proc connect*(url:string):string =
   showLog("Response code is \'" & res.code.intToStr & "\'")
   return res.body
 
-proc getJson():JsonObj =
-  return pauseJson(connect(jsonUrl))
+proc getJson*():JsonNode =
+  return parseJson(connect(jsonUrl))

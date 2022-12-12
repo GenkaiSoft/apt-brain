@@ -1,4 +1,4 @@
-import std/times
+import std/[times , os]
 import common
 import cmd/[help , show , install/main]
 from std/strutils import intToStr
@@ -19,7 +19,7 @@ proc showVer() =
   showInfo("https://github.com/GenkaiSoft/apt-brain")
   showInfo("Copylight (c) 2022 777shuang. All Rights Reserved.")
 
-if cmdLineParamCount == 0:
+if paramCount() == 0:
   showLog(""" ___              _                  _   _""")
   showLog("""|   \ _____ _____| |___ _ __  ___ __| | | |__ _  _""")
   showLog("""| |) / -_) V / -_) / _ \ '_ \/ -_) _` | | '_ \ || |""")
@@ -33,12 +33,12 @@ if cmdLineParamCount == 0:
   showVer()
   showHelp()
 else:
-  case cmdLineParams[0]
+  case commandLineParams()[0]
   of "help":
     cmdHelp()
   of "ping":
     let start = cpuTime()
-    discard connect(url)
+    discard connect(jsonUrl)
     showInfo("Ping : " & int((cpuTime() - start) * 1000).intToStr & " ms")
   of "install":
     cmdInstall()

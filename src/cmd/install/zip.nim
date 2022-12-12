@@ -20,4 +20,3 @@ proc installZip*(listUrl , zipFileName:string) {.inline.} =
         strm.close()
       except IOError:
         showExc("Unable to open file \"" & inputFileName & "\"")
-      except ZippyError:

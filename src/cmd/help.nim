@@ -1,5 +1,5 @@
 import ../common
-import std/tables
+import std/[os , tables]
 from std/os import `/`
 
 proc cmdHelp*() {.inline.} =
@@ -15,14 +15,14 @@ proc cmdHelp*() {.inline.} =
     "show":[["show" , "Show all packages"] , ["show [package]" , "Show about [package]."]]
   }.toTable
   const space = " : "
-  if cmdLineParamCount == 1:
+  if paramCount() == 1:
     for key , help in helps:
       for value in help:
         if value != null:
           showInfo(value[0].quote & space & value[1])
   else:
     for key , help in helps:
-      if key == cmdLineParams[1]:
+      if key == commandLineParams()[1]:
         for value in help:
           if value != null:
             showInfo(value[0].quote & space & value[1])

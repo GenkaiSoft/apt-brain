@@ -1,23 +1,39 @@
 {
     "CERestor":{
         "url":"http://tmksoft.starfree.jp/applications/dl/cerestorer_20.zip",
-        "dependencies":null
+        "dependencies":null,
+        "files":{
+            "CERestor/Applications/*.*":"CERestor/Applications*.*",
+            "CERestor/Scripts/*.*":"CERestor/Scripts/*.*",
+            "CERestor/Windows/*.*":"CERestor/Windows/*.*",
+            "CERestor/AppMain_.exe":"CERestor/AppMain.exe",
+            "CERestor/AppMain_.mscr":"CERestor/AppMain.mscr"
+        },
+        "AppMain.cfg":true
     },
     "batmtr":{
         "url":"http://tmksoft.starfree.jp/applications/dl/batmtr_4_0.zip",
-        "dependencies":null
+        "dependencies":null,
+        "files":{
+            "batmtr_4_0/AppMain_.exe":"BatteryMeter/AppMain.exe"
+        },
+        "AppMain.cfg":true
     },
     "KnMemoPadRev7Plus":{
         "url":"http://tmksoft.starfree.jp/applications/dl/knmemopad.zip",
-        "dependencies":null
-    },
-    "ManualLowRes":{
-        "url":"http://tmksoft.starfree.jp/applications/dl/lowres_1_2.zip",
-        "dependencies":null
+        "dependencies":null,
+        "files":{
+            "KN MemoPad/*.*":"KN MemoPad Rev7 +/*.*"
+        },
+        "AppMain.cfg":false
     },
     "TmTimer":{
         "url":"http://tmksoft.starfree.jp/applications/dl/tmtimer_0_6.zip",
-        "dependencies":null
+        "dependencies":null,
+        "files":{
+            "tmtimer_0_6/tmtimer.exe":"TmTimer/AppMain.exe"
+        },
+        "AppMain.cfg":false
     },
     "MEMZ":{
         "url":"http://tmksoft.starfree.jp/applications/dl/memz_1_3.zip",

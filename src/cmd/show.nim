@@ -1,15 +1,17 @@
-import std/strutils
+import std/[strutils , os , json , tables]
 import ../common
 
 proc cmdShow*() {.inline.} =
-  if cmdLineParamCount == 1:
-    for key in fields.keys:
+  let fields = getJson().getFields()
+  if paramCount() == 1:
+    for key , value in fields:
       showInfo(key)
   else:
-    for key in fields.keys:
-      if key.toLower == cmdLineParams[1].toLower:
-        showInfo("Package \"" & key & "\" exists.")
+    var exist = false
+    for key , value in fields:
+      if key.toLower == commandLineParams()[1].toLower:
+        showInfo("Package" & key.quote & "exists.")
         exist = true
         break
     if not exist:
-      showErr("Package \"" & cmdLineParams[1] & "\" does not exist")
+      showErr("Package" & commandLineParams()[1].quote & "does not exist")
