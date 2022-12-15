@@ -63,9 +63,26 @@ proc connect*(url:string):string =
   else:
     showFailed()
     showErr("Unable to connect to " & url.quote)
-    showInfo("Would you use \"https://web.archive.org\" ?")
+    showInfo("Would you use" & "https://web.archive.org".quote & "? (Yes/No) >")
+    let input = readLine(stdin).toLower
+    if input == "y" or input == "yes":
+      echo "DEBUG"
   showLog("Response code is \'" & res.code.intToStr & "\'")
   return res.body
 
+type Package = object
+  gen:seq[int]
+  url:string
+  dependencies:seq[string]
+  input:seq[string]
+  output:seq[string]
+  AppMain_cfg:bool
+
 proc getJson*():JsonNode =
-  return parseJson(connect(jsonUrl))
+  try:
+    return parseJson(connect(jsonUrl))
+  except JsonParsingError:
+    showExc("Unable to parse json" & jsonUrl.quote)
+
+proc getObject*():seq[Package] =
+  return to(getJson() , seq[Package])
