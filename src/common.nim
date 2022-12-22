@@ -71,12 +71,12 @@ proc connect*(url:string):string =
   return res.body
 
 type Package = object
+  name:string
   gen:seq[int]
   url:string
   dependencies:seq[string]
   input:seq[string]
   output:seq[string]
-  AppMain_cfg:bool
 
 proc getJson*():JsonNode =
   try:

@@ -1,5 +1,6 @@
-{
-    "CERestor":{
+[
+    {
+        "name":"CERestor",
         "gen":[1,2,3,4],
         "url":"http://tmksoft.starfree.jp/applications/dl/cerestorer_20.zip",
         "dependencies":[],
@@ -16,71 +17,14 @@
             "CERestor/Windows/*.*",
             "CERestor/AppMain.exe",
             "CERestor/AppMain.mscr"
-        ],
-        "AppMain.cfg":true
+        ]
     },
-    "batmtr":{
+    {
+        "name":"batmtr",
         "gen":[3,4],
         "url":"http://tmksoft.starfree.jp/applications/dl/batmtr_4_0.zip",
         "dependencies":[],
         "input":["batmtr_4_0/AppMain_.exe"],
-        "output":["BatteryMeter/AppMain.exe"],
-        "AppMain.cfg":true
-    },
-    "KnMemoPadRev7Plus":{
-        "gen":[1,2,3,4],
-        "url":"http://tmksoft.starfree.jp/applications/dl/knmemopad.zip",
-        "dependencies":[],
-        "input":["KN MemoPad/*.*"],
-        "output":["KN MemoPad Rev7 +/*.*"],
-        "AppMain.cfg":false
-    },
-    "TmTimer":{
-        "gen":[1,2,3,4],
-        "url":"http://tmksoft.starfree.jp/applications/dl/tmtimer_0_6.zip",
-        "dependencies":[],
-        "input":["tmtimer_0_6/tmtimer.exe"],
-        "output":["TmTimer/AppMain.exe"],
-        "AppMain.cfg":false
-    },
-    "MEMZ":{
-        "gen":[1,2,3,4],
-        "url":"http://tmksoft.starfree.jp/applications/dl/memz_1_3.zip",
-        "dependencies":[],
-        "input":["memz_1_3/memz.exe"],
-        "output":["MEMZ/AppMain.exe"],
-        "AppMain.cfg":true
-    },
-    "SaikoroCE":{
-        "gen":[1,2,3,4],
-        "url":"http://tmksoft.starfree.jp/applications/dl/saikoroce_1_1.zip",
-        "dependencies":[],
-        "input":["saikoroce_1_1/saikoroce.exe"],
-        "output":["SaikoroCE/AppMain.exe"],
-        "AppMain.cfg":false
-    },
-    "ceOpenerMod":{
-        "gen":[1,2,3,4],
-        "url":"https://ho.ie-t.net/IT/brain/ceopener_mod/ceOpener_mod.zip",
-        "dependencies":[],
-        "input":[
-            "ceOpener_mod/*.dll",
-            "ceOpener_mod/AppMain.exe",
-            "ceOpener_mod/colors/*.*",
-            "ceOpener_mod/fonts/*.*",
-            "ceOpener_mod/plugins/*.*",
-            "ceOpener_mod/sounds/*.*",
-            "ceOpener_mod/wallpapers/*.*"
-        ],
-        "output":[
-            "ceOpenerMod/*.dll",
-            "ceOpenerMod/AppMain.exe",
-            "ceOpenerMod/colors/*.*",
-            "ceOpenerMod/fonts/*.*",
-            "ceOpenerMod/plugins/*.*",
-            "ceOpenerMod/sounds/*.*",
-            "ceOpenerMod/wallpapers/*.*"
-        ],
-        "AppMain.cfg":true
+        "output":["BatteryMeter/AppMain.exe"]
     }
-}
+]
