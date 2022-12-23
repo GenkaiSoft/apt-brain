@@ -41,7 +41,7 @@ else:
     discard connect(jsonUrl)
     showInfo("Ping : " & int((cpuTime() - start) * 1000).intToStr & " ms")
   of "install":
-    cmdInstall()
+    cmdInstall(commandLineParams()[1])
   of "show":
     cmdShow()
   of "version":

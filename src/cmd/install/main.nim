@@ -1,17 +1,20 @@
-import std/[strutils , streams , os , tables , json]
+import std/[strutils , streams , os]
 import ../../common
 import zip
-when defined(windows):
-  import osproc
 
-proc cmdInstall*() {.inline.} =
+proc cmdInstall*(install:string) {.inline.} =
   if paramCount() == 2:
-    let fields = getJson().getFields()
-    var
-      exist = false
-      count = 0
-    for key , value in fields:
-        
+    var exist = false
+    let packages = getObject()
+    for package in packages:
+      if package.name.toLower == install.toLower:
+        exist = true
+        let extension = package.url.substr(package.url.rfind(".") + 1)
+        case extension
+        of "zip":
+          installZip(package)
+        else:
+          showErr("Unknown extension" & extension.quote)
   elif paramCount() == 1:
     showFew()
   else:

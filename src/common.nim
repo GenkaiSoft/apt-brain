@@ -70,13 +70,13 @@ proc connect*(url:string):string =
   showLog("Response code is \'" & res.code.intToStr & "\'")
   return res.body
 
-type Package = object
-  name:string
-  gen:seq[int]
-  url:string
-  dependencies:seq[string]
-  input:seq[string]
-  output:seq[string]
+type Package* = object
+  name*:string
+  gen*:seq[int]
+  url*:string
+  dependencies*:seq[string]
+  input*:seq[string]
+  output*:seq[string]
 
 proc getJson*():JsonNode =
   try:
