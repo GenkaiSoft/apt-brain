@@ -26,6 +26,5 @@
 		"dependencies":[],
 		"input":["batmtr_4_0/AppMain_.exe"],
 		 "output":["BatteryMeter/AppMain.exe"]
-	},
-
+	}
 ]

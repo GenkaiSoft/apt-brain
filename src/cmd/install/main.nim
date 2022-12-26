@@ -1,6 +1,6 @@
 import std/[strutils , streams , os]
 import ../../common
-import zip
+import zip , cab
 
 proc cmdInstall*(install:string) {.inline.} =
   if paramCount() == 2:
@@ -13,6 +13,8 @@ proc cmdInstall*(install:string) {.inline.} =
         case extension
         of "zip":
           installZip(package)
+        of "cab":
+          installCab(package)
         else:
           showErr("Unknown extension" & extension.quote)
   elif paramCount() == 1:
