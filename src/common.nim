@@ -80,11 +80,13 @@ type Package* = object
   input*:seq[string]
   output*:seq[string]
 
-proc getJson():JsonNode =
+proc getJsonNode*():JsonNode =
   try:
     return parseJson(connect(jsonUrl))
   except JsonParsingError:
     showExc("Unable to parse json" & jsonUrl.quote)
 
+proc getObject*(jsonNode:JsonNode):seq[Package] =
+  return jsonNode.to(seq[Package])
 proc getObject*():seq[Package] =
-  return to(getJson() , seq[Package])
+  return getJsonNode().getObject()
