@@ -1,4 +1,4 @@
 import ../../common
 
-proc installCab(package:Package){.inline.} =
+proc installCab*(package:Package){.inline.} =
   echo "DEBUG"

@@ -51,23 +51,25 @@ proc showProcess*(str:string , p:proc():string) =
     showFailed()
     showErr(msg)
 
-proc showArgs(str:string) = showErr("Too " & str & " arguments")
-proc showFew*() = showArgs("few")
-proc showMany*() = showArgs("many")
+proc showArgs(lamda:proc(str:string) , str:string) = lamda("Too " & str & " arguments")
+proc showFew*(lamda:proc(str:string)) = lamda.showArgs("few")
+proc showMany*(lamda:proc(str:string)) = lamda.showArgs("many")
 
 proc connect*(url:string):string =
   showProcess("Connecting to" & url.quote)
-  let res = fetch(Request(url:parseUrl(url) , verb:"GET"))
+  let
+    msg = "Unable to connect to " & url.quote
+    res = fetch(Request(url:parseUrl(url) , verb:"GET"))
+  showLog("Response code is \'" & res.code.intToStr & "\'")
   if res.code == 200:
     showDone()
   else:
     showFailed()
-    showErr("Unable to connect to " & url.quote)
+    showErr(msg)
     showInfo("Would you use" & "https://web.archive.org".quote & "? (Yes/No) >")
     let input = readLine(stdin).toLower
     if input == "y" or input == "yes":
       echo "DEBUG"
-  showLog("Response code is \'" & res.code.intToStr & "\'")
   return res.body
 
 type Package* = object
@@ -78,7 +80,7 @@ type Package* = object
   input*:seq[string]
   output*:seq[string]
 
-proc getJson*():JsonNode =
+proc getJson():JsonNode =
   try:
     return parseJson(connect(jsonUrl))
   except JsonParsingError:

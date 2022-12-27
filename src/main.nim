@@ -37,14 +37,25 @@ else:
   of "help":
     cmdHelp()
   of "ping":
+    if paramCount() != 1:
+      showWarn.showMany()
     let start = cpuTime()
     discard connect(jsonUrl)
     showInfo("Ping : " & int((cpuTime() - start) * 1000).intToStr & " ms")
   of "install":
-    cmdInstall(commandLineParams()[1])
+    case paramCount()
+    of 2:
+      if not cmdInstall(commandLineParams()[1]):
+        showErr("Installation faild")
+    of 1:
+      showErr.showFew()
+    else:
+      showErr.showMany()
   of "show":
     cmdShow()
   of "version":
+    if paramCount() != 1:
+      showWarn.showMany()
     showVer()
   else:
     showErr("Unknown option")
