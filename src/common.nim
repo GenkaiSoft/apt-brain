@@ -59,7 +59,7 @@ proc connect*(url:string):string =
   showProcess("Connecting to" & url.quote)
   let
     msg = "Unable to connect to " & url.quote
-    res = fetch(Request(url:parseUrl(url) , verb:"GET"))
+    res = get(url)
   showLog("Response code is \'" & res.code.intToStr & "\'")
   if res.code == 200:
     showDone()
