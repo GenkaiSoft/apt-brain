@@ -13,7 +13,7 @@ proc showVer() =
   when not defined(release) or not defined(NimblePkgVersion):
     showWarn("It's not release build!")
   showInfo(appName & " v" & NimblePkgVersion)
-  showInfo("https://github.com/GenkaiSoft/apt-brain")
+  showInfo("https://github.com/GenkaiSoft/" & appName)
   showInfo("Copylight (c) 2022 777shuang. All Rights Reserved.")
 
 if paramCount() == 0:

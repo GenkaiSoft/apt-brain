@@ -13,4 +13,5 @@ requires "nim >= 1.4.2"
 requires "puppy >= 1.6.0"
 requires "zippy >= 0.10.4"
 
-skipFiles = ["package.json"]
+# Skips
+skipFiles = @["package.json"]
