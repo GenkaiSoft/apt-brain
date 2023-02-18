@@ -1,5 +1,5 @@
 import ../common
-import std/[os , tables]
+import std/[os , tables , strutils]
 from std/os import `/`
 
 proc cmdHelp*() {.inline.} =
@@ -22,7 +22,7 @@ proc cmdHelp*() {.inline.} =
           showInfo(value[0].quote & space & value[1])
   else:
     for key , help in helps:
-      if key == commandLineParams()[1]:
+      if key == commandLineParams()[1].toLower:
         for value in help:
           if value != null:
             showInfo(value[0].quote & space & value[1])

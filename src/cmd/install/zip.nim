@@ -1,4 +1,4 @@
-import std/[strutils , streams , os]
+import std/[strutils , streams]
 import zippy/ziparchives
 import ../../common
 

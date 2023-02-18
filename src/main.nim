@@ -1,7 +1,6 @@
-import std/[times , os]
+import std/[times , os , strutils]
 import common
 import cmd/[help , show , install/main]
-from std/strutils import intToStr
 from std/exitprocs import addExitProc
 from std/terminal import resetAttributes
 
@@ -33,7 +32,7 @@ if paramCount() == 0:
   showVer()
   showHelp()
 else:
-  case commandLineParams()[0]
+  case commandLineParams()[0].toLower
   of "help":
     cmdHelp()
   of "ping":
