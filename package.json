@@ -1,16 +1,16 @@
 {
 	"packages":[
 		{
-			"name":"cerestror",
+			"name":"cerestorer",
 			"description":"Windows CE のデスクトップを復元します。",
 			"gen":[1,2,3,4],
 			"url":"http://tmksoft.starfree.jp/applications/dl/cerestorer_20.zip",
 			"dependencies":[],
 			"dir":{
-				"input":"CERestror",
-				"output":"CERestror"
+				"input":"CERestorer",
+				"output":"CERestorer"
 			},
-			"delete":["CERestror/ReadMe.txt"]
+			"delete":["CERestorer/ReadMe.txt"]
 		},
 		{
 			"name":"batmtr",
