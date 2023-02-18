@@ -72,14 +72,19 @@ proc connect*(url:string):string =
       echo "DEBUG"
   return res.body
 
-type Package* = object
-  name*:string
-  description*:string
-  gen*:seq[int]
-  url*:string
-  dependencies*:seq[string]
-  input*:seq[string]
-  output*:seq[string]
+type
+  Dir* = object
+    input:string
+    output:string
+  Package* = object
+    name*:string
+    description*:string
+    gen*:seq[int]
+    url*:string
+    dependencies*:seq[string]
+    delete*:seq[string]
+  Packages = object
+    packages:seq[Package]
 
 proc getJsonNode*():JsonNode =
   try:
@@ -87,8 +92,12 @@ proc getJsonNode*():JsonNode =
   except JsonParsingError:
     showExc("Unable to parse json" & jsonUrl.quote)
 
-proc getObject*(jsonNode:JsonNode):seq[Package] =
-  return jsonNode.to(seq[Package])
-
 proc getObject*():seq[Package] =
-  return getObject(getJsonNode())
+  return getJsonNode().to(Packages).packages
+
+proc findPackage*(find:string):Package =
+  for package in getObject():
+    if find.toLower == package.name.toLower:
+      return package
+  showErr("Package" & find.quote & "is not found")
+  quit()

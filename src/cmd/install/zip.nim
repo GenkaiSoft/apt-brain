@@ -1,25 +1,15 @@
-import std/[strutils , streams , os]
+import std/[strutils , os]
 import zippy/ziparchives
 import ../../common
 
-proc installZip*(package:Package) {.inline.} =
-  let fileName = getTempDir() / package.url.substr(package.url.rfind("/") + 1)
-  var strm :Stream
+proc installZip*(package:Package , fileName:string) {.inline.} =
   try:
-    strm = openFileStream(fileName , fmWrite)
-  except IOError:
-    showExc("Unable to open file" & fileName.quote)
-    quit(1)
-  strm.write(package.url.connect) 
-  strm.close()
-  try:
-    let reader = openZipArchive(fileName)
-    for file in 0..package.input.len:
-      try:
-        strm = openFileStream(package.output[file])
-      except OSError:
-        showExc("Failed to open file" & package.output[file].quote)
-      strm.write(reader.extractFile(package.output[file]))
-      strm.close()
+    extractAll(fileName , appDir)
   except ZippyError:
     showExc("zipfile" & fileName.quote & "is broken")
+  for delete in package.delete:
+    let del = appDir / delete
+    if delete.substr(delete.len - 1) == "/":
+      removeDir(del)
+    else:
+      removeFile(del)

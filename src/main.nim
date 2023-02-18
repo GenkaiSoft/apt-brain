@@ -1,6 +1,6 @@
 import std/[times , os , strutils]
 import common
-import cmd/[help , show , install/main]
+import cmd/[help , show , install/main , download]
 from std/exitprocs import addExitProc
 from std/terminal import resetAttributes
 
@@ -41,11 +41,12 @@ else:
     let start = cpuTime()
     discard connect(jsonUrl)
     showInfo("Ping : " & int((cpuTime() - start) * 1000).intToStr & " ms")
+  of "download":
+    discard cmdDownload(findPackage(commandLineParams()[1]) , getCurrentDir())
   of "install":
     case paramCount()
     of 2:
-      if not cmdInstall(commandLineParams()[1]):
-        showErr("Installation faild")
+      cmdInstall()
     of 1:
       showErr.showFew()
     else:

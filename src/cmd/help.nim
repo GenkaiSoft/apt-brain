@@ -1,6 +1,5 @@
 import ../common
 import std/[os , tables , strutils]
-from std/os import `/`
 
 proc cmdHelp*() {.inline.} =
   const null = ["" , ""]

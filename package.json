@@ -1,11 +1,15 @@
-[
+{"packages":[
 	{
 		"name":"CERestor",
 		"description":"Windows CE のデスクトップを復元します。",
 		"gen":[1,2,3,4],
 		"url":"http://tmksoft.starfree.jp/applications/dl/cerestorer_20.zip",
 		"dependencies":[],
-		"delete":["ReadMe.txt"]
+		"dir":{
+			"input":"CERestor",
+			"output":"CERestor"
+		},
+		"delete":["CERestor/ReadMe.txt"]
 	},
 	{
 		"name":"batmtr",
@@ -13,6 +17,10 @@
 		"gen":[3,4],
 		"url":"http://tmksoft.starfree.jp/applications/dl/batmtr_4_0.zip",
 		"dependencies":[],
-		"delete":["ReadMe.txt"]
+		"dir":{
+			"input":"batmtr_4_0",
+			"output":"BatteryMater"
+		},
+		"delete":["batmtr_4_0/ReadMe.txt" , "batmtr_4_0/SOURCE/"]
 	}
-]
+]}

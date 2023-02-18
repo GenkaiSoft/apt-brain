@@ -1,24 +1,17 @@
 import std/[strutils , os]
 import ../../common
+import ../download
 import zip , cab
 
-proc cmdInstall*(install:string):bool {.inline.} =
-  var exist = false
-  let packages = getObject()
-  for package in packages:
-    if package.name.toLower == install.toLower:
-      exist = true
-      if not appDir.dirExists:
-        appDir.createDir
-      let extension = package.url.substr(package.url.rfind(".") + 1)
-      case extension
-      of "zip":
-        installZip(package)
-      of "cab":
-        installCab(package)
-      else:
-        showErr("Unknown extension" & extension.quote)
-  if not exist:
-    showErr("Package" & install.quote & "isn't found")
-    return false
-  return true
+proc cmdInstall*() {.inline.} =
+  let
+    package = findPackage(commandLineParams()[1])
+    fileName = package.cmdDownload(getTempDir())
+    extension = fileName.substr(fileName.rfind(".") + 1)
+  case extension
+  of "zip":
+    package.installZip(fileName)
+  of "cab":
+    package.installCab(fileName)
+  else:
+    showErr("Unknown extension" & extension.quote)
