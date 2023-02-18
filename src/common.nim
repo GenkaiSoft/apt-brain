@@ -1,10 +1,11 @@
-import std/[strutils , terminal , json]
+import std/[strutils , terminal , json , streams]
 import puppy
 import time/ctime
 
 const
   jsonUrl* = "https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/package.json"
   appDir* = "アプリ"
+  appName* = "apt-brain"
 
 proc quote*(str:string):string = return " \"" & str & "\" "
 proc show(f:File , msgType , str:string , color:ForegroundColor) =
@@ -72,16 +73,33 @@ proc connect*(url:string):string =
       echo "DEBUG"
   return res.body
 
+proc createFileAndOpen*(path:string):Stream =
+  showProcess("Opening file" & path.quote)
+  var strm:Stream
+  try:
+    strm = openFileStream(path , fmWrite)
+  except IOError:
+    showFailed()
+    showExc("Unable to open file" & path.quote)
+    quit()
+  showDone()
+  return strm
+proc createFileAndWrite*(path , str:string) =
+  let strm = createFileAndOpen(path)
+  strm.write(str)
+  strm.close()
+
 type
   Dir* = object
-    input:string
-    output:string
+    input*:string
+    output*:string
   Package* = object
     name*:string
     description*:string
     gen*:seq[int]
     url*:string
     dependencies*:seq[string]
+    dir*:Dir
     delete*:seq[string]
   Packages = object
     packages:seq[Package]
@@ -97,7 +115,7 @@ proc getObject*():seq[Package] =
 
 proc findPackage*(find:string):Package =
   for package in getObject():
-    if find.toLower == package.name.toLower:
+    if find.toLower == package.name:
       return package
   showErr("Package" & find.quote & "is not found")
   quit()

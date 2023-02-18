@@ -12,9 +12,7 @@ proc showVer() =
   const NimblePkgVersion {.strdefine.}:string = "DEBUG_BUILD"
   when not defined(release) or not defined(NimblePkgVersion):
     showWarn("It's not release build!")
-    showDbg("apt-brain " & NimblePkgVersion)
-  else:
-    showInfo("apt-brain v" & NimblePkgVersion)
+  showInfo(appName & " v" & NimblePkgVersion)
   showInfo("https://github.com/GenkaiSoft/apt-brain")
   showInfo("Copylight (c) 2022 777shuang. All Rights Reserved.")
 

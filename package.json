@@ -1,26 +1,28 @@
-{"packages":[
-	{
-		"name":"CERestor",
-		"description":"Windows CE のデスクトップを復元します。",
-		"gen":[1,2,3,4],
-		"url":"http://tmksoft.starfree.jp/applications/dl/cerestorer_20.zip",
-		"dependencies":[],
-		"dir":{
-			"input":"CERestor",
-			"output":"CERestor"
+{
+	"packages":[
+		{
+			"name":"cerestror",
+			"description":"Windows CE のデスクトップを復元します。",
+			"gen":[1,2,3,4],
+			"url":"http://tmksoft.starfree.jp/applications/dl/cerestorer_20.zip",
+			"dependencies":[],
+			"dir":{
+				"input":"CERestror",
+				"output":"CERestror"
+			},
+			"delete":["CERestror/ReadMe.txt"]
 		},
-		"delete":["CERestor/ReadMe.txt"]
-	},
-	{
-		"name":"batmtr",
-		"description":"バッテリー残量を表示します。",
-		"gen":[3,4],
-		"url":"http://tmksoft.starfree.jp/applications/dl/batmtr_4_0.zip",
-		"dependencies":[],
-		"dir":{
-			"input":"batmtr_4_0",
-			"output":"BatteryMater"
-		},
-		"delete":["batmtr_4_0/ReadMe.txt" , "batmtr_4_0/SOURCE/"]
-	}
-]}
+		{
+			"name":"batmtr",
+			"description":"バッテリー残量を表示します。",
+			"gen":[3,4],
+			"url":"http://tmksoft.starfree.jp/applications/dl/batmtr_4_0.zip",
+			"dependencies":[],
+			"dir":{
+				"input":"batmtr_4_0",
+				"output":"BatteryMater"
+			},
+			"delete":["batmtr_4_0/ReadMe.txt" , "batmtr_4_0/SOURCE/"]
+		}
+	]
+}

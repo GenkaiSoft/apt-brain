@@ -1,14 +1,8 @@
-import std/[os , streams , strutils]
+import std/strutils
+from os import `/`
 import ../common
 
-proc cmdDownload*(package:Package , dir:string):string =
+proc cmdDownload*(package:Package , dir:string):string {.inline.} =
   let fileName = dir / package.url.substr(package.url.rfind("/") + 1)
-  var strm:Stream
-  try:
-    strm = openFileStream(fileName , fmWrite)
-  except IOError:
-    showExc("Unable to open file" & fileName.quote)
-    quit()
-  strm.write(connect(package.url))
-  strm.close()
+  createFileAndWrite(fileName , connect(package.url))
   return fileName
