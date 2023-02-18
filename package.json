@@ -25,6 +25,6 @@
 		"url":"http://tmksoft.starfree.jp/applications/dl/batmtr_4_0.zip",
 		"dependencies":[],
 		"input":["batmtr_4_0/AppMain_.exe"],
-		 "output":["BatteryMeter/AppMain.exe"]
+		"output":["BatteryMeter/AppMain.exe"]
 	}
 ]
