@@ -1,14 +1,15 @@
-import std/[strutils , streams]
+import std/[strutils , streams , os]
 import zippy/ziparchives
 import ../../common
 
 proc installZip*(package:Package) {.inline.} =
-  let fileName = package.url.substr(package.url.rfind("/") + 1)
+  let fileName = getTempDir() / package.url.substr(package.url.rfind("/") + 1)
   var strm :Stream
   try:
-    strm = openFileStream(fileName)
-  except OSError:
+    strm = openFileStream(fileName , fmWrite)
+  except IOError:
     showExc("Unable to open file" & fileName.quote)
+    quit(1)
   strm.write(package.url.connect) 
   strm.close()
   try:

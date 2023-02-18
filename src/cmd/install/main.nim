@@ -1,4 +1,4 @@
-import std/strutils
+import std/[strutils , os]
 import ../../common
 import zip , cab
 
@@ -8,6 +8,8 @@ proc cmdInstall*(install:string):bool {.inline.} =
   for package in packages:
     if package.name.toLower == install.toLower:
       exist = true
+      if not appDir.dirExists:
+        appDir.createDir
       let extension = package.url.substr(package.url.rfind(".") + 1)
       case extension
       of "zip":

@@ -5,20 +5,7 @@
 		"gen":[1,2,3,4],
 		"url":"http://tmksoft.starfree.jp/applications/dl/cerestorer_20.zip",
 		"dependencies":[],
-		"input":[
-			"CERestor/Applications/*.*",
-			"CERestor/Scripts/*.*",
-			"CERestor/Windows/*.*",
-			"CERestor/AppMain_.exe",
-			"CERestor/AppMain_.mscr"
-		],
-		"output":[
-			"CERestor/Applications*.*",
-			"CERestor/Scripts/*.*",
-			"CERestor/Windows/*.*",
-			"CERestor/AppMain.exe",
-			"CERestor/AppMain.mscr"
-		]
+		"delete":["ReadMe.txt"]
 	},
 	{
 		"name":"batmtr",
@@ -26,7 +13,6 @@
 		"gen":[3,4],
 		"url":"http://tmksoft.starfree.jp/applications/dl/batmtr_4_0.zip",
 		"dependencies":[],
-		"input":["batmtr_4_0/AppMain_.exe"],
-		"output":["BatteryMeter/AppMain.exe"]
+		"delete":["ReadMe.txt"]
 	}
 ]
