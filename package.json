@@ -1,6 +1,7 @@
 [
 	{
 		"name":"CERestor",
+		"description":"Windows CE のデスクトップを復元します。",
 		"gen":[1,2,3,4],
 		"url":"http://tmksoft.starfree.jp/applications/dl/cerestorer_20.zip",
 		"dependencies":[],
@@ -21,6 +22,7 @@
 	},
 	{
 		"name":"batmtr",
+		"description":"バッテリー残量を表示します。",
 		"gen":[3,4],
 		"url":"http://tmksoft.starfree.jp/applications/dl/batmtr_4_0.zip",
 		"dependencies":[],

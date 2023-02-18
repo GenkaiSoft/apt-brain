@@ -74,6 +74,7 @@ proc connect*(url:string):string =
 
 type Package* = object
   name*:string
+  description*:string
   gen*:seq[int]
   url*:string
   dependencies*:seq[string]
@@ -88,5 +89,6 @@ proc getJsonNode*():JsonNode =
 
 proc getObject*(jsonNode:JsonNode):seq[Package] =
   return jsonNode.to(seq[Package])
+
 proc getObject*():seq[Package] =
-  return getJsonNode().getObject()
+  return getObject(getJsonNode())
