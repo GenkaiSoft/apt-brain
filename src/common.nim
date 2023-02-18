@@ -105,10 +105,17 @@ type
     packages:seq[Package]
 
 proc getJsonNode*():JsonNode =
+  let package = connect(jsonUrl)
+  showProcess("Parsing package.json")
+  var jsonNode:JsonNode
   try:
-    return parseJson(connect(jsonUrl))
+    jsonNode = parseJson(package)
   except JsonParsingError:
+    showFailed()
     showExc("Unable to parse json" & jsonUrl.quote)
+    quit()
+  showDone()
+  return jsonNode
 
 proc getObject*():seq[Package] =
   return getJsonNode().to(Packages).packages
