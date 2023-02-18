@@ -23,6 +23,64 @@
 				"output":"BatteryMater"
 			},
 			"delete":["batmtr_4_0/ReadMe.txt" , "batmtr_4_0/SOURCE/"]
+		},
+		{
+			"name":"knmemopadrev7plus",
+			"description":"KN MemoPad 機能拡張版(リポジトリ名:knmemopadmod)の後継",
+			"gen":[1,2,3,4],
+			"url":"http://tmksoft.starfree.jp/applications/dl/knmemopad.zip",
+			"dependencies":[],
+			"dir":{
+				"input":"KN MemoPad",
+				"output":"KN MemoPad Rev7 +"
+			},
+			"delete":[]
+		},
+		{
+			"name":"tmtimer",
+			"description":"簡易的なタイマー。",
+			"gen":[1,2,3,4],
+			"url":"http://tmksoft.starfree.jp/applications/dl/tmtimer_0_6.zip",
+			"dependencies":[],
+			"dir":{
+				"input":"tmtimer_0_6",
+				"output":"TmTimer"
+			},
+			"delete":[]
+		},
+		{
+			"name":"memz",
+			"description":"MEMZのような表示をします。破壊活動はしません。",
+			"gen":[1,2,3,4],
+			"url":"http://tmksoft.starfree.jp/applications/dl/memz_1_3.zip",
+			"dependencies":[],
+			"dir":{
+				"input":"memz_1_3",
+				"output":"MEMZ"
+			},
+			"delete":[]
+		},
+		{
+			"name":"saikoroce",
+			"description":"ただの「さいころ」です。ただの「さいころ」です。",
+			"url":"http://tmksoft.starfree.jp/applications/dl/saikoroce_1_1.zip",
+			"dependencies":[],
+			"dir":{
+				"input":"saikoroce_1_1",
+				"output":"SaikoroCE"
+			}
+		},
+		{
+			"name":"ceopenermod",
+			"description":"ceOpenerの後継",
+			"gen":[3,4],
+			"url":"https://ho.ie-t.net/IT/brain/ceopener_mod/ceOpener_mod.zip",
+			"dependencies":[],
+			"dir":{
+				"input":"ceOpener_mod",
+				"output":"ceOpener Mod"
+			},
+			"delete":[]
 		}
 	]
 }
