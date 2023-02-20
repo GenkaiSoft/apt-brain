@@ -15,14 +15,14 @@ proc cmdHelp*() {.inline.} =
     "download":[["" , "download package file to current directory"] , ["[--dir|-d] {directory}" , "download package file to {directory}"]]
   }.toTable
   const space = " : "
-  if paramCount() == 1:
+  if cmdParamCount == 1:
     for key , help in helps:
       for value in help:
         if value != null:
           showInfo(quote(key & " " & value[0]) & space & value[1])
   else:
     for key , help in helps:
-      if key == commandLineParams()[1].toLower:
+      if key == cmdParams[1].toLower:
         for value in help:
           if value != null:
             showInfo(quote(key & " " & value[0]) & space & value[1])

@@ -33,7 +33,7 @@ proc cmdInstall*() {.inline.} =
 
   let
     package = findPackage(pkgName)
-    fileName = package.cmdDownload(tmpDir)
+    fileName = package.dlPkg(tmpDir)
     extension = fileName.substr(fileName.rfind(".") + 1)
   case extension
   of "zip":

@@ -1,9 +1,9 @@
-import std/[os , strutils]
-import common
-import cmd/[help , show , install/main , download]
+import std/strutils
 from std/times import cputime
 from std/exitprocs import addExitProc
 from std/terminal import resetAttributes
+import common
+import cmd/[help , show , install/main , download]
 
 exitprocs.addExitProc(resetAttributes)
 
@@ -17,7 +17,7 @@ proc showVer() =
   showInfo("https://github.com/GenkaiSoft/" & appName)
   showInfo("Copylight (c) 2022 777shuang. All Rights Reserved.")
 
-if paramCount() == 0:
+if cmdParamCount == 0:
   showLog(""" ___              _                  _   _""")
   showLog("""|   \ _____ _____| |___ _ __  ___ __| | | |__ _  _""")
   showLog("""| |) / -_) V / -_) / _ \ '_ \/ -_) _` | | '_ \ || |""")
@@ -31,23 +31,23 @@ if paramCount() == 0:
   showVer()
   showHelp()
 else:
-  case commandLineParams()[0].toLower
+  case cmdParams[0].toLower
   of "help":
     cmdHelp()
   of "ping":
-    if paramCount() != 1:
+    if cmdParamCount != 1:
       showWarn.showMany()
     let start = cpuTime()
     discard connect(jsonUrl)
     showInfo("Ping : " & int((cpuTime() - start) * 1000).intToStr & " ms")
   of "download":
-    discard cmdDownload(findPackage(commandLineParams()[1]) , getCurrentDir())
+    cmdDownload()
   of "install":
     cmdInstall()
   of "show":
     cmdShow()
   of "version":
-    if paramCount() != 1:
+    if cmdParamCount != 1:
       showWarn.showMany()
     showVer()
   else:
