@@ -63,6 +63,7 @@
 		{
 			"name":"saikoroce",
 			"description":"ただの「さいころ」です。ただの「さいころ」です。",
+			"gen":[1,2,3,4],
 			"url":"http://tmksoft.starfree.jp/applications/dl/saikoroce_1_1.zip",
 			"dependencies":[],
 			"dir":{

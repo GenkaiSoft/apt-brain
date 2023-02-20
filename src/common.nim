@@ -1,4 +1,4 @@
-import std/[strutils , terminal , json , streams]
+import std/[strutils , terminal , json , os]
 import puppy
 import time/ctime
 
@@ -6,8 +6,12 @@ const
   jsonUrl* = "https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/package.json"
   appDir* = "アプリ"
   appName* = "apt-brain"
+let
+  cmdParamCount* = paramCount()
+  cmdParams* = commandLineParams()
 
 proc quote*(str:string):string = return " \"" & str & "\" "
+
 proc show(f:File , msgType , str:string , color:ForegroundColor) =
   f.styledWrite(
     fgMagenta ,
@@ -43,14 +47,6 @@ proc showFailed*() = showResult("failed")
 proc showDone*() = showResult("done")
 
 proc showProcess*(str:string) = showLog(str & " ...")
-proc showProcess*(str:string , p:proc():string) =
-  showProcess(str)
-  let msg = p()
-  if msg == "":
-    showDone()
-  else:
-    showFailed()
-    showErr(msg)
 
 proc showArgs(lamda:proc(str:string) , str:string) = lamda("Too " & str & " arguments")
 proc showFew*(lamda:proc(str:string)) = lamda.showArgs("few")
@@ -73,22 +69,6 @@ proc connect*(url:string):string =
       echo "DEBUG"
   return res.body
 
-proc createFileAndOpen*(path:string):Stream =
-  showProcess("Opening file" & path.quote)
-  var strm:Stream
-  try:
-    strm = openFileStream(path , fmWrite)
-  except IOError:
-    showFailed()
-    showExc("Unable to open file" & path.quote)
-    quit()
-  showDone()
-  return strm
-proc createFileAndWrite*(path , str:string) =
-  let strm = createFileAndOpen(path)
-  strm.write(str)
-  strm.close()
-
 type
   Dir* = object
     input*:string
@@ -106,7 +86,7 @@ type
 
 proc getJsonNode*():JsonNode =
   let package = connect(jsonUrl)
-  showProcess("Parsing package.json")
+  showProcess("Parsing" & jsonUrl.quote)
   var jsonNode:JsonNode
   try:
     jsonNode = parseJson(package)
@@ -117,8 +97,7 @@ proc getJsonNode*():JsonNode =
   showDone()
   return jsonNode
 
-proc getObject*():seq[Package] =
-  return getJsonNode().to(Packages).packages
+proc getObject*():seq[Package] = return getJsonNode().to(Packages).packages
 
 proc findPackage*(find:string):Package =
   for package in getObject():

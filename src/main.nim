@@ -1,13 +1,14 @@
-import std/[times , os , strutils]
+import std/[os , strutils]
 import common
 import cmd/[help , show , install/main , download]
+from std/times import cputime
 from std/exitprocs import addExitProc
 from std/terminal import resetAttributes
 
 exitprocs.addExitProc(resetAttributes)
 
 proc showHelp() =
-  showInfo("Get help with \"apt-brain help\"")
+  showInfo("Get help with" & quote(appName & " help"))
 proc showVer() =
   const NimblePkgVersion {.strdefine.}:string = "DEBUG_BUILD"
   when not defined(release) or not defined(NimblePkgVersion):
@@ -42,13 +43,7 @@ else:
   of "download":
     discard cmdDownload(findPackage(commandLineParams()[1]) , getCurrentDir())
   of "install":
-    case paramCount()
-    of 2:
-      cmdInstall()
-    of 1:
-      showErr.showFew()
-    else:
-      showErr.showMany()
+    cmdInstall()
   of "show":
     cmdShow()
   of "version":

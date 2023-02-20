@@ -2,7 +2,7 @@ import std/os
 import zippy/ziparchives
 import ../../common
 
-proc installZip*(package:Package , tmpDir , fileName:string) {.inline.} =
+proc installZip*(package:Package , tmpDir , insDir , fileName:string) {.inline.} =
   let tmp = tmpDir / package.name
   showProcess("Extracting zip file" & fileName & "to" & tmp)
   try:
@@ -21,7 +21,7 @@ proc installZip*(package:Package , tmpDir , fileName:string) {.inline.} =
       removeFile(del)
   let
     source = tmp / package.dir.input
-    dest = appDir / package.dir.output
+    dest = insDir / package.dir.output
   showProcess("Moving directory" & source & "to" & dest.quote)
   try:
     moveDir(source , dest)
