@@ -87,6 +87,17 @@
 				"output":"TestCE"
 			},
 			"delete":[]
+		},
+		{
+			"name":"selector",
+			"description":"タスク管理アプリ",
+			"gen":[1,2,3,4],
+			"url":"https://github.com/GenkaiSoft/apt-brain/raw/main/packages/Selector.zip",
+			"dir":{
+				"input":"Selector",
+				"output":"Selector"
+			},
+			"delete":[]
 		}
 	]
 }
