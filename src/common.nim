@@ -78,7 +78,6 @@ type
     description*:string
     gen*:seq[int]
     url*:string
-    dependencies*:seq[string]
     dir*:Dir
     delete*:seq[string]
   Packages = object

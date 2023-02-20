@@ -5,7 +5,6 @@
 			"description":"Windows CE のデスクトップを復元します。",
 			"gen":[1,2,3,4],
 			"url":"http://tmksoft.starfree.jp/applications/dl/cerestorer_20.zip",
-			"dependencies":[],
 			"dir":{
 				"input":"CERestorer",
 				"output":"CERestorer"
@@ -17,7 +16,6 @@
 			"description":"バッテリー残量を表示します。",
 			"gen":[3,4],
 			"url":"http://tmksoft.starfree.jp/applications/dl/batmtr_4_0.zip",
-			"dependencies":[],
 			"dir":{
 				"input":"batmtr_4_0",
 				"output":"BatteryMater"
@@ -29,7 +27,6 @@
 			"description":"KN MemoPad 機能拡張版(リポジトリ名:knmemopadmod)の後継",
 			"gen":[1,2,3,4],
 			"url":"http://tmksoft.starfree.jp/applications/dl/knmemopad.zip",
-			"dependencies":[],
 			"dir":{
 				"input":"KN MemoPad",
 				"output":"KN MemoPad Rev7 +"
@@ -41,7 +38,6 @@
 			"description":"簡易的なタイマー。",
 			"gen":[1,2,3,4],
 			"url":"http://tmksoft.starfree.jp/applications/dl/tmtimer_0_6.zip",
-			"dependencies":[],
 			"dir":{
 				"input":"tmtimer_0_6",
 				"output":"TmTimer"
@@ -53,7 +49,6 @@
 			"description":"MEMZのような表示をします。破壊活動はしません。",
 			"gen":[1,2,3,4],
 			"url":"http://tmksoft.starfree.jp/applications/dl/memz_1_3.zip",
-			"dependencies":[],
 			"dir":{
 				"input":"memz_1_3",
 				"output":"MEMZ"
@@ -65,7 +60,6 @@
 			"description":"ただの「さいころ」です。ただの「さいころ」です。",
 			"gen":[1,2,3,4],
 			"url":"http://tmksoft.starfree.jp/applications/dl/saikoroce_1_1.zip",
-			"dependencies":[],
 			"dir":{
 				"input":"saikoroce_1_1",
 				"output":"SaikoroCE"
@@ -77,10 +71,20 @@
 			"description":"ceOpenerの後継",
 			"gen":[3,4],
 			"url":"https://ho.ie-t.net/IT/brain/ceopener_mod/ceOpener_mod.zip",
-			"dependencies":[],
 			"dir":{
 				"input":"ceOpener_mod",
 				"output":"ceOpener Mod"
+			},
+			"delete":[]
+		},
+		{
+			"name":"testce",
+			"description":"タスク管理アプリ",
+			"gen":[1,2,3,4],
+			"url":"https://github.com/GenkaiSoft/apt-brain/raw/main/packages/TestCE-1.62.zip",
+			"dir":{
+				"input":"TestCE-1.62",
+				"output":"TestCE"
 			},
 			"delete":[]
 		}
