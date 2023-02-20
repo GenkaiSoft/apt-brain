@@ -3,4 +3,5 @@
 src/main
 apt-brain
 アプリ/
-*.zip
+apt-brain_windows_x64.zip
+apt-brain_windows_x86.zip
