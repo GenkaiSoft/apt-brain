@@ -69,7 +69,8 @@
 			"dir":{
 				"input":"saikoroce_1_1",
 				"output":"SaikoroCE"
-			}
+			},
+			"delete":[]
 		},
 		{
 			"name":"ceopenermod",
