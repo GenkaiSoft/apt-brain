@@ -81,7 +81,7 @@
 			"name":"testce",
 			"description":"タスク管理アプリ",
 			"gen":[1,2,3,4],
-			"url":"https://github.com/GenkaiSoft/apt-brain/raw/main/packages/TestCE-1.62.zip",
+			"url":"https://drive.google.com/uc?id=1fZd4Oi_LinhpA_eHUOOSLb0aiqZOJSRo",
 			"dir":{
 				"input":"TestCE-1.62",
 				"output":"TestCE"
@@ -92,7 +92,7 @@
 			"name":"selector",
 			"description":"タスク管理アプリ",
 			"gen":[1,2,3,4],
-			"url":"https://github.com/GenkaiSoft/apt-brain/raw/main/packages/Selector.zip",
+			"url":"https://drive.google.com/uc?id=1-iW2yZpP13LyAWjxSr8WoZy3UUTzVuE4",
 			"dir":{
 				"input":"Selector",
 				"output":"Selector"
