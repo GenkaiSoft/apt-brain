@@ -1,7 +1,7 @@
-import std/[strutils , os]
+import std/os
 import ../../common
 import ../download
-import zip , cab
+import zip
 
 proc cmdInstall*() {.inline.} =
   var
@@ -34,11 +34,4 @@ proc cmdInstall*() {.inline.} =
   let
     package = findPackage(pkgName)
     fileName = package.dlPkg(tmpDir)
-    extension = fileName.substr(fileName.rfind(".") + 1)
-  case extension
-  of "zip":
-    package.installZip(tmpDir , insDir , fileName)
-  of "cab":
-    package.installCab(fileName)
-  else:
-    showErr("Unknown extension" & extension.quote)
+  package.installZip(tmpDir , insDir , fileName)

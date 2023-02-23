@@ -1,8 +1,8 @@
-import std/[strutils , streams , os]
+import std/[streams , os]
 import ../common
 
 proc dlPkg*(package:Package , dir:string):string =
-  let fileName = dir / package.url.substr(package.url.rfind("/") + 1)
+  let fileName = dir / package.name & ".zip"
   showProcess("Opening file" & fileName.quote)
   var strm:Stream
   try:
