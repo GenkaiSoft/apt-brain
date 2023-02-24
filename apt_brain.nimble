@@ -15,7 +15,6 @@ requires "zippy >= 0.10.4"
 
 # Skips
 skipFiles = @["package.json"]
-skipDirs = @["packages"]
 
 # Tasks
 task build_win , "Cross compile for windows":

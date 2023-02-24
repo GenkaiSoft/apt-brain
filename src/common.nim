@@ -76,7 +76,6 @@ type
   Package* = object
     name*:string
     description*:string
-    gen*:seq[int]
     url*:string
     dir*:Dir
     delete*:seq[string]

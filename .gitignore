@@ -1,7 +1,9 @@
 *.exe
 *.app
+*.zip
+
 src/main
 apt-brain
+package
+
 アプリ/
-apt-brain_windows_x64.zip
-apt-brain_windows_x86.zip
