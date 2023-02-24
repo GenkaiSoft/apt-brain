@@ -6,13 +6,15 @@ proc prompt(str:string):string =
     echo(str & " > ")
     return stdin.readLine()
 
-let
-    name = prompt("package name").toLower
-    description = prompt("description")
-    url = prompt("url")
-    input = prompt("dir.input")
-    output = prompt("dir.output")
-    delete = prompt("delete")
+let name = prompt("package name").toLower
+let description = prompt("description")
+var url = prompt("url")
+let input = prompt("dir.input")
+let output = prompt("dir.output")
+let delete = prompt("delete")
+
+if url.startsWith("https://drive.google.com/file/d/"):
+    url = "https://drive.google.com/uc?id=" & url.split("/")[5]
 
 var seqDelete:seq[string]
 if delete != "":

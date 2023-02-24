@@ -45,7 +45,7 @@ proc cmdInstall*() {.inline.} =
   showDone()
 
   for delete in package.delete:
-    let del = tmp / delete
+    let del = tmp / package.dir.input / delete
     if delete.substr(delete.len - 1) == "/":
       removeDir(del)
     else:

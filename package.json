@@ -9,7 +9,7 @@
         "output": "CERestorer"
       },
       "delete": [
-        "CERestorer/ReadMe.txt"
+        "ReadMe.txt"
       ]
     },
     {
@@ -21,8 +21,8 @@
         "output": "BatteryMater"
       },
       "delete": [
-        "batmtr_4_0/ReadMe.txt",
-        "batmtr_4_0/SOURCE/"
+        "ReadMe.txt",
+        "SOURCE/"
       ]
     },
     {
@@ -102,6 +102,28 @@
       "dir": {
         "input": "GenkaiyaReversi",
         "output": "GenkaiyaReversi"
+      },
+      "delete": []
+    },
+    {
+      "name": "mu",
+      "description": "タスク管理アプリ",
+      "url": "https://web.archive.org/web/20170422153400/http://cka.html.xdomain.jp/softwareSpace/Mu.zip",
+      "dir": {
+        "input": "Mu-0.05",
+        "output": "Mu"
+      },
+      "delete": [
+        "ReadMe.txt"
+      ]
+    },
+    {
+      "name": "sqpocket",
+      "description": "タスク管理アプリ",
+      "url": "https://drive.google.com/uc?id=1nW9oIUx3IYeIudvccJv7DB4BlWzauIdC",
+      "dir": {
+        "input": "SQPocket",
+        "output": "SQPocket"
       },
       "delete": []
     }
