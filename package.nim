@@ -1,3 +1,5 @@
+# Add a package to package.json
+
 import std/[strutils , json , streams]
 
 proc prompt(str:string):string =

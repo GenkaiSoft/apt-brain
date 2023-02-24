@@ -3,7 +3,7 @@ from std/times import cputime
 from std/exitprocs import addExitProc
 from std/terminal import resetAttributes
 import common
-import cmd/[help , show , install/main , download]
+import cmd/[help , show , install , download]
 
 exitprocs.addExitProc(resetAttributes)
 

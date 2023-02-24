@@ -1,6 +1,6 @@
 # Package
 
-version          = "1.2.0"
+version          = "1.2.1"
 author           = "777shuang"
 description      = "apt for SHARP Brain"
 license          = "GPL-3.0-or-later"
@@ -14,7 +14,7 @@ requires "puppy >= 1.6.0"
 requires "zippy >= 0.10.4"
 
 # Skips
-skipFiles = @["package.json"]
+skipFiles = @["package.json" , "package.nim"]
 
 # Tasks
 task build_win , "Cross compile for windows":
