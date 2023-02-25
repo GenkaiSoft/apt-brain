@@ -1,17 +1,18 @@
 import std/[streams , os]
+import liblim/logging
 import ../common
 
 proc dlPkg*(package:Package , dir:string):string =
   let fileName = dir / package.name & ".zip"
-  showProcess("Opening file" & fileName.quote)
+  printProcess("Opening file" & fileName.quote)
   var strm:Stream
   try:
     strm = openFileStream(fileName , fmWrite)
   except IOError:
-    showFailed()
-    showExc("Unable to open file" & fileName.quote)
+    printFailed()
+    printExc("Unable to open file" & fileName.quote)
     quit()
-  showDone()
+  printDone()
   strm.write(connect(package.url))
   strm.close()
   return fileName
@@ -22,7 +23,7 @@ proc cmdDownload*() {.inline.} =
     pkgName:string
   case cmdParamCount
   of 1:
-    showErr.showFew()
+    printErr.printFew()
     quit()
   of 2:
     dlDir = getCurrentDir()
@@ -32,10 +33,10 @@ proc cmdDownload*() {.inline.} =
       dlDir = cmdParams[2]
       pkgName = cmdParams[3]
     else:
-      showErr.showMany
+      printErr.printMany
       quit()
   else:
-    showErr.showMany()
+    printErr.printMany()
     quit()
 
   discard dlPkg(findPackage(pkgName) , dlDir)

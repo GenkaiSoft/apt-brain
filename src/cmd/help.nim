@@ -1,5 +1,6 @@
-import ../common
 import std/[os , tables , strutils]
+import liblim/logging
+import ../common
 
 proc cmdHelp*() {.inline.} =
   const null = ["" , ""]
@@ -19,11 +20,11 @@ proc cmdHelp*() {.inline.} =
     for key , help in helps:
       for value in help:
         if value != null:
-          showInfo(quote(key & " " & value[0]) & space & value[1])
+          printInfo(quote(key & " " & value[0]) & space & value[1])
   else:
     for key , help in helps:
       if key == cmdParams[1].toLower:
         for value in help:
           if value != null:
-            showInfo(quote(key & " " & value[0]) & space & value[1])
+            printInfo(quote(key & " " & value[0]) & space & value[1])
         break

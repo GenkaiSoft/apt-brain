@@ -2,44 +2,45 @@ import std/strutils
 from std/times import cputime
 from std/exitprocs import addExitProc
 from std/terminal import resetAttributes
+import liblim/logging
 import common
 import cmd/[help , show , install , download]
 
 exitprocs.addExitProc(resetAttributes)
 
-proc showHelp() =
-  showInfo("Get help with" & quote(appName & " help"))
-proc showVer() =
-  const NimblePkgVersion {.strdefine.}:string = "DEBUG_BUILD"
+proc printHelp() =
+  printInfo("Get help with" & quote(appName & " help"))
+proc printVer() =
+  const NimblePkgVersion {.strdefine.}:string = "0.0.0(DEBUG_BUILD)"
   when not defined(release) or not defined(NimblePkgVersion):
-    showWarn("It's not release build!")
-  showInfo(appName & " v" & NimblePkgVersion)
-  showInfo("https://github.com/GenkaiSoft/" & appName)
-  showInfo("Copylight (c) 2022 777shuang. All Rights Reserved.")
+    printWarn("It's not release build!")
+  printInfo(appName & " v" & NimblePkgVersion)
+  printInfo("https://github.com/GenkaiSoft/" & appName)
+  printInfo("Copylight (c) 2022 777shuang. All Rights Reserved.")
 
 if cmdParamCount == 0:
-  showLog(""" ___              _                  _   _""")
-  showLog("""|   \ _____ _____| |___ _ __  ___ __| | | |__ _  _""")
-  showLog("""| |) / -_) V / -_) / _ \ '_ \/ -_) _` | | '_ \ || |""")
-  showLog("""|___/\___|\_/\___|_\___/ .__/\___\__,_| |_.__/\_, |""")
-  showLog("""                       |_|                    |__/""")
-  showLog("""  ____            _         _ ____         __ _     /\  /\    __________""")
-  showLog(""" / ___| ___ _ __ | | ____ _(_) ___|  ___  / _| |_  /------\  /          |""")
-  showLog("""| |  _ / _ \ '_ \| |/ / _` | \___ \ / _ \| |_| __| | *  * | < Genkaiya! |""")
-  showLog("""| |_| |  __/ | | |   < (_| | |___) | (_) |  _| |_  |= __ =|  \__________|""")
-  showLog(""" \____|\___|_| |_|_|\_\__,_|_|____/ \___/|_|  \__| \______/""")
-  showVer()
-  showHelp()
+  printLog(""" ___              _                  _   _""")
+  printLog("""|   \ _____ _____| |___ _ __  ___ __| | | |__ _  _""")
+  printLog("""| |) / -_) V / -_) / _ \ '_ \/ -_) _` | | '_ \ || |""")
+  printLog("""|___/\___|\_/\___|_\___/ .__/\___\__,_| |_.__/\_, |""")
+  printLog("""                       |_|                    |__/""")
+  printLog("""  ____            _         _ ____         __ _     /\  /\    __________""")
+  printLog(""" / ___| ___ _ __ | | ____ _(_) ___|  ___  / _| |_  /------\  /          |""")
+  printLog("""| |  _ / _ \ '_ \| |/ / _` | \___ \ / _ \| |_| __| | *  * | < Genkaiya! |""")
+  printLog("""| |_| |  __/ | | |   < (_| | |___) | (_) |  _| |_  |= __ =|  \__________|""")
+  printLog(""" \____|\___|_| |_|_|\_\__,_|_|____/ \___/|_|  \__| \______/""")
+  printVer()
+  printHelp()
 else:
   case cmdParams[0].toLower
   of "help":
     cmdHelp()
   of "ping":
     if cmdParamCount != 1:
-      showWarn.showMany()
+      printWarn.printMany()
     let start = cpuTime()
     discard connect(jsonUrl)
-    showInfo("Ping : " & int((cpuTime() - start) * 1000).intToStr & " ms")
+    printInfo("Ping : " & int((cpuTime() - start) * 1000).intToStr & " ms")
   of "download":
     cmdDownload()
   of "install":
@@ -48,8 +49,8 @@ else:
     cmdShow()
   of "version":
     if cmdParamCount != 1:
-      showWarn.showMany()
-    showVer()
+      printWarn.printMany()
+    printVer()
   else:
-    showErr("Unknown option")
-    showHelp()
+    printErr("Unknown option")
+    printHelp()

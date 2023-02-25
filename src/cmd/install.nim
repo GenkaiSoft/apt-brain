@@ -1,4 +1,5 @@
 import std/os
+import liblim/logging
 import ../common
 import download
 import zippy/ziparchives
@@ -9,7 +10,7 @@ proc cmdInstall*() {.inline.} =
     pkgName:string
   case cmdParamCount
   of 1:
-    showErr.showFew()
+    printErr.printFew()
     quit()
   of 2:
     insDir = appDir
@@ -19,14 +20,15 @@ proc cmdInstall*() {.inline.} =
       insDir = cmdParams[2]
       pkgName = cmdParams[3]
     else:
-      showErr.showMany()
+      printErr.printMany()
       quit()
   else:
-    showErr.showMany()
+    printErr.printMany()
     quit()
 
   let tmpDir = getTempDir() / appName
   if dirExists(tmpDir):
+    printProcess("Removing directory")
     removeDir(tmpDir)
   discard existsOrCreateDir(tmpDir)
   discard existsOrCreateDir(insDir)
@@ -35,32 +37,41 @@ proc cmdInstall*() {.inline.} =
     package = findPackage(pkgName)
     fileName = package.dlPkg(tmpDir)
     tmp = tmpDir / package.name
-  showProcess("Extracting zip file" & fileName & "to" & tmp)
+  printProcess("Extracting zip file" & fileName & "to" & tmp)
   try:
     extractAll(fileName , tmp)
   except ZippyError:
-    showFailed()
-    showExc("Unable to extract zip file" & fileName & "to" & tmp)
+    printFailed()
+    printExc("Unable to extract zip file" & fileName & "to" & tmp)
     quit()
-  showDone()
+  printDone()
 
   for delete in package.delete:
     let del = tmp / package.dir.input / delete
     if delete.substr(delete.len - 1) == "/":
-      showProcess("Removing directory" & del.quote)
-      removeDir(del)
-      showDone()
+      printProcess("Removing directory" & del.quote)
+      try:
+        removeDir(del)
+      except OSError:
+        printFailed()
+        printExc("Unable to remove directory" & del.quote)
+        quit()
+      printDone()
     else:
-      showProcess("Removing file" & del.quote)
-      removeFile(del)
-      showDone()
+      printProcess("Removing file" & del.quote)
+      try:
+        removeFile(del)
+      except OSError:
+        printFailed()
+        printExc("Unable to remove file" & del.quote)
+      printDone()
   let
     source = tmp / package.dir.input
     dest = insDir / package.dir.output
-  showProcess("Moving directory" & source.quote & "to" & dest.quote)
+  printProcess("Moving directory" & source.quote & "to" & dest.quote)
   try:
     moveDir(source , dest)
   except OSError:
-    showFailed()
-    showExc("Unable to move directory" & source.quote & "to" & dest.quote)
-  showDone()
+    printFailed()
+    printExc("Unable to move directory" & source.quote & "to" & dest.quote)
+  printDone()

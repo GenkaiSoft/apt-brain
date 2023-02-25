@@ -27,7 +27,7 @@
     },
     {
       "name": "knmemopadrev7plus",
-      "description": "KN MemoPad 機能拡張版(リポジトリ名:knmemopadmod)の後継",
+      "description": "KN MemoPad 機能追加版(リポジトリ名:knmemopadmod)の後継",
       "url": "http://tmksoft.starfree.jp/applications/dl/knmemopad.zip",
       "dir": {
         "input": "KN MemoPad",
@@ -126,6 +126,19 @@
         "output": "SQPocket"
       },
       "delete": []
+    },
+    {
+      "name": "knmemopadmod",
+      "description": "KN MemoPad(リポジトリ名:knmemopad) 機能追加版",
+      "url": "https://github.com/watamario15/kn-memopad/releases/download/v0.12-rev7/KN_MemoPad_v0.12_rev7.zip",
+      "dir": {
+        "input": "",
+        "output": "KN MemoPad Mod"
+      },
+      "delete": [
+        "readme.txt",
+        "COPYING"
+      ]
     }
   ]
 }

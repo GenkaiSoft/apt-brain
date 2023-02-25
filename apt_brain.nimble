@@ -1,10 +1,10 @@
 # Package
 
-version          = "1.2.1"
-author           = "777shuang"
-description      = "apt for SHARP Brain"
-license          = "GPL-3.0-or-later"
-srcDir           = "src"
+version = "1.2.2"
+author = "777shuang"
+description = "apt for SHARP Brain"
+license = "GPL-3.0-or-later"
+srcDir = "src"
 namedBin["main"] = "apt-brain"
 
 # Dependencies
@@ -12,6 +12,7 @@ namedBin["main"] = "apt-brain"
 requires "nim >= 1.4.2"
 requires "puppy >= 1.6.0"
 requires "zippy >= 0.10.4"
+requires "https://github.com/777shuang/Lim"
 
 # Skips
 skipFiles = @["package.json" , "package.nim"]
