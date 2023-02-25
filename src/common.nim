@@ -27,9 +27,13 @@ proc printMany*(lamda:proc(str:string)) = lamda.printArgs("many")
 
 proc connect*(url:string):string =
   printProcess("Connecting to" & url.quote)
-  let
-    msg = "Unable to connect to " & url.quote
-    res = get(url)
+  let msg = "Unable to connect to " & url.quote
+  var res:Response
+  try:
+    res = url.get()
+  except PuppyError:
+    printExc(msg)
+    quit()
   printLog("Response code is \'" & res.code.intToStr & "\'")
   if res.code == 200:
     printDone()
