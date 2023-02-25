@@ -59,7 +59,7 @@ type
   Packages = object
     packages:seq[Package]
 
-proc findPackage*(find:string):Package =
+proc getPackages*():seq[Package] =
   let package = connect(jsonUrl)
   printProcess("Parsing" & jsonUrl.quote)
   var jsonNode:JsonNode
@@ -70,7 +70,11 @@ proc findPackage*(find:string):Package =
     printExc("Unable to parse json" & jsonUrl.quote)
     quit()
   printDone()
-  for package in jsonNode.to(Packages).packages:
+  return jsonNode.to(Packages).packages
+
+proc findPackage*(find:string):Package =
+
+  for package in getPackages():
     if find.toLower == package.name:
       return package
   printErr("Package" & find.quote & "is not found")
