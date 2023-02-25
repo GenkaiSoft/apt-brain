@@ -1,4 +1,4 @@
-import std/[strutils , json , os]
+import std/[strutils , json , os , streams]
 import puppy
 import liblim/logging
 const
@@ -80,3 +80,16 @@ proc findPackage*(find:string):Package =
       return package
   printErr("Package" & find.quote & "is not found")
   quit()
+
+proc writeFile*(fileName , str:string) =
+  printProcess("Opening file" & fileName.quote)
+  var strm:Stream
+  try:
+    strm = openFileStream(fileName , fmWrite)
+  except IOError:
+    printFailed()
+    printErr("Unable to open file" & fileName.quote)
+    quit()
+  printDone()
+  strm.write(str)
+  strm.close()

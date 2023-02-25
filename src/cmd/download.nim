@@ -4,17 +4,7 @@ import ../common
 
 proc dlPkg*(package:Package , dir:string):string =
   let fileName = dir / package.name & ".zip"
-  printProcess("Opening file" & fileName.quote)
-  var strm:Stream
-  try:
-    strm = openFileStream(fileName , fmWrite)
-  except IOError:
-    printFailed()
-    printExc("Unable to open file" & fileName.quote)
-    quit()
-  printDone()
-  strm.write(connect(package.url))
-  strm.close()
+  fileName.writeFile(package.url.connect)
   return fileName
 
 proc cmdDownload*() {.inline.} =

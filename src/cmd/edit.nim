@@ -20,22 +20,28 @@ proc cmdEdit*() =
   let output = printPrompt("dir.output")
   let delete = printPrompt("delete")
 
-  var jsonObj:JsonNode
+  if url.startsWith("https://drive.google.com/file/d/"):
+    url = "https://drive.google.com/uc?id=" & url.split("/")[5]
+
+  var seqDelete:seq[string]
+  if delete != "":
+    seqDelete = delete.split()
+
+  let jsonObj = %*
+  {
+    "name":name ,
+    "description":description ,
+    "url":url ,
+    "dir":{
+      "input":input ,
+      "output":output,
+    },
+    "delete":seqDelete
+  }
+  var jsonRootObj:JsonNode
   if fileExists(jsonFileName):
-    jsonObj = parseJson(jsonFileName)
+    jsonRootObj = parseJson(jsonFileName)
+    jsonRootObj{"packages"}.add(jsonObj)
   else:
-    jsonObj = %*{
-      "packages":
-        [
-          {
-            "name":name ,
-            "description":description ,
-            "url":url ,
-            "dir":{
-              "input":input ,
-              "output":output,
-            },
-            "delete":delete.split()
-          }
-        ]
-    }
+    jsonRootObj = %*{"packages":[jsonObj]}
+  jsonFileName.writeFile(jsonRootObj.pretty)
