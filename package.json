@@ -139,6 +139,68 @@
         "readme.txt",
         "COPYING"
       ]
+    },
+    {
+      "name": "knmemopad",
+      "description": "シンプルなテキストエディタ",
+      "url": "https://web.archive.org/web/20210405101135if_/https://bbuseruploads.s3.amazonaws.com/knatech/brain-tools/downloads/knmemopad-0.12-arm.zip?Signature=M8M5J6%2BYIpwBRsuX9Kr5co2%2FkCQ%3D&Expires=1617619295&AWSAccessKeyId=AKIA6KOSE3BNJRRFUUX6&versionId=null&response-content-disposition=attachment%3B%20filename%3D%22knmemopad-0.12-arm.zip%22",
+      "dir": {
+        "input": "KN MemoPad",
+        "output": "KN MemoPad"
+      },
+      "delete": []
+    },
+    {
+      "name": "jot",
+      "description": "テキストエディタ",
+      "url": "https://downloadx.getuploader.com/g/63f971c5-6324-4b51-a6b7-63bba010e467/brainup2ch/85/jotaic.zip",
+      "dir": {
+        "input": "jotaic",
+        "output": "jot"
+      },
+      "delete": []
+    },
+    {
+      "name": "knote",
+      "description": "テキストエディタ",
+      "url": "https://drive.google.com/uc?id=1uIKyKw3FGA1dr7PK_ut4LIH5iZKL-2ky",
+      "dir": {
+        "input": "KNote",
+        "output": "KNote"
+      },
+      "delete": [
+        "readme.txt"
+      ]
+    },
+    {
+      "name": "calc98",
+      "description": "関数電卓",
+      "url": "https://drive.google.com/uc?id=1mg9xX1d1eX5jDAQlidIsARtWO66xB5KE",
+      "dir": {
+        "input": "Calc98",
+        "output": "Calc98"
+      },
+      "delete": []
+    },
+    {
+      "name": "passlocker",
+      "description": "任意のパスコードでロックできるアプリ",
+      "url": "https://grain.exout.net/Brain/pl/PassLocker-0.12.zip",
+      "dir": {
+        "input": "PassLocker",
+        "output": "PassLocker"
+      },
+      "delete": []
+    },
+    {
+      "name": "patternlocker",
+      "description": "パターンでロックできるアプリ",
+      "url": "https://grain.exout.net/Brain/ptl/PatternLocker-0.12.zip",
+      "dir": {
+        "input": "PatternLocker",
+        "output": "PatternLocker"
+      },
+      "delete": []
     }
   ]
 }
