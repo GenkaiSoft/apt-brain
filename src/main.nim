@@ -4,7 +4,7 @@ from std/exitprocs import addExitProc
 from std/terminal import resetAttributes
 import liblim/logging
 import common
-import cmd/[help , show , install , download]
+import cmd/[help , show , install , download , edit]
 
 exitprocs.addExitProc(resetAttributes)
 
@@ -47,6 +47,8 @@ else:
     cmdInstall()
   of "show":
     cmdShow()
+  of "edit":
+    cmdEdit()
   of "version":
     if cmdParamCount != 1:
       printWarn.printMany()
