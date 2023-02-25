@@ -1,4 +1,5 @@
 # apt-brain
+Brainアプリを簡単にインストールできるソフトです。
 ## インストール
 ### Windows (ビルド済みバイナリ)
 右の[Releases](https://github.com/GenkaiSoft/apt-brain/releases)から入手
