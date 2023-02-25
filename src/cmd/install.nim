@@ -28,7 +28,7 @@ proc cmdInstall*() {.inline.} =
 
   let tmpDir = getTempDir() / appName
   if dirExists(tmpDir):
-    printProcess("Removing directory")
+    printProcess("Removing directory" & tmpDir.quote)
     removeDir(tmpDir)
   discard existsOrCreateDir(tmpDir)
   discard existsOrCreateDir(insDir)
@@ -37,12 +37,12 @@ proc cmdInstall*() {.inline.} =
     package = findPackage(pkgName)
     fileName = package.dlPkg(tmpDir)
     tmp = tmpDir / package.name
-  printProcess("Extracting zip file" & fileName & "to" & tmp)
+  printProcess("Extracting zip file" & fileName.quote & "to" & tmp)
   try:
     extractAll(fileName , tmp)
   except ZippyError:
     printFailed()
-    printExc("Unable to extract zip file" & fileName & "to" & tmp)
+    printExc("Unable to extract zip file" & fileName.quote & "to" & tmp)
     quit()
   printDone()
 
