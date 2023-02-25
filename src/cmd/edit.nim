@@ -2,7 +2,7 @@ import std/[os , json , strutils]
 import liblim/logging
 import ../common
 
-proc cmdEdit*() =
+proc cmdEdit*() {.inline.} =
   var jsonFileName:string
   case cmdParamCount
   of 1:
@@ -27,8 +27,7 @@ proc cmdEdit*() =
   if delete != "":
     seqDelete = delete.split()
 
-  let jsonObj = %*
-  {
+  let jsonObj = %*{
     "name":name ,
     "description":description ,
     "url":url ,
@@ -44,4 +43,4 @@ proc cmdEdit*() =
     jsonRootObj{"packages"}.add(jsonObj)
   else:
     jsonRootObj = %*{"packages":[jsonObj]}
-  jsonFileName.writeFile(jsonRootObj.pretty)
+  jsonFileName.createAndWriteFile(jsonRootObj.pretty)

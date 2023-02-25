@@ -81,7 +81,7 @@ proc findPackage*(find:string):Package =
   printErr("Package" & find.quote & "is not found")
   quit()
 
-proc writeFile*(fileName , str:string) =
+proc createAndWriteFile*(fileName , str:string) =
   printProcess("Opening file" & fileName.quote)
   var strm:Stream
   try:

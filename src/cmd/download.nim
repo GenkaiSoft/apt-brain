@@ -1,10 +1,10 @@
-import std/[streams , os]
+import os
 import liblim/logging
 import ../common
 
 proc dlPkg*(package:Package , dir:string):string =
   let fileName = dir / package.name & ".zip"
-  fileName.writeFile(package.url.connect)
+  fileName.createAndWriteFile(package.url.connect)
   return fileName
 
 proc cmdDownload*() {.inline.} =
