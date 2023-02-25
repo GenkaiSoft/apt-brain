@@ -12,8 +12,9 @@ proc cmdHelp*() {.inline.} =
     ] ,
     "ping":[["" , "Measure ping."] , null] ,
     "version":[["" , "Show version."] , null] ,
-    "show":[["" , "Show all packages"] , ["show [package]" , "Show about [package]."]] ,
-    "download":[["" , "download package file to current directory"] , ["[--dir|-d] {directory}" , "download package file to {directory}"]]
+    "show":[["" , "Show all packages"] , ["[package]" , "Show about [package]."]] ,
+    "download":[["" , "download package file to current directory"] , ["[--dir|-d] {directory}" , "download package file to {directory}"]] ,
+    "edit":[["" , "add a package to `package.json`"] , ["[filename]" , "add a package to `[filename].json`"]]
   }.toTable
   const space = " : "
   if cmdParamCount == 1:

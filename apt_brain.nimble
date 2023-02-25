@@ -1,6 +1,6 @@
 # Package
 
-version = "1.3.0"
+version = "1.3.1"
 author = "777shuang"
 description = "apt for SHARP Brain"
 license = "GPL-3.0-or-later"
@@ -20,7 +20,7 @@ skipFiles = @["package.json" , "package.nim"]
 # Tasks
 task build_win , "Cross compile for windows":
   exec "nimble build -d:release -d:mingw --cpu:amd64"
-  exec "zip apt-brain_windows_x64 apt-brain.exe LICENSE.txt"
+  exec "zip apt-brain.windows.x86_64.zip apt-brain.exe LICENSE.txt"
   exec "nimble build -d:release -d:mingw --cpu:i386"
-  exec "zip apt-brain_windows_x86 apt-brain.exe LICENSE.txt"
+  exec "zip apt-brain.windows.i686.zip apt-brain.exe LICENSE.txt"
   exec "rm apt-brain.exe"
