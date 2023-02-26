@@ -4,7 +4,7 @@ from std/exitprocs import addExitProc
 from std/terminal import resetAttributes
 import liblim/logging
 import apt_brain/common
-import apt_brain/cmd/[help , show , install , download , edit]
+import apt_brain/cmd/[help , show , install , download , edit , add]
 
 exitprocs.addExitProc(resetAttributes)
 
@@ -37,7 +37,7 @@ else:
     cmdHelp()
   of "ping":
     if cmdParamCount != 1:
-      printWarn.printMany()
+      printMany()
     let start = cpuTime()
     discard connect(jsonUrl)
     printInfo("Ping : " & int((cpuTime() - start) * 1000).intToStr & " ms")
@@ -49,9 +49,11 @@ else:
     cmdShow()
   of "edit":
     cmdEdit()
+  of "add":
+    cmdAdd()
   of "version":
     if cmdParamCount != 1:
-      printWarn.printMany()
+      printMany()
     printVer()
   else:
     printErr("Unknown option")

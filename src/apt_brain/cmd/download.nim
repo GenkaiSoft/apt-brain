@@ -1,5 +1,4 @@
 import os
-import liblim/logging
 import ../common
 
 proc dlPkg*(package:Package , dir:string):string =
@@ -13,7 +12,7 @@ proc cmdDownload*() {.inline.} =
     pkgName:string
   case cmdParamCount
   of 1:
-    printErr.printFew()
+    printFew()
     quit()
   of 2:
     dlDir = getCurrentDir()
@@ -23,10 +22,8 @@ proc cmdDownload*() {.inline.} =
       dlDir = cmdParams[2]
       pkgName = cmdParams[3]
     else:
-      printErr.printMany
-      quit()
+      printMany()
   else:
-    printErr.printMany()
-    quit()
+    printMany()
 
   discard dlPkg(findPackage(pkgName) , dlDir)

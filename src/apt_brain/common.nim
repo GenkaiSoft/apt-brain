@@ -21,9 +21,11 @@ proc printDone*() = printResult("done")
 
 proc printProcess*(str:string) = printLog(str & " ...")
 
-proc printArgs(lamda:proc(str:string) , str:string) = lamda("Too " & str & " arguments")
-proc printFew*(lamda:proc(str:string)) = lamda.printArgs("few")
-proc printMany*(lamda:proc(str:string)) = lamda.printArgs("many")
+proc printArgs(str:string) =
+  printErr("Too " & str & " arguments")
+  quit()
+proc printFew*() = printArgs("few")
+proc printMany*() = printArgs("many")
 
 proc connect*(url:string):string =
   printProcess("Connecting to" & url.quote)

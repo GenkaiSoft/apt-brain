@@ -10,8 +10,7 @@ proc cmdEdit*() {.inline.} =
   of 2:
     jsonFileName = cmdParams[1]
   else:
-    printErr.printMany()
-    quit()
+    printMany()
 
   let name = printPrompt("package name").toLower
   let description = printPrompt("description")

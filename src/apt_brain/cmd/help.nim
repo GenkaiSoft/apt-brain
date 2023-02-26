@@ -23,9 +23,14 @@ proc cmdHelp*() {.inline.} =
         if value != null:
           printInfo(quote(key & " " & value[0]) & space & value[1])
   else:
-    for key , help in helps:
-      if key == cmdParams[1].toLower:
-        for value in help:
-          if value != null:
-            printInfo(quote(key & " " & value[0]) & space & value[1])
-        break
+    for i in 1..(cmdParamCount - 1):
+      var exist = false
+      for key , help in helps:
+        if key == cmdParams[i].toLower:
+          exist = true
+          for value in help:
+            if value != null:
+              printInfo(quote(key & " " & value[0]) & space & value[1])
+          break
+      if not exist:
+        printErr("command" & cmdParams[i].quote & "isn't find")

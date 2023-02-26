@@ -1,5 +1,4 @@
 import std/os
-import liblim/logging
 import ../common
 import download
 import zippy/ziparchives
@@ -10,7 +9,7 @@ proc cmdInstall*() {.inline.} =
     pkgName:string
   case cmdParamCount
   of 1:
-    printErr.printFew()
+    printFew()
     quit()
   of 2:
     insDir = appDir
@@ -20,10 +19,10 @@ proc cmdInstall*() {.inline.} =
       insDir = cmdParams[2]
       pkgName = cmdParams[3]
     else:
-      printErr.printMany()
+      printMany()
       quit()
   else:
-    printErr.printMany()
+    printMany()
     quit()
 
   let tmpDir = getTempDir() / appName
