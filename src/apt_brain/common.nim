@@ -1,19 +1,21 @@
-import std/[strutils , json , os , streams]
+import std/[strutils , json , os]
 import puppy
 import liblim/logging
 const
-  jsonUrl* = "https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/package.json"
+  defaultJsonUrl = "https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/package.json"
   appDir* = "アプリ"
   appName* = "apt-brain"
 let
   cmdParamCount* = paramCount()
   cmdParams* = commandLineParams()
 
-proc quote*(str:string):string = return " \"" & str & "\" "
+proc quote*(str:string):string =
+  return " \"" & str & "\" "
 
 proc printExc*(str:string) =
   printErr(str)
   printErr("Error message is" & quote(getCurrentExceptionMsg()))
+  quit()
 
 proc printResult(str:string) = printLog("-> " & str)
 proc printFailed*() = printResult("failed")
@@ -58,7 +60,27 @@ type
   Packages = object
     packages:seq[Package]
 
-proc getPackages*():seq[Package] =
+proc parseJsonFile*(path:string):JsonNode =
+  printProcess("Opening json file" & path.quote)
+  var file:File
+  try:
+    file = path.open
+  except IOError:
+    printFailed()
+    printExc("Unable to open json file" & path.quote)
+  printDone()
+
+  printProcess("Parsing json file" & path.quote)
+  var jsonNode:JsonNode
+  try:
+     jsonNode = file.readAll.parseJson
+  except JsonParsingError:
+    printFailed()
+    printExc("Unable to parse json file" & path.quote)
+  printDone()
+  return jsonNode
+
+proc getJsonNode*(jsonUrl:string):JsonNode =
   let package = connect(jsonUrl)
   printProcess("Parsing json" & jsonUrl.quote)
   var jsonNode:JsonNode
@@ -69,25 +91,44 @@ proc getPackages*():seq[Package] =
     printExc("Unable to parse json" & jsonUrl.quote)
     quit()
   printDone()
-  return jsonNode.to(Packages).packages
+  return jsonNode
 
-proc findPackage*(find:string):Package =
+proc getPackages*(jsonUrl:string = defaultJsonUrl):seq[Package] =
+  try:
+    return getJsonNode(jsonUrl).to(Packages).packages
+  except KeyError:
+    printExc(jsonUrl.quote & "is broken")
 
-  for package in getPackages():
+proc findPackage*(find:string , jsonUrl:string = defaultJsonUrl):Package =
+
+  for package in jsonUrl.getPackages:
     if find.toLower == package.name:
       return package
   printErr("Package" & find.quote & "is not found")
   quit()
 
-proc createAndWriteFile*(fileName , str:string) =
-  printProcess("Opening file" & fileName.quote)
-  var strm:Stream
+proc remDir*(path:string) =
+  printProcess("Removing directory" & path.quote)
   try:
-    strm = openFileStream(fileName , fmWrite)
-  except IOError:
+    removeDir(path)
+  except OSError:
     printFailed()
-    printErr("Unable to open file" & fileName.quote)
+    printExc("Unable to remove directory" & path.quote)
     quit()
   printDone()
-  strm.write(str)
-  strm.close()
+
+proc openFile*(path:string , fileMode:FileMode = fmRead):File =
+  printProcess("Opening file" & path.quote)
+  var file:File
+  try:
+    file = open(path , fileMode)
+  except IOError:
+    printFailed()
+    printExc("Unable to open file" & path.quote)
+  printDone()
+  return file
+
+proc createAndWriteFile*(path , str:string , fileMode:FileMode = fmWrite) =
+  let file = openFile(path , fileMode)
+  file.write(str)
+  file.close()

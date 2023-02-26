@@ -4,7 +4,7 @@ from std/exitprocs import addExitProc
 from std/terminal import resetAttributes
 import liblim/logging
 import apt_brain/common
-import apt_brain/cmd/[help , show , install , download , edit , add]
+import apt_brain/cmd/[help , show , install , download , edit , repo]
 
 exitprocs.addExitProc(resetAttributes)
 
@@ -35,12 +35,6 @@ else:
   case cmdParams[0].toLower
   of "help":
     cmdHelp()
-  of "ping":
-    if cmdParamCount != 1:
-      printMany()
-    let start = cpuTime()
-    discard connect(jsonUrl)
-    printInfo("Ping : " & int((cpuTime() - start) * 1000).intToStr & " ms")
   of "download":
     cmdDownload()
   of "install":
@@ -49,8 +43,8 @@ else:
     cmdShow()
   of "edit":
     cmdEdit()
-  of "add":
-    cmdAdd()
+  of "repo":
+    cmdRepo()
   of "version":
     if cmdParamCount != 1:
       printMany()

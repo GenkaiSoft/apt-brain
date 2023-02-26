@@ -3,12 +3,26 @@ import liblim/logging
 import ../common
 
 proc cmdEdit*() {.inline.} =
-  var jsonFileName:string
+  var
+    jsonFileName:string
+    repoName:string
   case cmdParamCount
   of 1:
-    jsonFileName = "package.json"
+    printFew()
   of 2:
-    jsonFileName = cmdParams[1]
+    repoName = cmdParams[1]
+    jsonFileName = "package.json"
+  of 4:
+    proc optionCheck(i:int):bool =
+      return cmdParams[i] == "--out" or cmdParams[i] == "-o"
+    if optionCheck(1):
+      jsonFileName = cmdParams[2].toLower
+      repoName = cmdParams[3].toLower
+    elif optionCheck(2):
+      jsonFileName = cmdParams[3].toLower
+      repoName = cmdParams[1].toLower
+    else:
+      printMany()
   else:
     printMany()
 
@@ -37,9 +51,9 @@ proc cmdEdit*() {.inline.} =
     "delete":seqDelete
   }
   var jsonRootObj:JsonNode
-  if fileExists(jsonFileName):
-    jsonRootObj = parseJson(jsonFileName)
-    jsonRootObj{"packages"}.add(jsonObj)
+  if jsonFileName.fileExists:
+    jsonRootObj = jsonFileName.parseJsonFile
+    jsonRootObj{repoNAme}.add(jsonObj)
   else:
-    jsonRootObj = %*{"packages":[jsonObj]}
+    jsonRootObj = %*{repoName:[jsonObj]}
   jsonFileName.createAndWriteFile(jsonRootObj.pretty)

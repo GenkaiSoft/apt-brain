@@ -26,9 +26,7 @@ proc cmdInstall*() {.inline.} =
     quit()
 
   let tmpDir = getTempDir() / appName
-  if dirExists(tmpDir):
-    printProcess("Removing directory" & tmpDir.quote)
-    removeDir(tmpDir)
+  remDir(tmpDir)
   discard existsOrCreateDir(tmpDir)
   discard existsOrCreateDir(insDir)
 
@@ -48,14 +46,7 @@ proc cmdInstall*() {.inline.} =
   for delete in package.delete:
     let del = tmp / package.dir.input / delete
     if delete.substr(delete.len - 1) == "/":
-      printProcess("Removing directory" & del.quote)
-      try:
-        removeDir(del)
-      except OSError:
-        printFailed()
-        printExc("Unable to remove directory" & del.quote)
-        quit()
-      printDone()
+      remDir(del)
     else:
       printProcess("Removing file" & del.quote)
       try:

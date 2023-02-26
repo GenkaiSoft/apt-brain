@@ -10,7 +10,6 @@ proc cmdHelp*() {.inline.} =
       ["{package(s)}" , "Install {package(s)} to \"{current directory}" / appDir / "{{package} name}\"."] ,
       ["[--dir|-d] {directory} {package(s)}" , "Install {packages(s)} to {directory}."]
     ] ,
-    "ping":[["" , "Measure ping."] , null] ,
     "version":[["" , "Show version."] , null] ,
     "show":[["" , "Show all packages"] , ["[package]" , "Show about [package]."]] ,
     "download":[["" , "download package file to current directory"] , ["[--dir|-d] {directory}" , "download package file to {directory}"]] ,
