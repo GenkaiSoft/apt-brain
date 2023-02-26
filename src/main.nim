@@ -3,8 +3,8 @@ from std/times import cputime
 from std/exitprocs import addExitProc
 from std/terminal import resetAttributes
 import liblim/logging
-import common
-import cmd/[help , show , install , download , edit]
+import apt_brain/common
+import apt_brain/cmd/[help , show , install , download , edit]
 
 exitprocs.addExitProc(resetAttributes)
 
