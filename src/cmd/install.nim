@@ -37,12 +37,12 @@ proc cmdInstall*() {.inline.} =
     package = findPackage(pkgName)
     fileName = package.dlPkg(tmpDir)
     tmp = tmpDir / package.name
-  printProcess("Extracting zip file" & fileName.quote & "to" & tmp)
+  printProcess("Extracting zip file" & fileName.quote & "to" & tmp.quote)
   try:
     extractAll(fileName , tmp)
   except ZippyError:
     printFailed()
-    printExc("Unable to extract zip file" & fileName.quote & "to" & tmp)
+    printExc("Unable to extract zip file" & fileName.quote & "to" & tmp.quote)
     quit()
   printDone()
 

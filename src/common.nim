@@ -40,10 +40,7 @@ proc connect*(url:string):string =
   else:
     printFailed()
     printErr(msg)
-    printInfo("Would you use" & "https://web.archive.org".quote & "? (Yes/No) >")
-    let input = readLine(stdin).toLower
-    if input == "y" or input == "yes":
-      echo "DEBUG"
+    quit()
   return res.body
 
 type
@@ -61,7 +58,7 @@ type
 
 proc getPackages*():seq[Package] =
   let package = connect(jsonUrl)
-  printProcess("Parsing" & jsonUrl.quote)
+  printProcess("Parsing json" & jsonUrl.quote)
   var jsonNode:JsonNode
   try:
     jsonNode = parseJson(package)

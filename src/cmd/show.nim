@@ -6,6 +6,6 @@ proc cmdShow*() {.inline.} =
     printInfo(package.name & " : " & package.description)
   if cmdParamCount == 1:
     for package in getPackages():
-      package.printPackage()
+      package.printPackage
   else:
     findPackage(cmdParams[1]).printPackage
