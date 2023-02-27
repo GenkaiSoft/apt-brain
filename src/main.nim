@@ -3,7 +3,7 @@ from std/exitprocs import addExitProc
 from std/terminal import resetAttributes
 import liblim/logging
 import apt_brain/common
-import apt_brain/cmd/[help , show , install , download , edit , repo]
+import apt_brain/cmd/[help , show , install , download , edit , repo , ping]
 
 exitprocs.addExitProc(resetAttributes)
 
@@ -48,6 +48,8 @@ else:
     if cmdParamCount != 1:
       printMany()
     printVer()
+  of "ping":
+    cmdPing()
   else:
     printErr("Unknown option")
     printHelp()
