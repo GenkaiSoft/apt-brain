@@ -2,7 +2,7 @@ import std/[os , json , strutils]
 import liblim/logging
 import ../common
 
-proc cmdEdit*() {.inline.} =
+proc cmdEdit*() =
   var
     jsonFileName:string
     repoName:string

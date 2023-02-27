@@ -6,7 +6,7 @@ proc dlPkg*(package:Package , dir:string):string =
   fileName.createAndWriteFile(package.url.connect)
   return fileName
 
-proc cmdDownload*() {.inline.} =
+proc cmdDownload*() =
   var
     dlDir:string
     pkgName:string

@@ -1,35 +1,24 @@
 import std/[os , tables , strutils]
 import liblim/logging
 import ../common
+import download , edit , install , ping , repo , show
 
 proc cmdHelp*() {.inline.} =
-  const null = ["" , ""]
-  const helps = {
-    "help":[["" , "Show help"] , ["{command(s)}" , "Show help about {command(s)}."]] ,
-    "install":[
-      ["{package(s)}" , "Install {package(s)} to \"{current directory}" / appDir / "{{package} name}\"."] ,
-      ["[--dir|-d] {directory} {package(s)}" , "Install {packages(s)} to {directory}."]
-    ] ,
-    "version":[["" , "Show version."] , null] ,
-    "show":[["" , "Show all packages"] , ["[package]" , "Show about [package]."]] ,
-    "download":[["" , "download package file to current directory"] , ["[--dir|-d] {directory}" , "download package file to {directory}"]] ,
-    "edit":[["" , "add a package to `package.json`"] , ["[filename]" , "add a package to `[filename].json`"]]
-  }.toTable
-  const space = " : "
-  if cmdParamCount == 1:
-    for key , help in helps:
-      for value in help:
-        if value != null:
-          printInfo(quote(key & " " & value[0]) & space & value[1])
-  else:
-    for i in 1..(cmdParamCount - 1):
-      var exist = false
-      for key , help in helps:
-        if key == cmdParams[i].toLower:
-          exist = true
-          for value in help:
-            if value != null:
-              printInfo(quote(key & " " & value[0]) & space & value[1])
-          break
-      if not exist:
-        printErr("command" & cmdParams[i].quote & "isn't find")
+  echo "DEBUG"
+
+type Help* = object
+  option*:string
+  description*:string
+proc newHelp*(option:string , description:string):Help {.inline.} =
+  return Help(option:option , description:description)
+type Command* = object
+  cmd*:proc()
+  str*:string
+  help:seq[Help]
+proc newCommand*(cmd:proc() , str:string , help:seq[Help]):Command {.inline.} =
+  return Command(cmd:cmd , str:str , help:help)
+
+let commands*:seq[Command] = @[
+  newCommand(cmdDownload , "download" , @[newHelp("" , "Show helps") , newHelp("{command(s)}" , "Show help about {command(s)}")]) ,
+  newCommand(cmdEdit , "edit" , @[newHelp("" , "add package to `current directory" / "package.json`") , newHelp("{filename}" , "add package to `{filename}.json`")])
+]
