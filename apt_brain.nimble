@@ -1,6 +1,6 @@
 # Package
 
-version = "1.3.4"
+version = "1.4.0"
 author = "777shuang"
 description = "apt for SHARP Brain"
 license = "GPL-3.0-or-later"
@@ -10,8 +10,8 @@ namedBin["main"] = "apt-brain"
 # Dependencies
 
 requires "nim >= 1.4.2"
-requires "puppy >= 1.6.0"
-requires "zippy >= 0.10.4"
+requires "puppy"
+requires "zippy"
 requires "https://github.com/777shuang/Lim"
 
 # Skips
