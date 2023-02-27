@@ -1,23 +1,6 @@
-import std/[os , strutils , tables , json]
+import std/[tables , json]
 import liblim/logging
 import ../common
-
-let
-  configDir = getConfigDir() / appName
-  repoFilePath = configDir / "repo.txt"
-
-proc getRepoFile(fileMode:FileMode):File =
-  if not repoFilePath.fileExists:
-    discard configDir.existsOrCreateDir
-    let official = "https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/package.json"
-    repoFilePath.createAndWriteFile(official)
-  return repoFilePath.openFile
-proc getRepositries*():seq[string] =
-  let
-    file = fmRead.getRepoFile
-    tmp = file.readAll.split("\n")
-  file.close
-  return tmp
 
 proc cmdRepo*() {.inline.} =
   if cmdParamCount == 1:
@@ -32,7 +15,7 @@ proc cmdRepo*() {.inline.} =
     case cmdParams[1]
     of "add":
       let
-        file = getRepoFile(fmAppend)
+        file = openRepoFile(fmAppend)
       for i in 2..(cmdParamCount - 1):
         let jsonUrl = cmdParams[i]
         for package in jsonUrl.getPackages:

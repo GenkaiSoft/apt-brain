@@ -2,12 +2,12 @@ import std/[strutils , json , os , tables]
 import puppy
 import liblim/logging
 const
-  defaultJsonUrl = "https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/package.json"
   appDir* = "アプリ"
   appName* = "apt-brain"
 let
   cmdParamCount* = paramCount()
   cmdParams* = commandLineParams()
+  configDir* = getConfigDir() / appName
 
 proc quote*(str:string):string =
   return " \"" & str & "\" "
@@ -73,6 +73,20 @@ proc createAndWriteFile*(path , str:string , fileMode:FileMode = fmWrite) =
   file.write(str)
   file.close()
 
+let repoFilePath = configDir / "repo.txt"
+proc openRepoFile*(fileMode:FileMode):File =
+  if not repoFilePath.fileExists:
+    discard configDir.existsOrCreateDir
+    let official = "https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/package.json"
+    repoFilePath.createAndWriteFile(official)
+  return repoFilePath.openFile
+proc getRepositries*():seq[string] =
+  let
+    file = fmRead.openRepoFile
+    tmp = file.readAll.split("\n")
+  file.close
+  return tmp
+
 type
   Dir* = object
     input*:string
@@ -108,7 +122,7 @@ proc getJsonNode*(jsonUrl:string):JsonNode =
   printDone()
   return jsonNode
 
-proc getPackages*(jsonUrl:string = defaultJsonUrl):seq[Package] =
+proc getPackages*(jsonUrl:string):seq[Package] =
   var fields:seq[Package] = @[]
   try:
     for key , value in jsonUrl.getJsonNode.getFields:
@@ -116,9 +130,14 @@ proc getPackages*(jsonUrl:string = defaultJsonUrl):seq[Package] =
   except KeyError:
     printExc("package list" & jsonUrl.quote & "is broken")
   return fields
+proc getPackages*():seq[Package] =
+  var packages:seq[Package] = @[]
+  for url in getRepositries():
+    packages.add(url.getPackages)
+  return packages
 
-proc findPackage*(find:string , jsonUrl:string = defaultJsonUrl):Package =
-  for package in jsonUrl.getPackages:
+proc findPackage*(find:string):Package =
+  for package in getPackages():
     if find.toLower == package.name:
       return package
   printErr("Package" & find.quote & "is not found")
