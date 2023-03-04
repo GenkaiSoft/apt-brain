@@ -27,8 +27,8 @@ else:
   var exist = false
   let param = cmdParams[0].toLower
   for command in commands:
-    if param == command.str:
-      exist = true
+    if param == command.name:
       command.cmd()
+      exist = true
   if not exist:
     printErr("command" & cmdParams[0].quote & "isn't found")

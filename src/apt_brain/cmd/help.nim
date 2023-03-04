@@ -1,4 +1,5 @@
-import std/[os , strutils]
+from std/os import `/`
+from std/strutils import toLower
 import liblim/logging
 import ../common
 import download , edit , install , ping , repo , show , ver
