@@ -123,13 +123,12 @@ proc getJsonNode*(jsonUrl:string):JsonNode =
   return jsonNode
 
 proc getPackages*(jsonUrl:string):seq[Package] =
-  var fields:seq[Package] = @[]
-  try:
-    for key , value in jsonUrl.getJsonNode.getFields:
-      fields.add(value.to(Package))
-  except KeyError:
-    printExc("package list" & jsonUrl.quote & "is broken")
-  return fields
+  var packages:seq[Package] = @[]
+  let jsonObj = jsonUrl.getJsonNode
+  for key in jsonObj.getFields.keys:
+    packages.add(jsonObj{key}.to(seq[Package]))
+  return packages
+
 proc getPackages*():seq[Package] =
   var packages:seq[Package] = @[]
   for url in getRepositries():
