@@ -3,19 +3,12 @@ from std/exitprocs import addExitProc
 from std/terminal import resetAttributes
 import liblim/logging
 import apt_brain/common
-import apt_brain/cmd/[help , show , install , download , edit , repo , ping]
+import apt_brain/cmd/[help , ver]
 
 exitprocs.addExitProc(resetAttributes)
 
 proc printHelp() =
   printInfo("Get help with" & quote(appName & " help"))
-proc printVer() =
-  const NimblePkgVersion {.strdefine.}:string = "0.0.0(DEBUG_BUILD)"
-  when not defined(release) or not defined(NimblePkgVersion):
-    printWarn("It's not release build!")
-  printInfo(appName & " v" & NimblePkgVersion)
-  printInfo("https://github.com/GenkaiSoft/" & appName)
-  printInfo("Copylight (c) 2022 777shuang. All Rights Reserved.")
 
 if cmdParamCount == 0:
   printLog(""" ___              _                  _   _""")
@@ -28,28 +21,14 @@ if cmdParamCount == 0:
   printLog("""| |  _ / _ \ '_ \| |/ / _` | \___ \ / _ \| |_| __| | *  * | < Genkaiya! |""")
   printLog("""| |_| |  __/ | | |   < (_| | |___) | (_) |  _| |_  |= __ =|  \__________|""")
   printLog(""" \____|\___|_| |_|_|\_\__,_|_|____/ \___/|_|  \__| \______/""")
-  printVer()
+  cmdVer()
   printHelp()
 else:
-  case cmdParams[0].toLower
-  of "help":
-    cmdHelp()
-  of "download":
-    cmdDownload()
-  of "install":
-    cmdInstall()
-  of "show":
-    cmdShow()
-  of "edit":
-    cmdEdit()
-  of "repo":
-    cmdRepo()
-  of "version":
-    if cmdParamCount != 1:
-      printMany()
-    printVer()
-  of "ping":
-    cmdPing()
-  else:
-    printErr("Unknown option")
-    printHelp()
+  var exist = false
+  let param = cmdParams[0].toLower
+  for command in commands:
+    if param == command.str:
+      exist = true
+      param.cmd()
+  if not exist:
+    printErr("command" & cmdParams[0].quote & "isn't found")

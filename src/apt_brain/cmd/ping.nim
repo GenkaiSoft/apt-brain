@@ -3,7 +3,7 @@ from std/times import cpuTime
 from liblim/logging import printLog
 import ../common
 
-proc cmdPing*() {.inline.} =
+proc cmdPing*() =
   for url in getRepositries():
     let start = cpuTime()
     discard url.connect

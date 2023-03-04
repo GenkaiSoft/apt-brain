@@ -3,7 +3,7 @@ import ../common
 import download
 import zippy/ziparchives
 
-proc cmdInstall*() {.inline.} =
+proc cmdInstall*() =
   var
     insDir:string
     pkgName:string

@@ -8,4 +8,5 @@ proc cmdShow*() {.inline.} =
     for package in getPackages():
       package.printPackage
   else:
-    findPackage(cmdParams[1]).printPackage
+    for i in 1..(cmdParamCount - 1):
+      findPackage(cmdParams[i]).printPackage
