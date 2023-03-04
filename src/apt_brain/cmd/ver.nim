@@ -1,5 +1,5 @@
 import liblim/logging
-import ../common
+from ../common import appName
 
 proc cmdVer*() =
   const NimblePkgVersion {.strdefine.} = "0.0.0(DEBUG_BUILD)"

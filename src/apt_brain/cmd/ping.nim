@@ -7,4 +7,4 @@ proc cmdPing*() =
   for url in getRepositries():
     let start = cpuTime()
     discard url.connect
-    printLog("Ping : " & int((cpuTime() - start) * 1000).intToStr & " ms")
+    printLog(url.quote & ": '" & int((cpuTime() - start) * 1000).intToStr & "' ms")

@@ -52,7 +52,13 @@ proc cmdEdit*() =
   }
   var jsonRootObj:JsonNode
   if jsonFileName.fileExists:
-    jsonRootObj = jsonFileName.parseJsonFile
+    printProcess("Parsing json file" & jsonFileName.quote)
+    try:
+      jsonRootObj = jsonFileName.read.parseJson
+    except JsonParsingError:
+      printFailed()
+      printExc("Unable to parse json file" & jsonFileName.quote)
+    printDone()
     jsonRootObj{repoNAme}.add(jsonObj)
   else:
     jsonRootObj = %*{repoName:[jsonObj]}

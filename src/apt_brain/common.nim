@@ -1,6 +1,7 @@
 import std/[strutils , json , os , tables]
 import puppy
 import liblim/logging
+
 const
   appDir* = "アプリ"
   appName* = "apt-brain"
@@ -8,6 +9,7 @@ let
   cmdParamCount* = paramCount()
   cmdParams* = commandLineParams()
   configDir* = getConfigDir() / appName
+  repoFilePath* = configDir / "repo.txt"
 
 proc quote*(str:string):string =
   return " \"" & str & "\" "
@@ -68,24 +70,25 @@ proc openFile*(path:string , fileMode:FileMode = fmRead):File =
   printDone()
   return file
 
+proc read*(path:string):string =
+  let
+    file = path.openFile
+    content = file.readAll
+  file.close
+  return content
+
 proc createAndWriteFile*(path , str:string , fileMode:FileMode = fmWrite) =
   let file = openFile(path , fileMode)
   file.write(str)
   file.close()
 
-let repoFilePath = configDir / "repo.txt"
 proc openRepoFile*(fileMode:FileMode):File =
   if not repoFilePath.fileExists:
     discard configDir.existsOrCreateDir
     let official = "https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/package.json"
     repoFilePath.createAndWriteFile(official)
   return repoFilePath.openFile
-proc getRepositries*():seq[string] =
-  let
-    file = fmRead.openRepoFile
-    tmp = file.readAll.split("\n")
-  file.close
-  return tmp
+proc getRepositries*():seq[string] = repoFilePath.read.split("\n")
 
 type
   Dir* = object
@@ -97,17 +100,6 @@ type
     url*:string
     dir*:Dir
     delete*:seq[string]
-
-proc parseJsonFile*(path:string):JsonNode =
-  printProcess("Parsing json file" & path.quote)
-  var jsonNode:JsonNode
-  try:
-     jsonNode = path.openFile.readAll.parseJson
-  except JsonParsingError:
-    printFailed()
-    printExc("Unable to parse json file" & path.quote)
-  printDone()
-  return jsonNode
 
 proc getJsonNode*(jsonUrl:string):JsonNode =
   let package = connect(jsonUrl)
@@ -125,8 +117,11 @@ proc getJsonNode*(jsonUrl:string):JsonNode =
 proc getPackages*(jsonUrl:string):seq[Package] =
   var packages:seq[Package] = @[]
   let jsonObj = jsonUrl.getJsonNode
-  for key in jsonObj.getFields.keys:
-    packages.add(jsonObj{key}.to(seq[Package]))
+  try:
+    for key in jsonObj.getFields.keys:
+      packages.add(jsonObj{key}.to(seq[Package]))
+  except KeyError:
+    printExc("Package file" & jsonUrl.quote & "is broken")
   return packages
 
 proc getPackages*():seq[Package] =

@@ -1,4 +1,4 @@
-import std/[tables , json]
+import std/[tables , json , os]
 import liblim/logging
 import ../common
 
@@ -14,8 +14,11 @@ proc cmdRepo*() =
   elif cmdParamCount != 2:
     case cmdParams[1]
     of "add":
-      let
-        file = openRepoFile(fmAppend)
+      if not repoFilePath.fileExists:
+        discard configDir.existsOrCreateDir
+        let official = "https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/package.json"
+        repoFilePath.createAndWriteFile(official)
+      let file = repoFilePath.openFile(fmAppend)
       for i in 2..(cmdParamCount - 1):
         let jsonUrl = cmdParams[i]
         for package in jsonUrl.getPackages:

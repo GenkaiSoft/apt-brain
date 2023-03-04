@@ -1,4 +1,4 @@
-import std/strutils
+from std/strutils import toLower
 from std/exitprocs import addExitProc
 from std/terminal import resetAttributes
 import liblim/logging
