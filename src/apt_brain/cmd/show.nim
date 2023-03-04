@@ -1,7 +1,7 @@
 import liblim/logging
 import ../common
 
-proc cmdShow*() {.inline.} =
+proc cmdShow*() =
   proc printPackage(package:Package) =
     printInfo(package.name & " : " & package.description)
   if cmdParamCount == 1:

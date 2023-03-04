@@ -2,7 +2,7 @@ import std/[tables , json]
 import liblim/logging
 import ../common
 
-proc cmdRepo*() {.inline.} =
+proc cmdRepo*() =
   if cmdParamCount == 1:
     var table:Table[string , string]
     for url in getRepositries():

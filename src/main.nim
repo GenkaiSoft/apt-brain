@@ -29,6 +29,6 @@ else:
   for command in commands:
     if param == command.str:
       exist = true
-      param.cmd()
+      command.cmd()
   if not exist:
     printErr("command" & cmdParams[0].quote & "isn't found")

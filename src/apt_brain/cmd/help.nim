@@ -1,22 +1,21 @@
-import std/[os , tables , strutils]
+import std/[os , strutils]
 import liblim/logging
 import ../common
 import download , edit , install , ping , repo , show , ver
 
-proc cmdHelp*() {.inline.} =
-  echo "DEBUG"
+proc cmdHelp*()
 
-type Help* = object
-  option*:string
-  description*:string
+type Help = object
+  option:string
+  description:string
 proc newHelp*(option:string , description:string):Help {.inline.} =
   return Help(option:option , description:description)
 type Command* = object
   cmd*:proc()
-  str*:string
-  help:seq[Help]
-proc newCommand*(cmd:proc() , str:string , help:seq[Help]):Command {.inline.} =
-  return Command(cmd:cmd , str:str , help:help)
+  name*:string
+  helps:seq[Help]
+proc newCommand*(cmd:proc() , name:string , helps:seq[Help]):Command {.inline.} =
+  return Command(cmd:cmd , name:name , helps:helps)
 
 let commands*:seq[Command] = @[
   newCommand(
@@ -30,6 +29,14 @@ let commands*:seq[Command] = @[
     @[
       newHelp("" , "add package to `current directory" / "package.json`") ,
       newHelp("{filename}" , "add package to `{filename}.json`")
+    ]
+  ) ,
+  newCommand(
+    cmdHelp ,
+    "help" ,
+    @[
+      newHelp("" , "Show help") ,
+      newHelp("{command(s)}" , "Show help about {command(s)}")
     ]
   ) ,
   newCommand(
@@ -58,5 +65,21 @@ let commands*:seq[Command] = @[
       newHelp("{package(s)}" , "Show about {package(s)}")
     ]
   ) ,
-  newCommand(cmdVer , "veriosn" , @[cmdHelp("" , "Show " & appName & "'s version")])
+  newCommand(cmdVer , "version" , @[newHelp("" , "Show " & appName & "'s version")])
 ]
+
+proc cmdHelp*() =
+  if cmdParamCount == 1:
+    for command in commands:
+      for help in command.helps:
+        printInfo(quote(command.name & " " & help.option) & ":" & help.description.quote)
+  else:
+    for i in 1..(cmdParamCount - 1):
+      var exist = false
+      for command in commands:
+        if cmdParams[i].toLower == command.name:
+          exist = true
+          for help in command.helps:
+            printInfo(quote(command.name & " " & help.option) & ":" & help.description.quote) 
+      if not exist:
+        printErr("command" & cmdParams[i] & "isn't found")
