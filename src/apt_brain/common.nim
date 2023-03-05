@@ -1,3 +1,4 @@
+from std/sequtils import toSeq
 import std/[strutils , json , os , tables]
 import puppy
 import liblim/logging
@@ -9,7 +10,7 @@ let
   cmdParamCount* = paramCount()
   cmdParams* = commandLineParams()
   configDir* = getConfigDir() / appName
-  repoFilePath* = configDir / "repo.txt"
+  repoFilePath* = configDir / "repo.csv"
 
 proc quote*(str:string):string =
   return " \"" & str & "\" "
@@ -88,7 +89,12 @@ proc openRepoFile*(fileMode:FileMode):File =
     let official = "https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/package.json"
     repoFilePath.createAndWriteFile(official)
   return repoFilePath.openFile
-proc getRepositries*():seq[string] = repoFilePath.read.split("\n")
+proc getRepositries*():seq[string] =
+  let
+    file = fmRead.openRepoFile
+    rtn = file.readAll.split("\n")
+  file.close
+  return rtn
 
 type
   Dir* = object
@@ -118,8 +124,8 @@ proc getPackages*(jsonUrl:string):seq[Package] =
   var packages:seq[Package] = @[]
   let jsonObj = jsonUrl.getJsonNode
   try:
-    for key in jsonObj.getFields.keys:
-      packages.add(jsonObj{key}.to(seq[Package]))
+    for package in jsonObj.getFields.values.toSeq:
+      packages.add(package.to(Package))
   except KeyError:
     printExc("Package file" & jsonUrl.quote & "is broken")
   return packages

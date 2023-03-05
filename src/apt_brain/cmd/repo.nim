@@ -1,4 +1,6 @@
-import std/[tables , json , os]
+from std/sequtils import toSeq
+from std/os import fileExists
+import std/[tables , json , strutils]
 import liblim/logging
 import ../common
 
@@ -14,11 +16,7 @@ proc cmdRepo*() =
   elif cmdParamCount != 2:
     case cmdParams[1]
     of "add":
-      if not repoFilePath.fileExists:
-        discard configDir.existsOrCreateDir
-        let official = "https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/package.json"
-        repoFilePath.createAndWriteFile(official)
-      let file = repoFilePath.openFile(fmAppend)
+      let file = fmAppend.openRepoFile
       for i in 2..(cmdParamCount - 1):
         let jsonUrl = cmdParams[i]
         for package in jsonUrl.getPackages:
@@ -27,6 +25,28 @@ proc cmdRepo*() =
           file.write(jsonUrl)
       file.close
     of "remove":
-      echo "DEBUG"
+      if not repoFilePath.fileExists:
+        printErr("Nothing to remove")
+      else:
+        var repositries:OrderedTable[string , string] = initOrderedTable[string , string]()
+        for url in getRepositries():
+          for key in url.getJsonNode.getFields.keys:
+            repositries[url] = key
+        for i in 1..(cmdParamCount - 1):
+          let param = cmdParams[1].toLower
+          if param == "official":
+            printErr("You can't remove official repositry")
+            quit()
+          var exist = false
+          for key , value in repositries:
+            if param == value:
+              exist = true
+              repositries.del(key)
+          if not exist:
+            printErr("Repositry" & cmdParams[i].quote & "isn't exist")
+            quit()
+        let file = fmWrite.openRepoFile
+        file.write(repositries.values.toSeq.join("\n"))
+        file.close
     else:
       printErr("Unknown option" & cmdParams[1].quote)

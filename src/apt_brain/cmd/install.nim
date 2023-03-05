@@ -1,7 +1,7 @@
 import std/os
-import ../common
-import download
 import zippy/ziparchives
+from download import dlPkg
+import ../common
 
 proc cmdInstall*() =
   var
