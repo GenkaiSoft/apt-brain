@@ -1,6 +1,6 @@
 # Package
 
-version = "1.4.1"
+version = "1.4.2"
 author = "777shuang"
 description = "apt for SHARP Brain"
 license = "GPL-3.0-or-later"
@@ -15,7 +15,7 @@ requires "zippy"
 requires "https://github.com/777shuang/Lim"
 
 # Skips
-skipFiles = @["package.json" , "package.nim"]
+skipFiles = @["package.json"]
 
 # Tasks
 task build_win , "Cross compile for windows":
