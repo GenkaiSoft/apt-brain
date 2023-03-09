@@ -26,4 +26,4 @@ proc cmdDownload*() =
   else:
     printMany()
 
-  discard dlPkg(findPackage(pkgName) , dlDir)
+  discard dlPkg(pkgName.findPackage , dlDir)

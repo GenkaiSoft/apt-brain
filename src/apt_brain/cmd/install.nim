@@ -1,5 +1,8 @@
 import std/os
 import zippy/ziparchives
+import liblim/logging
+import options
+from std/strutils import toLower
 from download import dlPkg
 import ../common
 
@@ -59,6 +62,12 @@ proc cmdInstall*() =
     source = tmp / package.dir.input
     dest = insDir / package.dir.output
   printProcess("Moving directory" & source.quote & "to" & dest.quote)
+  if dest.dirExists:
+    printInfo("Directory" & dest.quote & "already exists.")
+    let answer = printPrompt("Do you want to replace ?" , true)
+    if answer.isNone or not answer.get:
+      printWarn("Instalation is stopped")
+      quit()
   try:
     moveDir(source , dest)
   except OSError:

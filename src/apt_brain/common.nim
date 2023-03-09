@@ -129,7 +129,6 @@ proc getPackages*(jsonUrl:string):seq[Package] =
   except KeyError:
     printExc("Package file" & jsonUrl.quote & "is broken")
   return packages
-
 proc getPackages*():seq[Package] =
   var packages:seq[Package] = @[]
   for url in getRepositries():
