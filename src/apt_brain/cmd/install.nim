@@ -2,7 +2,6 @@ import std/os
 import zippy/ziparchives
 import liblim/logging
 import options
-from std/strutils import toLower
 from download import dlPkg
 import ../common
 
