@@ -201,6 +201,36 @@
         "output": "PatternLocker"
       },
       "delete": []
+    },
+    {
+      "name": "pqbox",
+      "description": "日本語入力支援システム",
+      "url": "https://drive.google.com/uc?id=1xMJuXLG8q00iAbXhKvw5wnLA-a8g8NuD",
+      "dir": {
+        "input": "PQBox",
+        "output": "PQBox"
+      },
+      "delete": []
+    },
+    {
+      "name": "pocketpowerpoint",
+      "description": "PowerPoint Editor",
+      "url": "https://drive.google.com/uc?id=1vLtx4qMJ--8mfh7G0BLbI0QE1pL6WOvs",
+      "dir": {
+        "input": "Pocket PowerPoint",
+        "output": "Pocket PowerPoint"
+      },
+      "delete": []
+    },
+    {
+      "name": "flitespeech",
+      "description": "テキスト読アプリ",
+      "url": "https://drive.google.com/uc?id=1skFc2Rvwhbz98sLtQxa6XxGnljelzvaF",
+      "dir": {
+        "input": "Flite Speech",
+        "output": "Flite Speech"
+      },
+      "delete": []
     }
   ]
 }
