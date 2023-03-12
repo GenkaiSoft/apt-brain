@@ -21,8 +21,8 @@ proc cmdRepo*() =
         let jsonUrl = cmdParams[i]
         for package in jsonUrl.getPackages:
           printLog("Found package" & package.name.quote & "in" & jsonUrl.quote)
-          file.write("\n")
-          file.write(jsonUrl)
+        file.write("\n")
+        file.write(jsonUrl)
       file.close
     of "remove":
       if not repoFilePath.fileExists:

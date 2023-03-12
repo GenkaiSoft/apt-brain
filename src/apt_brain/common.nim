@@ -89,25 +89,26 @@ proc openRepoFile*(fileMode:FileMode):File =
     let official = "https://raw.githubusercontent.com/GenkaiSoft/apt-brain/main/package.json"
     repoFilePath.createAndWriteFile(official)
   return repoFilePath.openFile
+
 proc getRepositries*():seq[string] =
   let
     file = fmRead.openRepoFile
-    rtn = file.readAll.split("\n")
+    lines = file.readAll.split("\n")
   file.close
-  return rtn
+  return lines
 
 type
   Dir* = object
-    input*:string
-    output*:string
+    input*: string
+    output*: string
   Package* = object
-    name*:string
-    description*:string
-    url*:string
-    dir*:Dir
-    delete*:seq[string]
+    name*: string
+    description*: string
+    url*: string
+    dir*: Dir
+    delete*: seq[string]
 
-proc getJsonNode*(jsonUrl:string):JsonNode =
+proc getJsonNode*(jsonUrl:string): JsonNode =
   let package = connect(jsonUrl)
   printProcess("Parsing json" & jsonUrl.quote)
   var jsonNode:JsonNode
@@ -122,13 +123,14 @@ proc getJsonNode*(jsonUrl:string):JsonNode =
 
 proc getPackages*(jsonUrl:string):seq[Package] =
   var packages:seq[Package] = @[]
-  let jsonObj = jsonUrl.getJsonNode
+  let jsonNode = jsonUrl.getJsonNode
   try:
-    for package in jsonObj.getFields.values.toSeq:
+    for package in jsonNode.getFields.values.toSeq:
       packages.add(package.to(Package))
   except KeyError:
     printExc("Package file" & jsonUrl.quote & "is broken")
   return packages
+
 proc getPackages*():seq[Package] =
   var packages:seq[Package] = @[]
   for url in getRepositries():
