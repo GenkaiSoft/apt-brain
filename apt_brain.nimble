@@ -1,6 +1,6 @@
 # Package
 
-version = "1.5.0"
+version = "1.5.1"
 author = "777shuang"
 description = "apt for SHARP Brain"
 license = "GPL-3.0-or-later"
@@ -12,7 +12,7 @@ namedBin["main"] = "apt-brain"
 requires "nim >= 1.4.2"
 requires "puppy"
 requires "zippy"
-requires "https://github.com/777shuang/Lim >= 0.1.9"
+requires "https://github.com/777shuang/Lim >= 0.2.0"
 
 # Skips
 skipFiles = @["package.json"]
