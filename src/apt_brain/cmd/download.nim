@@ -1,7 +1,7 @@
 import os
 import ../common
 
-proc dlPkg*(package:Package , dir:string):string =
+proc dlPkg*(package: Package , dir: string): string =
   let fileName = dir / package.name & ".zip"
   fileName.createAndWriteFile(package.url.connect)
   return fileName
