@@ -83,4 +83,4 @@ proc cmdHelp*() =
           for help in command.helps:
             printInfo(quote(command.name & " " & help.option) & ":" & help.description.quote) 
       if not exist:
-        printErr("command" & cmdParams[i] & "isn't found")
+        printErr("command" & cmdParams[i].quote & "isn't found")

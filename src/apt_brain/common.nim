@@ -12,8 +12,7 @@ let
   configDir* = getConfigDir() / appName
   repoFilePath* = configDir / "repo.csv"
 
-proc quote*(str:string):string =
-  return " \"" & str & "\" "
+proc quote*(str:string):string = return " \"" & str & "\" "
 
 proc printExc*(str:string) =
   printErr(str)
