@@ -13,6 +13,7 @@ requires "nim >= 1.4.2"
 requires "puppy"
 requires "zippy"
 requires "https://github.com/777shuang/Lim == 0.2.0"
+requires "cligen"
 
 # Skips
 skipFiles = @["package.json"]
