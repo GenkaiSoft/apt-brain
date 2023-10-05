@@ -12,7 +12,7 @@ namedBin["main"] = "apt-brain"
 requires "nim >= 1.4.2"
 requires "puppy"
 requires "zippy"
-requires "https://github.com/777shuang/Lim >= 0.2.0"
+requires "https://github.com/777shuang/Lim == 0.2.0"
 
 # Skips
 skipFiles = @["package.json"]
