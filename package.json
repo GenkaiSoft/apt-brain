@@ -1,236 +1,234 @@
-{
-  "official": [
-    {
-      "name": "cerestorer",
-      "description": "Windows CE のデスクトップを復元します。",
-      "url": "http://tmksoft.starfree.jp/applications/dl/cerestorer_20.zip",
-      "dir": {
-        "input": "CERestorer",
-        "output": "CERestorer"
-      },
-      "delete": [
-        "ReadMe.txt"
-      ]
+[
+  {
+    "name": "cerestorer",
+    "description": "Windows CE のデスクトップを復元します。",
+    "url": "http://tmksoft.starfree.jp/applications/dl/cerestorer_20.zip",
+    "dir": {
+      "input": "CERestorer",
+      "output": "CERestorer"
     },
-    {
-      "name": "batmtr",
-      "description": "バッテリー残量を表示します。",
-      "url": "http://tmksoft.starfree.jp/applications/dl/batmtr_4_0.zip",
-      "dir": {
-        "input": "batmtr_4_0",
-        "output": "BatteryMater"
-      },
-      "delete": [
-        "ReadMe.txt",
-        "SOURCE/"
-      ]
+    "delete": [
+      "ReadMe.txt"
+    ]
+  },
+  {
+    "name": "batmtr",
+    "description": "バッテリー残量を表示します。",
+    "url": "http://tmksoft.starfree.jp/applications/dl/batmtr_4_0.zip",
+    "dir": {
+      "input": "batmtr_4_0",
+      "output": "BatteryMater"
     },
-    {
-      "name": "knmemopadrev7plus",
-      "description": "KN MemoPad 機能追加版(リポジトリ名:knmemopadmod)の後継",
-      "url": "http://tmksoft.starfree.jp/applications/dl/knmemopad.zip",
-      "dir": {
-        "input": "KN MemoPad",
-        "output": "KN MemoPad Rev7 +"
-      },
-      "delete": []
+    "delete": [
+      "ReadMe.txt",
+      "SOURCE/"
+    ]
+  },
+  {
+    "name": "knmemopadrev7plus",
+    "description": "KN MemoPad 機能追加版(リポジトリ名:knmemopadmod)の後継",
+    "url": "http://tmksoft.starfree.jp/applications/dl/knmemopad.zip",
+    "dir": {
+      "input": "KN MemoPad",
+      "output": "KN MemoPad Rev7 +"
     },
-    {
-      "name": "tmtimer",
-      "description": "簡易的なタイマー。",
-      "url": "http://tmksoft.starfree.jp/applications/dl/tmtimer_0_6.zip",
-      "dir": {
-        "input": "tmtimer_0_6",
-        "output": "TmTimer"
-      },
-      "delete": []
+    "delete": []
+  },
+  {
+    "name": "tmtimer",
+    "description": "簡易的なタイマー。",
+    "url": "http://tmksoft.starfree.jp/applications/dl/tmtimer_0_6.zip",
+    "dir": {
+      "input": "tmtimer_0_6",
+      "output": "TmTimer"
     },
-    {
-      "name": "memz",
-      "description": "MEMZのような表示をします。破壊活動はしません。",
-      "url": "http://tmksoft.starfree.jp/applications/dl/memz_1_3.zip",
-      "dir": {
-        "input": "memz_1_3",
-        "output": "MEMZ"
-      },
-      "delete": []
+    "delete": []
+  },
+  {
+    "name": "memz",
+    "description": "MEMZのような表示をします。破壊活動はしません。",
+    "url": "http://tmksoft.starfree.jp/applications/dl/memz_1_3.zip",
+    "dir": {
+      "input": "memz_1_3",
+      "output": "MEMZ"
     },
-    {
-      "name": "saikoroce",
-      "description": "ただの「さいころ」です。ただの「さいころ」です。",
-      "url": "http://tmksoft.starfree.jp/applications/dl/saikoroce_1_1.zip",
-      "dir": {
-        "input": "saikoroce_1_1",
-        "output": "SaikoroCE"
-      },
-      "delete": []
+    "delete": []
+  },
+  {
+    "name": "saikoroce",
+    "description": "ただの「さいころ」です。ただの「さいころ」です。",
+    "url": "http://tmksoft.starfree.jp/applications/dl/saikoroce_1_1.zip",
+    "dir": {
+      "input": "saikoroce_1_1",
+      "output": "SaikoroCE"
     },
-    {
-      "name": "ceopenermod",
-      "description": "ceOpenerの後継",
-      "url": "https://ho.ie-t.net/IT/brain/ceopener_mod/ceOpener_mod.zip",
-      "dir": {
-        "input": "ceOpener_mod",
-        "output": "ceOpener Mod"
-      },
-      "delete": []
+    "delete": []
+  },
+  {
+    "name": "ceopenermod",
+    "description": "ceOpenerの後継",
+    "url": "https://ho.ie-t.net/IT/brain/ceopener_mod/ceOpener_mod.zip",
+    "dir": {
+      "input": "ceOpener_mod",
+      "output": "ceOpener Mod"
     },
-    {
-      "name": "testce",
-      "description": "タスク管理アプリ",
-      "url": "https://drive.google.com/uc?id=1fZd4Oi_LinhpA_eHUOOSLb0aiqZOJSRo",
-      "dir": {
-        "input": "TestCE-1.62",
-        "output": "TestCE"
-      },
-      "delete": []
+    "delete": []
+  },
+  {
+    "name": "testce",
+    "description": "タスク管理アプリ",
+    "url": "https://drive.google.com/uc?id=1fZd4Oi_LinhpA_eHUOOSLb0aiqZOJSRo",
+    "dir": {
+      "input": "TestCE-1.62",
+      "output": "TestCE"
     },
-    {
-      "name": "selector",
-      "description": "タスク管理アプリ",
-      "url": "https://drive.google.com/uc?id=1-iW2yZpP13LyAWjxSr8WoZy3UUTzVuE4",
-      "dir": {
-        "input": "Selector",
-        "output": "Selector"
-      },
-      "delete": []
+    "delete": []
+  },
+  {
+    "name": "selector",
+    "description": "タスク管理アプリ",
+    "url": "https://drive.google.com/uc?id=1-iW2yZpP13LyAWjxSr8WoZy3UUTzVuE4",
+    "dir": {
+      "input": "Selector",
+      "output": "Selector"
     },
-    {
-      "name": "genkaiyareversi",
-      "description": "Reversi",
-      "url": "https://github.com/GenkaiSoft/GenkaiyaReversi/releases/download/2.98/WindowsCE-arm.Brain.zip",
-      "dir": {
-        "input": "GenkaiyaReversi",
-        "output": "GenkaiyaReversi"
-      },
-      "delete": []
+    "delete": []
+  },
+  {
+    "name": "genkaiyareversi",
+    "description": "Reversi",
+    "url": "https://github.com/GenkaiSoft/GenkaiyaReversi/releases/download/2.98/WindowsCE-arm.Brain.zip",
+    "dir": {
+      "input": "GenkaiyaReversi",
+      "output": "GenkaiyaReversi"
     },
-    {
-      "name": "mu",
-      "description": "タスク管理アプリ",
-      "url": "https://web.archive.org/web/20170422153400/http://cka.html.xdomain.jp/softwareSpace/Mu.zip",
-      "dir": {
-        "input": "Mu-0.05",
-        "output": "Mu"
-      },
-      "delete": [
-        "ReadMe.txt"
-      ]
+    "delete": []
+  },
+  {
+    "name": "mu",
+    "description": "タスク管理アプリ",
+    "url": "https://web.archive.org/web/20170422153400/http://cka.html.xdomain.jp/softwareSpace/Mu.zip",
+    "dir": {
+      "input": "Mu-0.05",
+      "output": "Mu"
     },
-    {
-      "name": "sqpocket",
-      "description": "タスク管理アプリ",
-      "url": "https://drive.google.com/uc?id=1nW9oIUx3IYeIudvccJv7DB4BlWzauIdC",
-      "dir": {
-        "input": "SQPocket",
-        "output": "SQPocket"
-      },
-      "delete": []
+    "delete": [
+      "ReadMe.txt"
+    ]
+  },
+  {
+    "name": "sqpocket",
+    "description": "タスク管理アプリ",
+    "url": "https://drive.google.com/uc?id=1nW9oIUx3IYeIudvccJv7DB4BlWzauIdC",
+    "dir": {
+      "input": "SQPocket",
+      "output": "SQPocket"
     },
-    {
-      "name": "knmemopadmod",
-      "description": "KN MemoPad(リポジトリ名:knmemopad) 機能追加版",
-      "url": "https://github.com/watamario15/kn-memopad/releases/download/v0.12-rev7/KN_MemoPad_v0.12_rev7.zip",
-      "dir": {
-        "input": "",
-        "output": "KN MemoPad Mod"
-      },
-      "delete": [
-        "readme.txt",
-        "COPYING"
-      ]
+    "delete": []
+  },
+  {
+    "name": "knmemopadmod",
+    "description": "KN MemoPad(リポジトリ名:knmemopad) 機能追加版",
+    "url": "https://github.com/watamario15/kn-memopad/releases/download/v0.12-rev7/KN_MemoPad_v0.12_rev7.zip",
+    "dir": {
+      "input": "",
+      "output": "KN MemoPad Mod"
     },
-    {
-      "name": "knmemopad",
-      "description": "シンプルなテキストエディタ",
-      "url": "https://web.archive.org/web/20210405101135if_/https://bbuseruploads.s3.amazonaws.com/knatech/brain-tools/downloads/knmemopad-0.12-arm.zip?Signature=M8M5J6%2BYIpwBRsuX9Kr5co2%2FkCQ%3D&Expires=1617619295&AWSAccessKeyId=AKIA6KOSE3BNJRRFUUX6&versionId=null&response-content-disposition=attachment%3B%20filename%3D%22knmemopad-0.12-arm.zip%22",
-      "dir": {
-        "input": "KN MemoPad",
-        "output": "KN MemoPad"
-      },
-      "delete": []
+    "delete": [
+      "readme.txt",
+      "COPYING"
+    ]
+  },
+  {
+    "name": "knmemopad",
+    "description": "シンプルなテキストエディタ",
+    "url": "https://web.archive.org/web/20210405101135if_/https://bbuseruploads.s3.amazonaws.com/knatech/brain-tools/downloads/knmemopad-0.12-arm.zip?Signature=M8M5J6%2BYIpwBRsuX9Kr5co2%2FkCQ%3D&Expires=1617619295&AWSAccessKeyId=AKIA6KOSE3BNJRRFUUX6&versionId=null&response-content-disposition=attachment%3B%20filename%3D%22knmemopad-0.12-arm.zip%22",
+    "dir": {
+      "input": "KN MemoPad",
+      "output": "KN MemoPad"
     },
-    {
-      "name": "jot",
-      "description": "テキストエディタ",
-      "url": "https://downloadx.getuploader.com/g/63f971c5-6324-4b51-a6b7-63bba010e467/brainup2ch/85/jotaic.zip",
-      "dir": {
-        "input": "jotaic",
-        "output": "jot"
-      },
-      "delete": []
+    "delete": []
+  },
+  {
+    "name": "jot",
+    "description": "テキストエディタ",
+    "url": "https://downloadx.getuploader.com/g/63f971c5-6324-4b51-a6b7-63bba010e467/brainup2ch/85/jotaic.zip",
+    "dir": {
+      "input": "jotaic",
+      "output": "jot"
     },
-    {
-      "name": "knote",
-      "description": "テキストエディタ",
-      "url": "https://drive.google.com/uc?id=1uIKyKw3FGA1dr7PK_ut4LIH5iZKL-2ky",
-      "dir": {
-        "input": "KNote",
-        "output": "KNote"
-      },
-      "delete": [
-        "readme.txt"
-      ]
+    "delete": []
+  },
+  {
+    "name": "knote",
+    "description": "テキストエディタ",
+    "url": "https://drive.google.com/uc?id=1uIKyKw3FGA1dr7PK_ut4LIH5iZKL-2ky",
+    "dir": {
+      "input": "KNote",
+      "output": "KNote"
     },
-    {
-      "name": "calc98",
-      "description": "関数電卓",
-      "url": "https://drive.google.com/uc?id=1mg9xX1d1eX5jDAQlidIsARtWO66xB5KE",
-      "dir": {
-        "input": "Calc98",
-        "output": "Calc98"
-      },
-      "delete": []
+    "delete": [
+      "readme.txt"
+    ]
+  },
+  {
+    "name": "calc98",
+    "description": "関数電卓",
+    "url": "https://drive.google.com/uc?id=1mg9xX1d1eX5jDAQlidIsARtWO66xB5KE",
+    "dir": {
+      "input": "Calc98",
+      "output": "Calc98"
     },
-    {
-      "name": "passlocker",
-      "description": "任意のパスコードでロックできるアプリ",
-      "url": "https://grain.exout.net/Brain/pl/PassLocker-0.12.zip",
-      "dir": {
-        "input": "PassLocker",
-        "output": "PassLocker"
-      },
-      "delete": []
+    "delete": []
+  },
+  {
+    "name": "passlocker",
+    "description": "任意のパスコードでロックできるアプリ",
+    "url": "https://grain.exout.net/Brain/pl/PassLocker-0.12.zip",
+    "dir": {
+      "input": "PassLocker",
+      "output": "PassLocker"
     },
-    {
-      "name": "patternlocker",
-      "description": "パターンでロックできるアプリ",
-      "url": "https://grain.exout.net/Brain/ptl/PatternLocker-0.12.zip",
-      "dir": {
-        "input": "PatternLocker",
-        "output": "PatternLocker"
-      },
-      "delete": []
+    "delete": []
+  },
+  {
+    "name": "patternlocker",
+    "description": "パターンでロックできるアプリ",
+    "url": "https://grain.exout.net/Brain/ptl/PatternLocker-0.12.zip",
+    "dir": {
+      "input": "PatternLocker",
+      "output": "PatternLocker"
     },
-    {
-      "name": "pqbox",
-      "description": "日本語入力支援システム",
-      "url": "https://drive.google.com/uc?id=1xMJuXLG8q00iAbXhKvw5wnLA-a8g8NuD",
-      "dir": {
-        "input": "PQBox",
-        "output": "PQBox"
-      },
-      "delete": []
+    "delete": []
+  },
+  {
+    "name": "pqbox",
+    "description": "日本語入力支援システム",
+    "url": "https://drive.google.com/uc?id=1xMJuXLG8q00iAbXhKvw5wnLA-a8g8NuD",
+    "dir": {
+      "input": "PQBox",
+      "output": "PQBox"
     },
-    {
-      "name": "pocketpowerpoint",
-      "description": "PowerPoint Editor",
-      "url": "https://drive.google.com/uc?id=1vLtx4qMJ--8mfh7G0BLbI0QE1pL6WOvs",
-      "dir": {
-        "input": "Pocket PowerPoint",
-        "output": "Pocket PowerPoint"
-      },
-      "delete": []
+    "delete": []
+  },
+  {
+    "name": "pocketpowerpoint",
+    "description": "PowerPoint Editor",
+    "url": "https://drive.google.com/uc?id=1vLtx4qMJ--8mfh7G0BLbI0QE1pL6WOvs",
+    "dir": {
+      "input": "Pocket PowerPoint",
+      "output": "Pocket PowerPoint"
     },
-    {
-      "name": "flitespeech",
-      "description": "テキスト読アプリ",
-      "url": "https://drive.google.com/uc?id=1skFc2Rvwhbz98sLtQxa6XxGnljelzvaF",
-      "dir": {
-        "input": "Flite Speech",
-        "output": "Flite Speech"
-      },
-      "delete": []
-    }
-  ]
-}
+    "delete": []
+  },
+  {
+    "name": "flitespeech",
+    "description": "テキスト読アプリ",
+    "url": "https://drive.google.com/uc?id=1skFc2Rvwhbz98sLtQxa6XxGnljelzvaF",
+    "dir": {
+      "input": "Flite Speech",
+      "output": "Flite Speech"
+    },
+    "delete": []
+  }
+]
