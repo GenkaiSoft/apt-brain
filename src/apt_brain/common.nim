@@ -121,11 +121,10 @@ proc getJsonNode*(jsonUrl:string): JsonNode =
   return jsonNode
 
 proc getPackages*(jsonUrl:string):seq[Package] =
-  var packages:seq[Package] = @[]
+  var packages:seq[Package]
   let jsonNode = jsonUrl.getJsonNode
   try:
-    for package in jsonNode.getFields.values.toSeq:
-      packages.add(package.to(Package))
+    packages = jsonNode.to(seq[Package])
   except KeyError:
     printExc("Package file" & jsonUrl.quote & "is broken")
   return packages
